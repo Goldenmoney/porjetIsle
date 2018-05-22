@@ -10,5 +10,5 @@ package porjetisle;
  * @author bassetlu
  */
 public class Joueur {
-    
+    private Cartes cartes;
 }

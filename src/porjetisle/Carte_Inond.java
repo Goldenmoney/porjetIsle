@@ -9,6 +9,6 @@ package porjetisle;
  *
  * @author bassetlu
  */
-public class Carte_Inond {
-    
+public class Carte_Inond extends Cartes {
+
 }

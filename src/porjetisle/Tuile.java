@@ -24,12 +24,12 @@ public class Tuile {
     }
 
     private EtatTuile etat;
-    private NomTuile nomTuile;
+    private final NomTuile nomTuile;
 
     // Associations
     private Carte_Inond carte;
     private ArrayList<Aventurier> joueurs;
-    private Position position;
+    private final Position position;
 
     // METHODES
     public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position position) {

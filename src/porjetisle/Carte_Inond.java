@@ -10,5 +10,17 @@ package porjetisle;
  * @author bassetlu
  */
 public class Carte_Inond extends Cartes {
+    
+    // Associations
+    private Tuile tuile;
+    
+    // METHODES
 
+    public Carte_Inond(Tuile tuile) {
+        this.tuile = tuile;
+    }
+
+    public Tuile getTuile() {
+        return tuile;
+    }
 }

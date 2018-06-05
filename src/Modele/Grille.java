@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 public class Grille {
     // Associations
+//je fais la grille (jules)
     private ArrayList<Tuile> tuiles;
     
     // METHODES

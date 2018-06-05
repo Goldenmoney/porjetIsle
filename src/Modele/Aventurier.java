@@ -14,17 +14,14 @@ import java.util.Iterator;
  */
 public abstract class Aventurier {
     private String nom;
+    private HashSet posPossible;
     
-    
-    public void seDeplacer() {
-        HashSet posPossible = new HashSet();
-        Tuille posAct = this.getPosition();
-        
+    public HashSet posAutourPossible(HashSet p, Tuille t) {
         if(/*à remplir, mettre les 2 if en 1 avec un ou*/){ //valeur impossible pour top [0][2], [1][1], [2][0], [3][0], [4][1], [5][2]
             if(){//tuile(x, y-1).etat = innondé
             }
         }else {
-                posPossible.add(/*x, y-1*/);
+                p.add(/*x, y-1*/);
          }
         
         ///////////////////////////////////////////////////////////////
@@ -33,7 +30,7 @@ public abstract class Aventurier {
             if(){//tuile(x, y+1).etat = innondé
             }
         }else {
-                posPossible.add(/*x, y+1*/);
+                p.add(/*x, y+1*/);
          }
         
         ///////////////////////////////////////////////////////////////
@@ -42,7 +39,7 @@ public abstract class Aventurier {
             if(){//tuile(x-1, y).etat = innondé
             }
         }else {
-                posPossible.add(/*x-1, y*/);
+                p.add(/*x-1, y*/);
          }
 
          ///////////////////////////////////////////////////////////////
@@ -51,14 +48,22 @@ public abstract class Aventurier {
             if(){//tuile(x+1, y).etat = innondé
             }
         }else {
-                posPossible.add(/*x+1, y*/);
-         } //pas sur que mes boolens soit utiles
+                p.add(/*x+1, y*/);
+         }
+        return p;
+    }
+    
+    public void seDeplacer() {
+        Tuille posJoueur = this.getPos();
+        posAutourPossible(posPossible, posJoueur);
+        
+         //pas sur que mes boolens soit utiles
         //proposer posPossible au joueur, il doit en choisir une, si il n'y en pas le lui dire
-         Iterator it = posPosible.iterator();
+         Iterator it = posPossible.iterator();
             while(it.hasNext()){
                 System.out.println(it.next());
             }
          this.setPos(/*nouvelle position que le joueur à choisi*/);
-         //PA = PA-1;        
+         this.setPA(this.getPA()-1);
     }
 }

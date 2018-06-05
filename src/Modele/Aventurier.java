@@ -7,6 +7,7 @@ package Modele;
 
 import java.util.HashSet;
 import java.util.Iterator;
+import Util.Utils.Pion;
 
 /**
  *
@@ -15,6 +16,7 @@ import java.util.Iterator;
 public abstract class Aventurier {
     private String nom;
     private HashSet posPossible;
+    private Pion couleur;
     
     public HashSet posAutourPossible(HashSet p, Tuille t) {
         if(/*à remplir, mettre les 2 if en 1 avec un ou*/){ //valeur impossible pour top [0][2], [1][1], [2][0], [3][0], [4][1], [5][2]

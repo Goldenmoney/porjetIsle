@@ -9,6 +9,6 @@ package Modele;
  *
  * @author bassetlu
  */
-public class Explorateur {
+public class Explorateur extends Aventurier{
     
 }

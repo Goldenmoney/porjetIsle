@@ -45,6 +45,9 @@ public class Grille {
         this.uneCase = uneCase;
     }
     
+    public ArrayList<Tuile> getTuiles() {
+        return tuiles;
+    }
     
     // METHODES
     public Grille(ArrayList<Tuile> tuiles) {
@@ -57,11 +60,8 @@ public class Grille {
             tableauTuiles=i;
             System.out.println(tableauTuiles);
         }
-        
     }
 
-    public ArrayList<Tuile> getTuiles() {
-        return tuiles;
-    }  
+    
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

@@ -20,5 +20,5 @@ public class PorjetIsle {
         // TODO code application logic here
         System.out.println("hello world");
     }
-    
+
 }

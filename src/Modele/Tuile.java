@@ -6,18 +6,12 @@
 package Modele;
 
 import java.util.ArrayList;
-
+import Util.Utils.EtatTuile;
 /**
  *
  * @author bassetlu
  */
 public class Tuile {
-
-    public enum EtatTuile {
-        SECHE,
-        INONDEE,
-        COULEE
-    }
 
     public enum NomTuile {
         Le_Pont_des_Abimes,
@@ -69,8 +63,8 @@ public class Tuile {
         ////
     }
 
-    public void majEtat() {
-        ////
+    public void majEtat(EtatTuile etatTuile) {
+        etat=etatTuile;
     }
 
     public EtatTuile getEtat() {
@@ -89,7 +83,7 @@ public class Tuile {
         return position;
     }
 
-    public void verifCoulee() {
-        ////
+    public boolean verifCoulee() {
+        return getEtat()==EtatTuile.COULEE;
     }
 }

@@ -17,6 +17,13 @@ import Modele.Grille;
  */
 public class Controleur {
     
+    public enum ActionSelectionee {
+        DEPLACER,
+        ASSECHER,
+        DONNER_CARTE,
+        RECUP_TRESOR
+    }
+
     private int niveauEau;
     private boolean tresorsRecup;
     private int numTour;
@@ -32,8 +39,7 @@ public class Controleur {
     private Carte_Tresor defausseTresor;
     private Carte_Inond piocheInond;
     private Carte_Inond supprimeInond;
-    
-    
+
     // METHODES
     public void controleur() {
         ////
@@ -71,42 +77,61 @@ public class Controleur {
         ////
     }
 
-    public void verifPartieFinie() {
-        ////
+    public boolean verifPartieFinie() {
+        return true; ////
     }
 
-    public void verifPartieGagnee() {
-        ////
+    public boolean verifPartieGagnee() {
+        return true; ////
     }
 
-    public void verifPartiePerdue() {
-        ////
+    public boolean verifPartiePerdue() {
+        return true; ////
     }
 
-    public void monteeEau() {
-        ////
+    public void monteeEau(int monte) {
+        niveauEau = +monte;
     }
 
     public void piocherCarte(Aventurier Aventurier) {
         ////
     }
-    
+
     public void piocherCarteInondation(int niveauEau) {
         ////
     }
-    
+
     public void piocherCarteTresor() {
         ////
     }
-    
-    public void debutTour() {
-        ////
+
+    public ActionSelectionee getChoixActionJoueur() {
+        return ActionSelectionee.DEPLACER; ////
     }
-    
+
+    public void debutTour(Aventurier aventurier) {
+        ////
+        /*getMainAventurier();
+        if (verifCarteSpe()){
+            ////
+        }*/
+        
+        if (getChoixActionJoueur()== ActionSelectionee.DEPLACER) {
+            ////
+        } else if (getChoixActionJoueur()== ActionSelectionee.ASSECHER) {
+            ////
+        } else if (getChoixActionJoueur()== ActionSelectionee.DONNER_CARTE) {
+            ////
+        } else {
+            ////
+        }
+
+    }
+
     public void terminerTour() {
         ////
     }
-    
+
     public void initJeu() {
         ////
     }

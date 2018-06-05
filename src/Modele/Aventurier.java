@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package porjetisle;
+package Modele;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import java.util.Iterator;
  *
  * @author bassetlu
  */
-abstract class Aventurier {
+public abstract class Aventurier {
     private String nom;
     
     

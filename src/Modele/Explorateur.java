@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package porjetisle;
+package Modele;
 
 /**
  *
  * @author bassetlu
  */
-public class Navigateur extends Aventurier {
+public class Explorateur {
     
 }

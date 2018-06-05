@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package porjetisle;
+package Modele;
 
 /**
  *
  * @author bassetlu
  */
-public class Cartes {
-    private Joueur joueur;
+public class Messager extends Aventurier {
+    
 }

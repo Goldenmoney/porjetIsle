@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package porjetisle;
+package Controleur;
 
 import java.util.ArrayList;
+import Modele.Aventurier;
+import Modele.Carte_Inond;
+import Modele.Carte_Tresor;
+import Modele.Grille;
 
 /**
  *

@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package porjetisle;
+package Modele;
+
+import Modele.Joueur;
 
 /**
  *
  * @author bassetlu
  */
-public class Tresor {
-    
+public class Cartes {
+    private Joueur joueur;
 }

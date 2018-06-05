@@ -72,5 +72,4 @@ public class Grille {
         }
     }
 }
-}
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

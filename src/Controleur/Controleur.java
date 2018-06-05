@@ -10,19 +10,14 @@ import Modele.Aventurier;
 import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
 import Modele.Grille;
+import Util.Utils.ActionSelectionee;
+import Vue.Message;
 
 /**
  *
  * @author bassetlu
  */
 public class Controleur {
-    
-    public enum ActionSelectionee {
-        DEPLACER,
-        ASSECHER,
-        DONNER_CARTE,
-        RECUP_TRESOR
-    }
 
     private int niveauEau;
     private boolean tresorsRecup;
@@ -115,12 +110,12 @@ public class Controleur {
         if (verifCarteSpe()){
             ////
         }*/
-        
-        if (getChoixActionJoueur()== ActionSelectionee.DEPLACER) {
+
+        if (getChoixActionJoueur() == ActionSelectionee.DEPLACER) {
             ////
-        } else if (getChoixActionJoueur()== ActionSelectionee.ASSECHER) {
+        } else if (getChoixActionJoueur() == ActionSelectionee.ASSECHER) {
             ////
-        } else if (getChoixActionJoueur()== ActionSelectionee.DONNER_CARTE) {
+        } else if (getChoixActionJoueur() == ActionSelectionee.DONNER_CARTE) {
             ////
         } else {
             ////
@@ -134,5 +129,10 @@ public class Controleur {
 
     public void initJeu() {
         ////
+    }
+
+    // Traiter message car Controleur=Obervé
+    public void traiterMessage(Message msg) {
+
     }
 }

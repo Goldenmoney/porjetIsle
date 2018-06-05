@@ -5,10 +5,22 @@
  */
 package Modele;
 
+import java.util.HashSet;
+
 /**
  *
  * @author bassetlu
  */
-public class Explorateur {
-    
+public class Explorateur extends Aventurier{
+    @Override
+    public HashSet posAutourPossible(HashSet p, Tuille t) {
+        //rajouter les cases en diagonale
+        return p;
+    }
+
+    @Override
+    public void seDeplacer() {
+        super.seDeplacer();
+    }
 }
+

@@ -14,54 +14,62 @@ import java.util.ArrayList;
 public class Grille {
     // Associations
 //je fais la grille (jules)
-    private ArrayList<Tuile> tuiles;
-    
-    private final int nbTuiles=36;
-    private Tuile tableauTuiles[] = new Tuile[36];
-    private Tuile uneCase;
-    
-    
+
+    private final int nbTuiles = 36;
+    private Tuile tableauTuiles[][] = new Tuile[6][6];
+
     //Getters
     public int getNbTuiles() {
         return nbTuiles;
     }
-    public Tuile[] getTableauTuiles() {
-        return tableauTuiles;
-    }
-    public Tuile getUneCase() {
-        return uneCase;
-    }
-    
-    
-    //Setters
-    public void setTableauTuiles(Tuile[] tableauTuiles) {
-        this.tableauTuiles = tableauTuiles;
-    }
-    public void setTuiles(ArrayList<Tuile> tuiles) {
-        this.tuiles = tuiles;
-    }
 
-    public void setUneCase(Tuile uneCase) {
-        this.uneCase = uneCase;
-    }
-    
-    public ArrayList<Tuile> getTuiles() {
-        return tuiles;
-    }
-    
     // METHODES
     public Grille(ArrayList<Tuile> tuiles) {
-        this.tuiles = tuiles;
-    }
-    
-    public void initGrille(int tableauTuiles) {
-        ////
-        for (int i=1; i<=36; i++){
-            tableauTuiles=i;
-            System.out.println(tableauTuiles);
+
+        for (int i = 0; i < tuiles.size(); i++) {
+
+            for (int j = 0; j < 6; j++) {
+
+                if (j == 0) {
+                    tableauTuiles[j][0] = null;
+                    tableauTuiles[j][1] = null;
+                    for (int k = 2; k <= 3; k++) {
+                        tableauTuiles[j][k] = tuiles.get(i);
+                        i++;
+                    }
+                    tableauTuiles[j][4] = null;
+                    tableauTuiles[j][5] = null;
+                } else if (j == 1) {
+                    tableauTuiles[j][0] = null;
+                    for (int k = 1; k <= 4; k++) {
+                        tableauTuiles[j][k] = tuiles.get(i);
+                        i++;
+                    }
+                    tableauTuiles[j][5] = null;
+                } else if (j == 2 || j == 3) {
+                    for (int k = 0; k <= 5; k++) {
+                        tableauTuiles[j][k] = tuiles.get(i);
+                        i++;
+                    }
+                } else if (j == 4) {
+                    tableauTuiles[j][0] = null;
+                    for (int k = 1; k <= 4; k++) {
+                        tableauTuiles[j][k] = tuiles.get(i);
+                        i++;
+                    }
+                    tableauTuiles[j][5] = null;
+                } else if (j == 5) {
+                    tableauTuiles[j][0] = null;
+                    tableauTuiles[j][1] = null;
+                    for (int k = 2; k <= 3; k++) {
+                        tableauTuiles[j][k] = tuiles.get(i);
+                        i++;
+                    }
+                    tableauTuiles[j][4] = null;
+                    tableauTuiles[j][5] = null;
+                }
+            }
         }
     }
-
-    
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

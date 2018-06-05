@@ -68,4 +68,4 @@ public abstract class Aventurier {
          this.setPos(/*nouvelle position que le joueur à choisi*/);
          this.setPA(this.getPA()-1);
     }
-}
+    }

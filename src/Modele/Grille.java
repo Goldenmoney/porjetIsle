@@ -51,8 +51,8 @@ public class Grille {
         Le_Val_du_Crepuscule,
         La_Tour_du_Guet,
         Le_Jardin_des_Murmures*/
-        Tuile tuileTest = new Tuile(Utils.EtatTuile.ASSECHEE,Utils.NomTuile.La_Caverne_des_Ombres);
-        tuiles.add(tuileTest);
+        Tuile La_Caverne_des_Ombres = new Tuile(Utils.EtatTuile.ASSECHEE,Utils.NomTuile.La_Caverne_des_Ombres);
+        tuiles.add(La_Caverne_des_Ombres);
         
         
         /*ASSECHEE("Asséchée"), 

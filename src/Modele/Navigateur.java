@@ -5,10 +5,15 @@
  */
 package Modele;
 
+import Util.Utils;
+
 /**
  *
  * @author bassetlu
  */
 public class Navigateur extends Aventurier {
     
+    public Navigateur(String nom, Tuile tuile) {
+        super(nom, Utils.Pion.ROUGE, null);
+    }
 }

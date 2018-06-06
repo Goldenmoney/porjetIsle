@@ -5,10 +5,17 @@
  */
 package Modele;
 
+import Util.Utils;
+
 /**
  *
  * @author bassetlu
  */
 public class Ingenieur extends Aventurier {
+
+    public Ingenieur(String nom, Tuile tuile) {
+        super(nom, Utils.Pion.ROUGE, null);
+    }
+    
     
 }

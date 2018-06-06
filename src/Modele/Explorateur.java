@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import Util.Utils;
 import java.util.HashSet;
 
 /**
@@ -12,11 +13,12 @@ import java.util.HashSet;
  * @author bassetlu
  */
 public class Explorateur extends Aventurier{
-
-    public Explorateur() {
-        super(null, null, null);
-    }
     
+    
+
+    public Explorateur(String nom, Tuile tuile) {
+        super(nom, Utils.Pion.VERT, null);
+    }   
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {
         //rajouter les cases en diagonale

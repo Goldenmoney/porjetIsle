@@ -5,10 +5,15 @@
  */
 package Modele;
 
+import Util.Utils;
+
 /**
  *
  * @author bassetlu
  */
 public class Messager extends Aventurier {
     
+    public Messager(String nom, Tuile tuile) {
+        super(nom, Utils.Pion.ROUGE, null);
+    }
 }

@@ -5,9 +5,11 @@
  */
 package Modele;
 
+import Util.Utils;
 import java.util.ArrayList;
 import Util.Utils.EtatTuile;
 import Util.Utils.NomTuile;
+import Util.Utils.Pion;
 /**
  *
  * @author bassetlu
@@ -19,14 +21,18 @@ public class Tuile {
 
     // Associations
     private Carte_Inond carte;
+    private Pion spawn; //a voir pour adapter aux aventuriers
     private ArrayList<Aventurier> joueurs;
     private Position position;
 
     // METHODES
-    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position position) {
+    public Tuile(EtatTuile etat, NomTuile nomTuile/*Carte_Inond carte, ArrayList<Aventurier> joueurs*/) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.position = position;
+        if (nomTuile == NomTuile.La_Porte_de_Bronze) {
+            spawn = Utils.Pion.ROUGE; //on les place directement depuis tuiles
+        }
     }
     
     public void addJoueur(Joueur joueur) {

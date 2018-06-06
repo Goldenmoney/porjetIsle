@@ -39,8 +39,6 @@ public class Tuile {
         this.posCase.setY(y);
     }
     
-    
-    
     public void addJoueur(Joueur joueur) {
         ////
     }

@@ -7,6 +7,7 @@ package Modele;
 
 import Util.Utils;
 import java.util.ArrayList;
+import jdk.nashorn.internal.objects.annotations.Where;
 
 /**
  *
@@ -123,8 +124,8 @@ public class Grille {
         }
     }
 
-    public Tuile getTuile(int x, int y) {
-        //// A FAIRE VITE SVP
+    public Tuile getTuileCase(int x, int y) {
+        return tableauTuiles[x][y];
     }
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

@@ -14,58 +14,90 @@ import Util.Utils.Pion;
  * @author bassetlu
  */
 public abstract class Aventurier {
-    private String nom;
-    private HashSet posPossible;
-    private Pion couleur;
-    
-    public HashSet posAutourPossible(HashSet p, Tuille t) {
-        if(/*à remplir, mettre les 2 if en 1 avec un ou*/){ //valeur impossible pour top [0][2], [1][1], [2][0], [3][0], [4][1], [5][2]
-            if(){//tuile(x, y-1).etat = innondé
-            }
-        }else {
-                p.add(/*x, y-1*/);
-         }
-        
-        ///////////////////////////////////////////////////////////////
-        
-        if(/*à remplir, mettre les 2 if en 1 avec un ou*/){ //valeur impossible pour bot [0][3], [1][4], [2][5], [3][5], [4][4], [5][3]
-            if(){//tuile(x, y+1).etat = innondé
-            }
-        }else {
-                p.add(/*x, y+1*/);
-         }
-        
-        ///////////////////////////////////////////////////////////////
-        
-        if(/*à remplir, mettre les 2 if en 1 avec un ou(||)*/){ //valeur impossible pour left [2][0], [1][1], [0][2], [0][3], [1][4], [2][5]
-            if(){//tuile(x-1, y).etat = innondé
-            }
-        }else {
-                p.add(/*x-1, y*/);
-         }
 
-         ///////////////////////////////////////////////////////////////
-        
-        if(/*à remplir, mettre les 2 if en 1 avec un ou(||)*/){ //valeur impossible pour right [3][0], [4][1], [5][2], [5][3], [4][4], [3][5]
-            if(){//tuile(x+1, y).etat = innondé
-            }
+    private String nom;
+    HashSet posPossible;
+    private Pion couleur;
+
+    public HashSet posAutourPossible(HashSet p, Position pos) {
+        int posX = pos.getX();
+        int posY = pos.getY();
+        if ((posX == 0 && posY == 2)
+                || (posX == 1 && posY == 1)
+                || (posX == 2 && posY == 0)
+                || (posX == 3 && posY == 0)
+                || (posX == 4 && posY == 1)
+                || (posX == 5 && posY == 2)) {//postion impossible pour top
+            System.out.println("posTop impossible (n'existe pas dans la grille)");
         }else {
-                p.add(/*x+1, y*/);
-         }
+            if (!/*Tuille de position x, y-1*/.verifCoulee()){ // la tuille ne doit pas être coulée
+                    Position NewPos = new Position(posX, posY - 1);
+                    p.add(NewPos); //ajout de la position possible
+            }
+        }
+        
+         if ((posX == 0 && posY == 3)
+                || (posX == 1 && posY == 4)
+                || (posX == 2 && posY == 5)
+                || (posX == 3 && posY == 5)
+                || (posX == 4 && posY == 4)
+                || (posX == 5 && posY == 3)) {//postion impossible pour bot
+            System.out.println("posBot impossible (n'existe pas dans la grille)");
+        }else {
+            if (!/*Tuille de position x, y+1*/.verifCoulee()){ // la tuille ne doit pas être coulée
+                    Position NewPos = new Position(posX, posY +1);
+                    p.add(NewPos); //ajout de la position possible
+            }
+        }
+         
+         if ((posX == 2 && posY == 0)
+                || (posX == 1 && posY == 1)
+                || (posX == 0 && posY == 2 )
+                || (posX == 0 && posY == 3)
+                || (posX == 1 && posY == 4)
+                || (posX == 2 && posY == 5)) {//postion impossible pour left
+            System.out.println("posLeft impossible (n'existe pas dans la grille)");
+        }else {
+            if (!/*Tuille de position x-1, y*/.verifCoulee()){ // la tuille ne doit pas être coulée
+                    Position NewPos = new Position(posX-1, posY);
+                    p.add(NewPos); //ajout de la position possible
+            }
+        }
+         
+          if ((posX == 3 && posY == 0)
+                || (posX == 4 && posY == 1)
+                || (posX == 5 && posY == 2 )
+                || (posX == 5 && posY == 3)
+                || (posX == 4 && posY == 4)
+                || (posX == 3 && posY == 5)) {//postion impossible pour right
+            System.out.println("posRight impossible (n'existe pas dans la grille)");
+        }else {
+            if (!/*Tuille de position x+1, y*/.verifCoulee()){ // la tuille ne doit pas être coulée
+                    Position NewPos = new Position(posX-1, posY);
+                    p.add(NewPos); //ajout de la position possible
+            }
+        }
+
         return p;
     }
-    
+
     public void seDeplacer() {
-        Tuille posJoueur = this.getPos();
-        posAutourPossible(posPossible, posJoueur);
-        
-         //pas sur que mes boolens soit utiles
+        Tuile posJoueur = this.getPosition();
+        Position posTuille = posJoueur.getPosition();
+        /*int posX = posTuille.getX();
+        int posY = posTuille.getY();*/
+        posAutourPossible(posPossible, posTuille);
+
         //proposer posPossible au joueur, il doit en choisir une, si il n'y en pas le lui dire
-         Iterator it = posPossible.iterator();
-            while(it.hasNext()){
-                System.out.println(it.next());
-            }
-         this.setPos(/*nouvelle position que le joueur à choisi*/);
-         this.setPA(this.getPA()-1);
+        Iterator it = posPossible.iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
+        this.setPos(/*nouvelle position que le joueur à choisi*/);
+        this.setPA(this.getPA() - 1);
     }
+
+    private Tuile getPosition() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+}

@@ -18,8 +18,8 @@ public class Plongeur extends Aventurier {
         private HashSet AVerifier;
         private HashSet Verifier; 
         
-        public Plongeur(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.ROUGE, null);
+        public Plongeur(String nom) {
+        super(nom, Utils.Pion.ROUGE);
     }
      
         

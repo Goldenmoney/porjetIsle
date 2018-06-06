@@ -13,7 +13,7 @@ import Util.Utils;
  */
 public class Navigateur extends Aventurier {
     
-    public Navigateur(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.ROUGE, null);
+    public Navigateur(String nom) {
+        super(nom, Utils.Pion.ROUGE);
     }
 }

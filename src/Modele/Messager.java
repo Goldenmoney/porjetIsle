@@ -13,7 +13,7 @@ import Util.Utils;
  */
 public class Messager extends Aventurier {
     
-    public Messager(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.ROUGE, null);
+    public Messager(String nom) {
+        super(nom, Utils.Pion.ROUGE);
     }
 }

@@ -13,8 +13,8 @@ import Util.Utils;
  */
 public class Ingenieur extends Aventurier {
 
-    public Ingenieur(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.ROUGE, null);
+    public Ingenieur(String nom) {
+        super(nom, Utils.Pion.ROUGE);
     }
     
     

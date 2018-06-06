@@ -16,8 +16,8 @@ public class Explorateur extends Aventurier{
     
     
 
-    public Explorateur(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.VERT, null);
+    public Explorateur(String nom) {
+        super(nom, Utils.Pion.VERT);
     }   
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {

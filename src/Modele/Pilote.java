@@ -13,7 +13,7 @@ import Util.Utils;
  */
 public class Pilote extends Aventurier {
     
-    public Pilote(String nom, Tuile tuile) {
-        super(nom, Utils.Pion.ROUGE, null);
+    public Pilote(String nom) {
+        super(nom, Utils.Pion.ROUGE);
     }
 }

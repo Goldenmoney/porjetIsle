@@ -55,6 +55,10 @@ public class Controleur {
         System.out.println("");
         grilleTest.afficheNomGrille();
     }
+    
+    public void initJoueurs() {
+        
+    }
 
     public Grille getGrille() {
         return grille;
@@ -133,7 +137,6 @@ public class Controleur {
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case BOUGER:
-                
                 ////
                 break;
             case ASSECHER:
@@ -143,5 +146,10 @@ public class Controleur {
                 ////
                 break;
         }
+    }
+    
+    public void initPartie(){
+        
+        this.initGrille();
     }
 }

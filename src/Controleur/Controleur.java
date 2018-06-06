@@ -11,6 +11,7 @@ import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
 import Modele.Grille;
 import Controleur.TypesMessages;
+import Modele.Tuile;
 
 /**
  *
@@ -24,6 +25,7 @@ public class Controleur {
     private int actionChoisie;
     private boolean aventurierMort;
     private int pa;
+    private ArrayList<Tuile> tuiles;
 
     // Associations
     private Grille grille;
@@ -45,6 +47,13 @@ public class Controleur {
 
     public int getPA() {
         return pa;
+    }
+    
+    public void initGrille() {
+        Grille grilleTest = new Grille(tuiles);
+        grilleTest.afficheGrille();
+        System.out.println("");
+        grilleTest.afficheNomGrille();
     }
 
     public Grille getGrille() {

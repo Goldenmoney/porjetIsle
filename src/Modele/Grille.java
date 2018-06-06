@@ -49,7 +49,7 @@ public class Grille {
         Le_Palais_des_Marees,
         Le_Val_du_Crepuscule,
         La_Tour_du_Guet,
-        Le_Jardin_des_Murmures
+        Le_Jardin_des_Murmures*/
         
         for (int i = 0; i < tuiles.size(); i++) {
 

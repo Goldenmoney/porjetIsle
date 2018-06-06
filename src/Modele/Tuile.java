@@ -28,7 +28,7 @@ public class Tuile {
         this.nomTuile = nomTuile;
         this.position = position;
     }
-
+    
     public void addJoueur(Joueur joueur) {
         ////
     }

@@ -62,13 +62,6 @@ public class Utils {
         La_Tour_du_Guet,
         Le_Jardin_des_Murmures
     }
-    
-    public enum ActionSelectionee {
-        DEPLACER,
-        ASSECHER,
-        DONNER_CARTE,
-        RECUP_TRESOR
-    }
 
     public static enum Pion {
         ROUGE("Rouge", new Color(255, 0, 0)),

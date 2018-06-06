@@ -122,5 +122,9 @@ public class Grille {
             }
         }
     }
+
+    public Tuile getTuile(int x, int y) {
+        //// A FAIRE VITE SVP
+    }
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

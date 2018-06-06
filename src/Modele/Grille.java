@@ -123,5 +123,8 @@ public class Grille {
             }
         }
     }
+    public void afficheGrille(){
+        
+    }
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

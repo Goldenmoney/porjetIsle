@@ -9,6 +9,6 @@ package Controleur;
  * @author bassetlu
  */
 public class Message {
-    public TypesMessages message;  // type de message
+    public TypesMessages type;  // type de message
     
 }

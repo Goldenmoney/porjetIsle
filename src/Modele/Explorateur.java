@@ -12,6 +12,12 @@ import java.util.HashSet;
  * @author bassetlu
  */
 public class Explorateur extends Aventurier{
+
+    public Explorateur() {
+        super(null, null, null);
+    }
+    
+    
     public HashSet posAutourPossible(HashSet p, Tuile t) {
         //rajouter les cases en diagonale
         return p;

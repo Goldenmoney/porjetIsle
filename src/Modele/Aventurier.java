@@ -8,6 +8,7 @@ package Modele;
 import java.util.HashSet;
 import java.util.Iterator;
 import Util.Utils.Pion;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,10 +16,18 @@ import Util.Utils.Pion;
  */
 public abstract class Aventurier {
 
-    /*private String nom;
-    HashSet posPossible;
+    private String nom;
+    private ArrayList<Position> posPossible;
     private Pion couleur;
     private Position pos;
+
+    public Aventurier(String nom, Pion couleur, Position pos) {
+        this.nom = nom;
+        this.couleur = couleur;
+        this.pos = pos;
+    }
+    
+    
     
     public HashSet posAutourPossible(HashSet p, Position pos) {
         int posX = pos.getX();
@@ -84,9 +93,9 @@ public abstract class Aventurier {
 
     public void seDeplacer() {
         Position posJoueur = this.getPosition();
-        /*int posX = posTuille.getX();
+        int posX = posTuille.getX();
         int posY = posTuille.getY();*/
-        /*posAutourPossible(posPossible, posJoueur);
+        posAutourPossible(posPossible, posJoueur);
 
         //proposer posPossible au joueur, il doit en choisir une, 
         //si il n'y en pas le lui dire
@@ -95,7 +104,7 @@ public abstract class Aventurier {
             System.out.println(it.next());
         }
         
-        this.setPosition(/*position que le joueur à choisie*//*);
+        this.setPosition(/*position que le joueur à choisie*/);
     }
 
     private Position getPosition() {

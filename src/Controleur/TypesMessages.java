@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Vue;
+package Controleur;
 
 /**
  *
@@ -13,4 +13,4 @@ public enum TypesMessages {
     BOUGER,
     ASSECHER,
     AUTRE_ACTION,
-}
+} //// A TERMINER

@@ -23,17 +23,23 @@ public class Tuile {
     private Carte_Inond carte;
     private Pion spawn; //a voir pour adapter aux aventuriers
     private ArrayList<Aventurier> joueurs;
-    private Position position;
+    private Position posCase;
 
     // METHODES
     public Tuile(EtatTuile etat, NomTuile nomTuile/*Carte_Inond carte, ArrayList<Aventurier> joueurs*/) {
         this.etat = etat;
         this.nomTuile = nomTuile;
-        this.position = position;
         if (nomTuile == NomTuile.La_Porte_de_Bronze) {
             spawn = Utils.Pion.ROUGE; //on les place directement depuis tuiles
         }
     }
+
+    public void setPosCase(int x, int y) {
+        this.posCase.setX(x);
+        this.posCase.setY(y);
+    }
+    
+    
     
     public void addJoueur(Joueur joueur) {
         ////
@@ -60,7 +66,7 @@ public class Tuile {
     }
 
     public Position getPosition() {
-        return position;
+        return posCase;
     }
 
     public boolean verifCoulee() {

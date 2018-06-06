@@ -1,5 +1,7 @@
 package Vue;
 
+import Controleur.Observateur;
+import Controleur.Message;
 import Modele.Aventurier;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -126,8 +128,8 @@ public abstract class VueAventurier implements Observateur {
         
         vueAventurier.setPosition("10");
         System.out.println("Position initialisée à 10.");
-        System.out.println("");
-        vueAventurier.getPosition()
+        System.out.println("Ecrire position souhaitée");
+        vueAventurier.getPosition();
         
     }
 }

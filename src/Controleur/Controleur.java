@@ -11,7 +11,6 @@ import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
 import Modele.Grille;
 import Util.Utils.ActionSelectionee;
-import Vue.Message;
 
 /**
  *

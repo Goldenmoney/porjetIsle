@@ -19,10 +19,8 @@ public class PorjetIsle {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("hello world");
         Controleur controleur = new Controleur();
-        controleur.initGrille();
-        
+        controleur.initPartie();
     }
 
 }

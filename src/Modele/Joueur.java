@@ -11,4 +11,8 @@ package Modele;
  */
 public class Joueur {
     private Cartes cartes;
+
+    public Joueur() {
+        
+    }
 }

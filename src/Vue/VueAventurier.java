@@ -33,7 +33,7 @@ public abstract class VueAventurier implements Observateur {
     @Override
     public void traiterMessage(Message msg) {
         // Traitement des différent messages reçus
-        switch(msg.message) {
+        /*switch(msg.message) {
             case BOUGER:
                 ////
                 break;
@@ -45,7 +45,7 @@ public abstract class VueAventurier implements Observateur {
             case AUTRE_ACTION:
                 ////
                 break;
-        }
+        }*/
     }
 
     public VueAventurier(String nomJoueur, String nomAventurier, Color couleur) {

@@ -154,5 +154,7 @@ public class Grille {
             System.out.println("");
         }
     }
+    
+    
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

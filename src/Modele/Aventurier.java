@@ -18,7 +18,8 @@ public abstract class Aventurier {
     private String nom;
     HashSet posPossible;
     private Pion couleur;
-
+    private Position pos;
+    
     public HashSet posAutourPossible(HashSet p, Position pos) {
         int posX = pos.getX();
         int posY = pos.getY();
@@ -30,7 +31,7 @@ public abstract class Aventurier {
                 || (posX == 5 && posY == 2)) {//postion impossible pour top
             System.out.println("posTop impossible (n'existe pas dans la grille)");
         }else {
-            if (!/*Tuille de position x, y-1*/.verifCoulee()){ // la tuille ne doit pas être coulée
+            if (!getTuile(posX, posY - 1).verifCoulee()){ // la tuille ne doit pas être coulée
                     Position NewPos = new Position(posX, posY - 1);
                     p.add(NewPos); //ajout de la position possible
             }
@@ -44,7 +45,7 @@ public abstract class Aventurier {
                 || (posX == 5 && posY == 3)) {//postion impossible pour bot
             System.out.println("posBot impossible (n'existe pas dans la grille)");
         }else {
-            if (!/*Tuille de position x, y+1*/.verifCoulee()){ // la tuille ne doit pas être coulée
+            if (!getTuile(posX, posY + 1).verifCoulee()){ // la tuille ne doit pas être coulée
                     Position NewPos = new Position(posX, posY +1);
                     p.add(NewPos); //ajout de la position possible
             }
@@ -58,7 +59,7 @@ public abstract class Aventurier {
                 || (posX == 2 && posY == 5)) {//postion impossible pour left
             System.out.println("posLeft impossible (n'existe pas dans la grille)");
         }else {
-            if (!/*Tuille de position x-1, y*/.verifCoulee()){ // la tuille ne doit pas être coulée
+            if (!getTuile(posX -1, posY).verifCoulee()){ // la tuille ne doit pas être coulée
                     Position NewPos = new Position(posX-1, posY);
                     p.add(NewPos); //ajout de la position possible
             }
@@ -72,7 +73,7 @@ public abstract class Aventurier {
                 || (posX == 3 && posY == 5)) {//postion impossible pour right
             System.out.println("posRight impossible (n'existe pas dans la grille)");
         }else {
-            if (!/*Tuille de position x+1, y*/.verifCoulee()){ // la tuille ne doit pas être coulée
+            if (!getTuile(posX + 1, posY).verifCoulee()){ // la tuille ne doit pas être coulée
                     Position NewPos = new Position(posX-1, posY);
                     p.add(NewPos); //ajout de la position possible
             }
@@ -82,22 +83,26 @@ public abstract class Aventurier {
     }
 
     public void seDeplacer() {
-        Tuile posJoueur = this.getPosition();
-        Position posTuille = posJoueur.getPosition();
+        Position posJoueur = this.getPosition();
         /*int posX = posTuille.getX();
         int posY = posTuille.getY();*/
-        posAutourPossible(posPossible, posTuille);
+        posAutourPossible(posPossible, posJoueur);
 
-        //proposer posPossible au joueur, il doit en choisir une, si il n'y en pas le lui dire
+        //proposer posPossible au joueur, il doit en choisir une, 
+        //si il n'y en pas le lui dire
         Iterator it = posPossible.iterator();
         while (it.hasNext()) {
             System.out.println(it.next());
         }
-        this.setPos(/*nouvelle position que le joueur à choisi*/);
-        this.setPA(this.getPA() - 1);
+        
+        this.setPosition(/*position que le joueur à choisie*/);
     }
 
-    private Tuile getPosition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Position getPosition() {
+        return this.pos;
+    }
+
+    private void setPosition(Position pos) {
+         this.pos=pos;
     }
 }

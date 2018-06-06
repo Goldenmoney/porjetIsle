@@ -5,12 +5,10 @@
  */
 package Modele;
 
-import Modele.Joueur;
-
 /**
  *
  * @author bassetlu
  */
 public class Cartes {
-    private Joueur joueur;
+    private Aventurier joueur;
 }

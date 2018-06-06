@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import Util.Utils;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -15,7 +16,11 @@ import java.util.Iterator;
  */
 public class Plongeur extends Aventurier {
         private HashSet AVerifier;
-        private HashSet Verifier;   
+        private HashSet Verifier; 
+        
+        public Plongeur(String nom) {
+        super(nom, Utils.Pion.ROUGE);
+    }
      
         
     /*    @Override

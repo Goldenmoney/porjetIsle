@@ -5,6 +5,7 @@
  */
 package Modele;
 
+import Util.Utils;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +27,7 @@ public class Grille {
     // METHODES
     public Grille(ArrayList<Tuile> tuiles) {
 
-        tuiles :  Le_Pont_des_Abimes,
+        /*tuiles :  Le_Pont_des_Abimes,
         La_Porte_de_Bronze,
         La_Caverne_des_Ombres,
         La_Porte_de_Fer,
@@ -49,7 +50,15 @@ public class Grille {
         Le_Palais_des_Marees,
         Le_Val_du_Crepuscule,
         La_Tour_du_Guet,
-        Le_Jardin_des_Murmures
+        Le_Jardin_des_Murmures*/
+        Tuile tuileTest = new Tuile(Utils.EtatTuile.ASSECHEE,Utils.NomTuile.La_Caverne_des_Ombres);
+        tuiles.add(tuileTest);
+        
+        
+        /*ASSECHEE("Asséchée"), 
+        INONDEE("Inondée"),
+        COULEE("Coulée");*/
+        
         
         for (int i = 0; i < tuiles.size(); i++) {
 

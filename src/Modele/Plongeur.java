@@ -18,14 +18,14 @@ public class Plongeur extends Aventurier {
         private HashSet Verifier;   
      
         
-        @Override
-    public HashSet posAutourPossible(HashSet p, Tuille t) {
+    /*    @Override
+    public HashSet posAutourPossible(HashSet p, Tuile t) {
         
     }    
         
     @Override
     public void seDeplacer() {
-        Tuille t = this.getPos();
+        Tuile t = this.getPos();
         posAutourPossible(AVerifier, t){
             Iterator it = posPossible.iterator();
             for(){
@@ -36,5 +36,5 @@ public class Plongeur extends Aventurier {
             
             
             
-       }
+       }*/
 }

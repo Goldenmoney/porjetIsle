@@ -10,7 +10,7 @@ import Modele.Aventurier;
 import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
 import Modele.Grille;
-import Util.Utils.ActionSelectionee;
+import Controleur.TypesMessages;
 
 /**
  *
@@ -99,8 +99,8 @@ public class Controleur {
         ////
     }
 
-    public ActionSelectionee getChoixActionJoueur() {
-        return ActionSelectionee.DEPLACER; ////
+    public TypesMessages getChoixActionJoueur() {
+        return TypesMessages.BOUGER; ////
     }
 
     public void debutTour(Aventurier aventurier) {
@@ -109,16 +109,6 @@ public class Controleur {
         if (verifCarteSpe()){
             ////
         }*/
-
-        if (getChoixActionJoueur() == ActionSelectionee.DEPLACER) {
-            ////
-        } else if (getChoixActionJoueur() == ActionSelectionee.ASSECHER) {
-            ////
-        } else if (getChoixActionJoueur() == ActionSelectionee.DONNER_CARTE) {
-            ////
-        } else {
-            ////
-        }
 
     }
 
@@ -132,6 +122,17 @@ public class Controleur {
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
-
+        switch (msg.type) {
+            case BOUGER:
+                
+                ////
+                break;
+            case ASSECHER:
+                ////
+                break;
+            case AUTRE_ACTION:
+                ////
+                break;
+        }
     }
 }

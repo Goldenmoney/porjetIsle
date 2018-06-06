@@ -23,7 +23,7 @@ public class Tuile {
     private Position position;
 
     // METHODES
-    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position position) {
+    public Tuile(EtatTuile etat, NomTuile nomTuile/*Carte_Inond carte, ArrayList<Aventurier> joueurs*/, Position position) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.position = position;

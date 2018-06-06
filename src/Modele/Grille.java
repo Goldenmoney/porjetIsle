@@ -6,7 +6,6 @@
 package Modele;
 
 //ca marche ?
-
 import Util.Utils;
 import java.util.ArrayList;
 import jdk.nashorn.internal.objects.annotations.Where;
@@ -29,6 +28,7 @@ public class Grille {
 
     // METHODES
     public Grille(ArrayList<Tuile> tuiles) {
+        tuiles = new ArrayList<>();
 
         //remplissage arraylist tuiles
         Tuile Le_Jardin_des_Murmures = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.Le_Jardin_des_Murmures);
@@ -129,11 +129,29 @@ public class Grille {
     public Tuile getTuileCase(int x, int y) {
         return tableauTuiles[x][y];
     }
-    public void afficheGrille(){
-        for (int x = 0; x<5; x++) {
-            for (int y = 0; y<5; y++) {
-                System.out.println(getTuileCase(x, y).getEtat());
+
+    public void afficheGrille() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                if (getTuileCase(x, y) == null) {
+                    System.out.print("VIDE \t\t");
+                } else {
+                    System.out.print(getTuileCase(x, y).getEtat() + "\t");
+                }
             }
+            System.out.println("");
+        }
+    }
+    public void afficheNomGrille() {
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+                if (getTuileCase(x, y) == null) {
+                    System.out.print("VIDE \t\t");
+                } else {
+                    System.out.print(getTuileCase(x, y).getNomTuile()+ "\t");
+                }
+            }
+            System.out.println("");
         }
     }
 }

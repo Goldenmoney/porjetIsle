@@ -129,5 +129,12 @@ public class Grille {
     public Tuile getTuileCase(int x, int y) {
         return tableauTuiles[x][y];
     }
+    public void afficheGrille(){
+        for (int x = 0; x<5; x++) {
+            for (int y = 0; y<5; y++) {
+                System.out.println(getTuileCase(x, y).getEtat());
+            }
+        }
+    }
 }
 //arraylist ou hashmap, getTuile assechées, coulées... ou ?? 

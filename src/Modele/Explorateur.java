@@ -17,9 +17,9 @@ public class Explorateur extends Aventurier{
         return p;
     }
 
-    @Override
+    /*@Override
     public void seDeplacer() {
         super.seDeplacer();
-    }
+    }*/
 }
 

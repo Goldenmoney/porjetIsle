@@ -19,6 +19,7 @@ public class Explorateur extends Aventurier{
     public Explorateur(String nom) {
         super(nom,Pion.VERT);
         this.spawnPos =NomTuile.La_Porte_de_Cuivre;
+        
     }   
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {

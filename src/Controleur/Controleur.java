@@ -36,6 +36,7 @@ public class Controleur {
     private Carte_Tresor defausseTresor;
     private Carte_Inond piocheInond;
     private Carte_Inond supprimeInond;
+    private Tuile tuile;
 
     // METHODES
     public void controleur() {
@@ -62,6 +63,7 @@ public class Controleur {
         Explorateur explo=new Explorateur("dd");
         joueurs.add(explo);
         joueur=explo;
+      
     }
 
     public Grille getGrille() {

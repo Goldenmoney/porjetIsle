@@ -40,11 +40,11 @@ public class Tuile {
     }
     
     public void addJoueur(Aventurier aventurier) {
-        ////
+        this.joueurs.add(aventurier);
     }
 
     public void supprJoueur(Aventurier aventurier) {
-        ////
+       this.joueurs.remove(aventurier);
     }
 
     public void majEtat(EtatTuile etatTuile) {

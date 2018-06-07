@@ -5,7 +5,7 @@
  */
 package Modele;
 
-import Util.Utils.Pion;
+import Util.Utils.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -19,11 +19,13 @@ public abstract class Aventurier {
     private ArrayList<Tuile> posPossible;
     private Pion couleur;
     private Tuile tuile;
-
+    protected NomTuile spawnPos;
+    
     public Aventurier(String nom, Pion couleur) {
         this.nom = nom;
         this.couleur = couleur;
         this.tuile = tuile;
+        this.spawnPos=null;
     }
    
     
@@ -95,7 +97,7 @@ public abstract class Aventurier {
 
         //proposer posPossible au joueur, il doit en choisir une, 
         //si il n'y en pas le lui dire
-        if (posPossible.size()==0){
+        if (posPossible.isEmpty()){
             System.out.println("déplacement impossible (pas de cases adjacente)");
         } else {
             for (int i = 0; i < posPossible.size(); i++) {

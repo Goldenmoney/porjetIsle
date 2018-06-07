@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import Modele.Aventurier;
 import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
+import Modele.Explorateur;
 import Modele.Grille;
-import Controleur.TypesMessages;
 import Modele.Tuile;
+import java.util.Scanner;
 
 /**
  *
@@ -57,7 +58,10 @@ public class Controleur {
     }
     
     public void initJoueurs() {
-        
+        joueurs=new ArrayList<>();
+        Explorateur explo=new Explorateur("dd");
+        joueurs.add(explo);
+        joueur=explo;
     }
 
     public Grille getGrille() {
@@ -122,11 +126,16 @@ public class Controleur {
         if (verifCarteSpe()){
             ////
         }*/
-
-    }
+        Scanner sc = new Scanner(System.in);
+        System.out.println("se deplacer? oui ou non?");
+        String str = sc.nextLine();
+        if (str.equalsIgnoreCase("oui")){
+            aventurier.seDeplacer(grille);
+    }}
 
     public void terminerTour() {
-        ////
+        setPa(0);
+        System.out.println("Tour terminer");
     }
 
     public void initJeu() {
@@ -151,5 +160,7 @@ public class Controleur {
     public void initPartie(){
         
         this.initGrille();
+        this.initJoueurs();
+        this.debutTour(joueur);
     }
 }

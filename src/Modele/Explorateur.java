@@ -5,7 +5,7 @@
  */
 package Modele;
 
-import Util.Utils;
+import Util.Utils.*;
 import java.util.HashSet;
 
 /**
@@ -17,7 +17,8 @@ public class Explorateur extends Aventurier{
     
 
     public Explorateur(String nom) {
-        super(nom, Utils.Pion.VERT);
+        super(nom,Pion.VERT);
+        this.spawnPos =NomTuile.La_Porte_de_Cuivre;
     }   
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {

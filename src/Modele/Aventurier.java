@@ -5,8 +5,6 @@
  */
 package Modele;
 
-import java.util.HashSet;
-import java.util.Iterator;
 import Util.Utils.Pion;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -125,6 +123,6 @@ public abstract class Aventurier {
     }
 
     private void setPosition(Tuile tuileChoisie) {
-         this.tuile=tuile;
+         this.tuile=tuileChoisie;
     }
 }

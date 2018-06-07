@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import Util.Utils.Pion;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -28,9 +29,9 @@ public abstract class Aventurier {
     }
    
     
-    public ArrayList<Tuile> posAutourPossible(ArrayList<Tuile> p, Tuile pos, Grille g) {
-        int posX = pos.getPosition().getX();
-        int posY = pos.getPosition().getY();
+    public ArrayList<Tuile> posAutourPossible(ArrayList<Tuile> p, Tuile tuile, Grille g) {
+        int posX = tuile.getPosition().getX();
+        int posY = tuile.getPosition().getY();
         
         if ((posX == 0 && posY == 2)
                 || (posX == 1 && posY == 1)
@@ -87,27 +88,43 @@ public abstract class Aventurier {
         return p;
     }
 
-    public void seDeplacer() {
-        Position posJoueur = this.getPosition();
-        int posX = posTuille.getX();
-        int posY = posTuille.getY();*/
-        posAutourPossible(posPossible, posJoueur);
+    public void seDeplacer(Grille grille) {
+        Tuile tuile = this.getPosition();
+        tuile.getPosition().getX();
+       // int posX = posJoueur.getX();
+        //int posY = posJoueur.getY();
+        posAutourPossible(posPossible, tuile, grille);
 
         //proposer posPossible au joueur, il doit en choisir une, 
         //si il n'y en pas le lui dire
-        Iterator it = posPossible.iterator();
-        while (it.hasNext()) {
-            System.out.println(it.next());
+        if (posPossible.size()==0){
+            System.out.println("déplacement impossible (pas de cases adjacente)");
+        } else {
+            for (int i = 0; i < posPossible.size(); i++) {
+                System.out.print(i+". ");
+                System.out.print("x = "+posPossible.get(i).getPosition().getX());
+                System.out.println("y = "+posPossible.get(i).getPosition().getY());
+            }
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Veuillez saisir un chiffre entre 0 et" + (posPossible.size()-1) + " :");
+                String str = sc.nextLine();
+                System.out.println("Vous avez saisi : " + str);
+                int choix = Integer.parseInt(str);
+                System.out.print(choix+". ");
+                System.out.print("x = "+posPossible.get(choix).getPosition().getX());
+                System.out.println("y = "+posPossible.get(choix).getPosition().getY());
+                this.setPosition(posPossible.get(choix));
         }
         
-        this.setPosition(/*position que le joueur à choisie*/);
+        
+        
     }
 
-    private Position getPosition() {
-        return this.pos;
+    private Tuile getPosition() {
+        return this.tuile;
     }
 
-    private void setPosition(Position pos) {
-         this.pos=pos;
-    }*/
+    private void setPosition(Tuile tuileChoisie) {
+         this.tuile=tuile;
+    }
 }

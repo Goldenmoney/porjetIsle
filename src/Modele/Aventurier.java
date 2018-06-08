@@ -29,7 +29,7 @@ public abstract class Aventurier {
     }
    
     
-    public ArrayList<Tuile> posAutourPossible(ArrayList<Tuile> p, Tuile tuile, Grille g) {
+    public ArrayList<Tuile> posAutourPossible( Tuile tuile, Grille g) {
         int posX = tuile.getPosition().getX();
         int posY = tuile.getPosition().getY();
         

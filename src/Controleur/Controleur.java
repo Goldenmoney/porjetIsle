@@ -40,7 +40,8 @@ public class Controleur {
 
     // METHODES
     public void controleur() {
-        ////
+        this.pa=pa;
+        
     }
 
     public void addTresor() {
@@ -140,9 +141,6 @@ public class Controleur {
         System.out.println("Tour terminer");
     }
 
-    public void initJeu() {
-        ////
-    }
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {

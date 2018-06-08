@@ -127,4 +127,26 @@ public abstract class Aventurier {
     private void setPosition(Tuile tuileChoisie) {
          this.tuile=tuileChoisie;
     }
+
+    public Pion getCouleur() {
+        return couleur;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public NomTuile getSpawnPos() {
+        return spawnPos;
+    }
+
+    public ArrayList<Tuile> getPosPossible() {
+        return posPossible;
+    }
+
+    public Tuile getTuile() {
+        return tuile;
+    }
+    
+    
 }

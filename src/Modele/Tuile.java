@@ -21,18 +21,30 @@ public class Tuile {
 
     // Associations
     private Carte_Inond carte;
-    private Pion spawn; //a voir pour adapter aux aventuriers
     private ArrayList<Aventurier> joueurs;
     private Position posCase;
-
+    private Carte_Tresor tresor;
     // METHODES
-    public Tuile(EtatTuile etat, NomTuile nomTuile/*Carte_Inond carte, ArrayList<Aventurier> joueurs*/) {
+  
+public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.etat = etat;
         this.nomTuile = nomTuile;
-        if (nomTuile == NomTuile.La_Porte_de_Bronze) {
-            spawn = Utils.Pion.ROUGE; //on les place directement depuis tuiles
-        }
+        this.carte = carte;
+        this.joueurs = joueurs;
+        this.posCase = posCase;
+        this.tresor = null;
     }
+    
+    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position posCase, Carte_Tresor tresor) {
+        this.etat = etat;
+        this.nomTuile = nomTuile;
+        this.carte = carte;
+        this.joueurs = joueurs;
+        this.posCase = posCase;
+        this.tresor = tresor;
+    }
+    
+    
 
     public void setPosCase(int x, int y) {
         this.posCase.setX(x);

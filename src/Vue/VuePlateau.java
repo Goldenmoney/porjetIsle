@@ -24,7 +24,8 @@ public class VuePlateau extends JPanel {
         for (int i = 0; i < 36; i++) {
             JButton button = new JButton();
 
-           
+            
+            
             if (i == 0) {
                 button.setVisible(false);
 

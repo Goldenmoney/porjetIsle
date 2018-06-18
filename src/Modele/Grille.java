@@ -8,9 +8,8 @@ package Modele;
 //ca marche ?
 import Util.Utils;
 import java.util.ArrayList;
-import jdk.nashorn.internal.objects.annotations.Where;
 
-/**
+/** tuiles;
  *
  * @author bassetlu
  */
@@ -21,17 +20,12 @@ public class Grille {
     private final int nbTuiles = 36;
     private Tuile tableauTuiles[][] = new Tuile[6][6];
 
-    //Getters
-    public int getNbTuiles() {
-        return nbTuiles;
-    }
-
-    // METHODES
+    // construction
     public Grille(ArrayList<Tuile> tuiles) {
         tuiles = new ArrayList<>();
 
         //remplissage arraylist tuiles
- Tuile Le_Pont_des_Abimes = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Pont_des_Abimes);
+        Tuile Le_Pont_des_Abimes = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Pont_des_Abimes);
         tuiles.add(Le_Pont_des_Abimes);
         Tuile La_Porte_de_Bronze = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.La_Porte_de_Bronze);
         tuiles.add(La_Porte_de_Bronze);
@@ -89,6 +83,8 @@ public class Grille {
                     tableauTuiles[j][1] = null;
                     for (int k = 2; k <= 3; k++) {
                         tableauTuiles[j][k] = tuiles.get(i);
+                        tuiles.get(i).setPosX(j);
+                        tuiles.get(i).setPosY(k);
                         i++;
                     }
                     tableauTuiles[j][4] = null;
@@ -97,18 +93,24 @@ public class Grille {
                     tableauTuiles[j][0] = null;
                     for (int k = 1; k <= 4; k++) {
                         tableauTuiles[j][k] = tuiles.get(i);
+                       tuiles.get(i).setPosX(j);
+                        tuiles.get(i).setPosY(k);
                         i++;
                     }
                     tableauTuiles[j][5] = null;
                 } else if (j == 2 || j == 3) {
                     for (int k = 0; k <= 5; k++) {
                         tableauTuiles[j][k] = tuiles.get(i);
+                        tuiles.get(i).setPosX(j);
+                        tuiles.get(i).setPosY(k);
                         i++;
                     }
                 } else if (j == 4) {
                     tableauTuiles[j][0] = null;
                     for (int k = 1; k <= 4; k++) {
                         tableauTuiles[j][k] = tuiles.get(i);
+                       tuiles.get(i).setPosX(j);
+                        tuiles.get(i).setPosY(k);
                         i++;
                     }
                     tableauTuiles[j][5] = null;
@@ -117,6 +119,8 @@ public class Grille {
                     tableauTuiles[j][1] = null;
                     for (int k = 2; k <= 3; k++) {
                         tableauTuiles[j][k] = tuiles.get(i);
+                       tuiles.get(i).setPosX(j);
+                        tuiles.get(i).setPosY(k);
                         i++;
                     }
                     tableauTuiles[j][4] = null;
@@ -126,10 +130,15 @@ public class Grille {
         }
     }
 
-    public Tuile getTuileCase(int x, int y) {
-        return tableauTuiles[x][y];
+     //Getters
+    public int getNbTuiles() {
+        return nbTuiles;
     }
-
+    
+    public Tuile getTuileCase(int x, int y) {
+        return this.tableauTuiles[x][y];
+    }
+ 
   public void afficheGrille() {
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {

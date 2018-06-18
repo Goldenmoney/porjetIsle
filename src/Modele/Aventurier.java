@@ -38,9 +38,11 @@ public class Aventurier {
    
     //methodes
     
-    public ArrayList<Tuile> posAutourPossible(Tuile tuile, Grille g) {
-        int posX = tuile.getPosition().getX();
-        int posY = tuile.getPosition().getY();
+    //demande depalcement : pospossible(liste cases dispo)-->choix puis deplacement
+    
+    public ArrayList<Tuile> posAutourPossible(Grille g) {
+        int posX = this.tuile.getPosX();
+        int posY = this.tuile.getPosY();
         ArrayList<Tuile> p = new ArrayList<>();
         
         if ((posX == 0 && posY == 2)
@@ -93,8 +95,7 @@ public class Aventurier {
             if (!g.getTuileCase(posX + 1, posY).verifCoulee()){ // la tuille ne doit pas être coulée
                     p.add(g.getTuileCase(posX + 1, posY)); //ajout de la position possible
             }
-        }
-
+          }
         return p;
     }
 

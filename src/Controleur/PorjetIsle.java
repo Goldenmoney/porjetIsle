@@ -22,5 +22,4 @@ public class PorjetIsle {
         Controleur controleur = new Controleur();
         controleur.initPartie();
     }
-
 }

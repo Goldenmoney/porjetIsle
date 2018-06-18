@@ -18,12 +18,15 @@ public class Tuile {
 
     private EtatTuile etat;
     private final NomTuile nomTuile;
+    private int posX;
+    private int posY;
 
     // Associations
     private Carte_Inond carte;
     private ArrayList<Aventurier> joueurs;
     private Position posCase;
     private Carte_Tresor tresor;
+    
     // METHODES
   
 public Tuile(EtatTuile etat, NomTuile nomTuile) {
@@ -31,7 +34,7 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.nomTuile = nomTuile;
         this.carte = carte;
         this.joueurs = joueurs;
-        this.posCase = posCase;
+        this.posCase = null;
         this.tresor = null;
     }
     
@@ -43,8 +46,22 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.posCase = posCase;
         this.tresor = tresor;
     }
-    
-    
+
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
 
     public void setPosCase(int x, int y) {
         this.posCase.setX(x);

@@ -45,17 +45,9 @@ public class Controleur {
     public void controleur() {
         this.pa = pa;
         this.tuiles = new ArrayList<>();
-         this.joueurs=new ArrayList<>();
-    }
-    
-    /*public void controleur(Aventurier joueur1, Aventurier joueur2) {
-        this.pa=3;
-        this.joueur1 = joueur1;
-        this.joueur2 = joueur2;
-        this.joueur3 = null;
-        this.joueur4 = null;
-    }*/
-                
+        this.joueurs = new ArrayList<>();
+        this.grille = getGrille();
+    }          
     
     // methodes de la classe
 
@@ -68,15 +60,14 @@ public class Controleur {
     }
     
     public void initGrille() {
-        Grille grilleTest = new Grille(tuiles);
-        grilleTest.afficheGrille();
+        grille = new Grille(tuiles);
+        grille.afficheGrille();
         System.out.println("");
-        grilleTest.afficheNomGrille();
+        grille.afficheNomGrille();
     }
-    
+
     public void initJoueurs() {
-        Aventurier aventurier1 =new Aventurier("je sais pas qui", ROUGE, tuiles.get(1));
-        joueurs.add(aventurier1);
+        joueur1 = new Aventurier("je sais pas qui", ROUGE, grille.getTuileCase(2, 2));
     }
     
    public void initPartie(){
@@ -147,15 +138,30 @@ public class Controleur {
         if (verifCarteSpe()){
             ////
         }*/
-        System.out.println(aventurier.getTuile());
+        ArrayList<Tuile> posPosi = new ArrayList<>();
+        posPosi = aventurier.posAutourPossible(grille);
+        System.out.print("position du joueur actuel : ");
+        System.out.println(aventurier.getTuile().getNomTuile());
         Scanner sc = new Scanner(System.in);
         System.out.println("se deplacer? oui ou non?");
         String str = sc.nextLine();
         if (str.equalsIgnoreCase("oui")){
-            aventurier.seDeplacer(tuiles.get(8));
+            for (int i = 0; i < posPosi.size();i ++) {
+                System.out.print(i + ". ");
+                System.out.println(posPosi.get(i).getNomTuile());
         }
-        System.out.println(aventurier.getTuile());
-    
+            if (!posPosi.isEmpty()){
+                 Scanner sc2 = new Scanner(System.in);
+                System.out.print("choisir une des positions proposé : ");
+                String str2 = sc2.nextLine();
+                int int2 = Integer.parseInt(str2);
+                int x = posPosi.get(int2).getPosX();
+                int y = posPosi.get(int2).getPosY();
+                aventurier.seDeplacer(grille.getTuileCase(x,y));
+            }
+        }
+        System.out.print("position du joueur actuel : ");
+        System.out.println(aventurier.getTuile().getNomTuile());
     }
 
     public void terminerTour() {

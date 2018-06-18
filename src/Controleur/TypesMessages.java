@@ -10,7 +10,6 @@ package Controleur;
  * @author bassetlu
  */
 public enum TypesMessages {
-    QUITTER,
     JOUER,
     PASSER,
     SE_DEPLACER,

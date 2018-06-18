@@ -5,49 +5,46 @@
  */
 package Vue;
 
+import Controleur.Message;
+import Controleur.Observe;
+import Controleur.TypesMessages;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-/**
- *
- * @author vialjule
- */
-public class VueDebut extends javax.swing.JFrame {
+public class VueDebut extends Observe{
 
     /**
      * Creates new form VueDebut
      */
     public VueDebut() {
         initComponents();
-        
-        jLabel6.setVisible(false);//6
-        jLabel7.setVisible(false);//7
-        jTextField3.setVisible(false);
-        jTextField4.setVisible(false);
+
+        jLabel6.setEnabled(false);//6
+        jLabel7.setEnabled(false);//7
+        jTextField3.setEnabled(false);
+        jTextField4.setEnabled(false);
 
         jSpinner1.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
                 int nbJoueurs = (int) jSpinner1.getValue();
                 if (nbJoueurs == 2) {
-                    jLabel6.setVisible(false);//6
-                    jLabel7.setVisible(false);//7
-                    jTextField3.setVisible(false);
-                    jTextField4.setVisible(false);
-                    repaint();
+                    jLabel6.setEnabled(false);//6
+                    jLabel7.setEnabled(false);//7
+                    jTextField3.setEnabled(false);
+                    jTextField4.setEnabled(false);
                 } else if (nbJoueurs == 3) {
-                    jLabel6.setVisible(true);//6
-                    jLabel7.setVisible(false);//7
-                    jTextField3.setVisible(true);
-                    jTextField4.setVisible(false);
+                    jLabel6.setEnabled(true);//6
+                    jLabel7.setEnabled(false);//7
+                    jTextField3.setEnabled(true);
+                    jTextField4.setEnabled(false);
                 } else {
-                    jLabel6.setVisible(true);//6
-                    jLabel7.setVisible(true);//7
-                    jTextField3.setVisible(true);
-                    jTextField4.setVisible(true);
+                    jLabel6.setEnabled(true);//6
+                    jLabel7.setEnabled(true);//7
+                    jTextField3.setEnabled(true);
+                    jTextField4.setEnabled(true);
                 }
 
             }
@@ -219,7 +216,9 @@ public class VueDebut extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
+        Message m = new Message();
+        m.type = TypesMessages.JOUER;
+        notifierObservateur(m);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed

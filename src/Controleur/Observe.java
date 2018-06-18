@@ -23,5 +23,6 @@ public class Observe extends javax.swing.JFrame {
         if (observateur != null) {
             observateur.traiterMessage(m);
         }
+        System.out.println("LOOOOOOOOOOOOL");
     }
 }

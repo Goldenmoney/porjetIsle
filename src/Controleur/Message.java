@@ -10,5 +10,7 @@ package Controleur;
  */
 public class Message {
     public TypesMessages type;  // type de message
+    public String joueur;
+    public int uneCase;
     
 }

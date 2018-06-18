@@ -39,7 +39,6 @@ public class Controleur {
     private Aventurier joueur3;
     private Aventurier joueur4;
     private Aventurier joueurCourant;
-    //private ArrayList<Aventurier> joueurs;
     private Carte_Tresor piocheTresor;
     private Carte_Tresor defausseTresor;
     private Carte_Inond piocheInond;
@@ -80,6 +79,7 @@ public class Controleur {
         this.initGrille();
         this.initJoueurs();
         this.joueurCourant = joueur1;
+        this.niveauEau = 10;
         System.out.println("c'est a " + joueurCourant.getNom());
         this.debutTour(joueurCourant);
     }
@@ -88,6 +88,10 @@ public class Controleur {
         return grille;
     }
 
+    public int getNiveauEau() {
+        return niveauEau;
+    }
+    
     public void setPA(int pa) {
         this.pa = pa;
     }
@@ -110,15 +114,20 @@ public class Controleur {
     }
 
     public boolean verifPartieFinie() {
-        return true; ////
+        if (getNiveauEau()==10){
+            return true;
+        } else {
+            return false;
+        }
     }
-
+    
+    ///true si la partie est gagné, false si elle est perdue
     public boolean verifPartieGagnee() {
-        return true; ////
-    }
-
-    public boolean verifPartiePerdue() {
-        return true; ////
+        //if () {
+            return true;
+        //} else {
+            //return false;
+        //}
     }
 
     public void monteeEau(int monte) {
@@ -129,16 +138,24 @@ public class Controleur {
         ////
     }
 
-    public void piocherCarteInondation(int niveauEau) {
-        ////
+    public void piocherCarteInondation() {
+        if (getNiveauEau() <= 2){
+            //nb de cartes a piocher = 2
+        } else if (getNiveauEau() <= 5) {
+            //nb de cartes a piocher = 3
+        } else if (getNiveauEau() <= 7) {
+            //nb de cartes a piocher = 4
+        } else if (getNiveauEau() <= 9){
+            //nb de cartes a piocher = 5
+        }
     }
 
     public void piocherCarteTresor() {
         ////
     }
 
-    public TypesMessages getChoixActionJoueur() {
-        return TypesMessages.SE_DEPLACER; ////
+    public Aventurier getJoueurCourant() {
+        return joueurCourant;
     }
     
     public void deplacement(Aventurier aventurier) {
@@ -223,7 +240,6 @@ public class Controleur {
         }
         System.out.println("PA actuel : " + getPA());
         boolean changementJoueur = false;
-        
         while (getPA()>0 && !changementJoueur){
             Scanner sc = new Scanner(System.in);
             System.out.println("se deplacer? oui ou non?");
@@ -239,7 +255,6 @@ public class Controleur {
                     assechement(aventurier);
                 } 
             }
-            
             if (getPA() != 0){
                 Scanner sc5 = new Scanner(System.in);
                 System.out.println("terminer tour ? oui ou non ?");
@@ -257,29 +272,43 @@ public class Controleur {
 
     public void terminerTour() {
         System.out.println("Tour terminer");
-        if (joueurCourant == joueur1){
-            joueurCourant = joueur2;
-        }else if (joueurCourant == joueur2 && joueur3 != null){
-            joueurCourant = joueur3;
-        }else if (joueurCourant == joueur3 && joueur4 != null) {
-            joueurCourant = joueur4;
+        if (verifPartieFinie()){
+            if (verifPartieGagnee()){
+                System.out.println("partie finit et gagné");
+            }else{
+                System.out.println("partie finit et perdu");
+            }
         } else {
-            joueurCourant = joueur1;
+            piocherCarteInondation();
+            if (joueurCourant == joueur1){
+                joueurCourant = joueur2;
+            }else if (joueurCourant == joueur2 && joueur3 != null){
+                joueurCourant = joueur3;
+            }else if (joueurCourant == joueur3 && joueur4 != null) {
+               joueurCourant = joueur4;
+            } else {
+                joueurCourant = joueur1;
+            }
+            System.out.println("Joueur Suivant");
+            System.out.println("c'est a " + joueurCourant.getNom());
+            debutTour(joueurCourant);
         }
-        System.out.println("Joueur Suivant");
-        System.out.println("c'est a " + joueurCourant.getNom());
-        debutTour(joueurCourant);
     }
-
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case SE_DEPLACER:
                 ////
+                if (getPA()!= 0){
+                   deplacement(getJoueurCourant()); 
+                }
                 break;
             case ASSECHER:
                 ////
+                if (getPA()!= 0){
+                   assechement(getJoueurCourant()); 
+                }
                 break;
             case ECHANGER:
                 ////

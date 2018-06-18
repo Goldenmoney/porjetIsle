@@ -99,4 +99,8 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
     public boolean verifCoulee() {
         return getEtat()==EtatTuile.COULEE;
     }
+    
+    public boolean verifInondee() {
+        return getEtat()==EtatTuile.INONDEE;
+    }
 }

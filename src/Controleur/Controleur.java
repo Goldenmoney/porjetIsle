@@ -12,6 +12,7 @@ import Modele.Carte_Tresor;
 import Modele.Explorateur;
 import Modele.Grille;
 import Modele.Tuile;
+import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.Pion.ROUGE;
 import java.util.Scanner;
 
@@ -67,7 +68,7 @@ public class Controleur {
     }
 
     public void initJoueurs() {
-        joueur1 = new Aventurier("je sais pas qui", ROUGE, grille.getTuileCase(2, 2));
+        joueur1 = new Aventurier("je sais pas qui", ROUGE, grille.getTuileCase(4, 3));
     }
     
    public void initPartie(){
@@ -131,21 +132,11 @@ public class Controleur {
     public TypesMessages getChoixActionJoueur() {
         return TypesMessages.BOUGER; ////
     }
-
-    public void debutTour(Aventurier aventurier) {
-        ////
-        /*getMainAventurier();
-        if (verifCarteSpe()){
-            ////
-        }*/
-        ArrayList<Tuile> posPosi = new ArrayList<>();
-        posPosi = aventurier.posAutourPossible(grille);
-        System.out.print("position du joueur actuel : ");
-        System.out.println(aventurier.getTuile().getNomTuile());
-        Scanner sc = new Scanner(System.in);
-        System.out.println("se deplacer? oui ou non?");
-        String str = sc.nextLine();
-        if (str.equalsIgnoreCase("oui")){
+    
+    public void deplacement(Aventurier aventurier) {
+        
+            ArrayList<Tuile> posPosi = new ArrayList<>();
+            posPosi = aventurier.posAutourPossible(grille);
             for (int i = 0; i < posPosi.size();i ++) {
                 System.out.print(i + ". ");
                 System.out.println(posPosi.get(i).getNomTuile());
@@ -158,10 +149,73 @@ public class Controleur {
                 int x = posPosi.get(int2).getPosX();
                 int y = posPosi.get(int2).getPosY();
                 aventurier.seDeplacer(grille.getTuileCase(x,y));
+            } else {
+                System.out.println("pas de déplacement possible");
             }
-        }
+    }
+    
+    public void assechement(Aventurier aventurier) {
+            ArrayList<Tuile> asse = new ArrayList<>();
+            asse = aventurier.AssechementAutourPossible(grille);
+            for (int i = 0; i < asse.size();i ++) {
+                System.out.print(i + ". ");
+                System.out.println(asse.get(i).getNomTuile());
+            }
+            if (!asse.isEmpty()){
+                Scanner sc4 = new Scanner(System.in);
+                System.out.print("choisir une des positions proposé : ");
+                String str4 = sc4.nextLine();
+                int int4 = Integer.parseInt(str4);
+                asse.get(int4).majEtat(ASSECHEE);
+            } else {
+                System.out.println("pas d'assechement possible");
+            }
+              ArrayList<Tuile> asseAft = new ArrayList<>();
+             asseAft = aventurier.AssechementAutourPossible(grille);
+             if (!asseAft.isEmpty()){
+                 for (int i = 0; i < asseAft.size();i ++) {
+                System.out.print(i + ". ");
+                System.out.println(asseAft.get(i).getNomTuile());
+                }  
+             } else {
+                 System.out.println("pas d'assechement possible");
+             }
+    }
+
+    public void debutTour(Aventurier aventurier) {
+        ////
+        /*getMainAventurier();
+        if (verifCarteSpe()){
+            ////
+        }*/
         System.out.print("position du joueur actuel : ");
         System.out.println(aventurier.getTuile().getNomTuile());
+        
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("se deplacer? oui ou non?");
+        String str = sc.nextLine();
+        if (str.equalsIgnoreCase("oui")){
+             deplacement(aventurier);
+        }
+
+        
+        
+        
+        Scanner sc3 = new Scanner(System.in);
+        System.out.println("assecher ? oui ou non ?");
+        String str3 = sc3.nextLine();
+        if (str3.equalsIgnoreCase("oui")){
+            assechement(aventurier);
+        }
+        
+        
+        System.out.print("position du joueur actuel : ");
+        System.out.println(aventurier.getTuile().getNomTuile());
+        
+        
+        
+        
     }
 
     public void terminerTour() {

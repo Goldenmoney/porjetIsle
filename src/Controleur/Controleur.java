@@ -141,7 +141,7 @@ public class Controleur {
     }
 
     public TypesMessages getChoixActionJoueur() {
-        return TypesMessages.BOUGER; ////
+        return TypesMessages.SE_DEPLACER; ////
     }
     
     public void deplacement(Aventurier aventurier) {
@@ -250,13 +250,16 @@ public class Controleur {
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
         switch (msg.type) {
-            case BOUGER:
+            case SE_DEPLACER:
                 ////
                 break;
             case ASSECHER:
                 ////
                 break;
-            case AUTRE_ACTION:
+            case ECHANGER:
+                ////
+                break;
+            case RECUP_TRESOR:
                 ////
                 break;
         }

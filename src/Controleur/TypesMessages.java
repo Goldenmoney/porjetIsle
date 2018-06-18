@@ -10,7 +10,12 @@ package Controleur;
  * @author bassetlu
  */
 public enum TypesMessages {
-    BOUGER,
+    QUITTER,
+    JOUER,
+    PASSER,
+    SE_DEPLACER,
     ASSECHER,
-    AUTRE_ACTION,
+    ECHANGER,
+    RECUP_TRESOR
+    
 } //// A TERMINER

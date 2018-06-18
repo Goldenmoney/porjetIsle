@@ -12,15 +12,15 @@ import java.util.HashSet;
  *
  * @author bassetlu
  */
-public class Explorateur extends Aventurier{
+public class Explorateur{
     
     
 
-    public Explorateur(String nom) {
+  /*  public Explorateur(String nom) {
         super(nom,Pion.VERT);
         this.spawnPos =NomTuile.La_Porte_de_Cuivre;
         
-    }   
+    }   */
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {
         //rajouter les cases en diagonale

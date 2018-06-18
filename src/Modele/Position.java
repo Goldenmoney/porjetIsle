@@ -13,11 +13,13 @@ public class Position {
     private int x;
     private int y;
 
+    //constructeur
     public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
+     //methodes
     public void setX(int x) {
         this.x = x;
     }

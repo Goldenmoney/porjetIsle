@@ -12,6 +12,7 @@ import Modele.Carte_Tresor;
 import Modele.Explorateur;
 import Modele.Grille;
 import Modele.Tuile;
+import static Util.Utils.Pion.ROUGE;
 import java.util.Scanner;
 
 /**
@@ -30,19 +31,33 @@ public class Controleur {
 
     // Associations
     private Grille grille;
-    private Aventurier joueur;
+    private Aventurier joueur1;
+    private Aventurier joueur2;
+    private Aventurier joueur3;
+    private Aventurier joueur4;
     private ArrayList<Aventurier> joueurs;
     private Carte_Tresor piocheTresor;
     private Carte_Tresor defausseTresor;
     private Carte_Inond piocheInond;
     private Carte_Inond supprimeInond;
-    private Tuile tuile;
 
-    // METHODES
+    // constructeur
     public void controleur() {
-        this.pa=pa;
-        
+        this.pa = pa;
+        this.tuiles = new ArrayList<>();
+         this.joueurs=new ArrayList<>();
     }
+    
+    /*public void controleur(Aventurier joueur1, Aventurier joueur2) {
+        this.pa=3;
+        this.joueur1 = joueur1;
+        this.joueur2 = joueur2;
+        this.joueur3 = null;
+        this.joueur4 = null;
+    }*/
+                
+    
+    // methodes de la classe
 
     public void addTresor() {
         ////
@@ -60,11 +75,14 @@ public class Controleur {
     }
     
     public void initJoueurs() {
-        joueurs=new ArrayList<>();
-        Explorateur explo=new Explorateur("dd");
-        joueurs.add(explo);
-        joueur=explo;
-      
+        Aventurier aventurier1 =new Aventurier("je sais pas qui", ROUGE, tuiles.get(1));
+        joueurs.add(aventurier1);
+    }
+    
+   public void initPartie(){
+        this.initGrille();
+        this.initJoueurs();
+        this.debutTour(joueur1);
     }
 
     public Grille getGrille() {
@@ -129,12 +147,16 @@ public class Controleur {
         if (verifCarteSpe()){
             ////
         }*/
+        System.out.println(aventurier.getTuile());
         Scanner sc = new Scanner(System.in);
         System.out.println("se deplacer? oui ou non?");
         String str = sc.nextLine();
         if (str.equalsIgnoreCase("oui")){
-            aventurier.seDeplacer(grille);
-    }}
+            aventurier.seDeplacer(tuiles.get(8));
+        }
+        System.out.println(aventurier.getTuile());
+    
+    }
 
     public void terminerTour() {
         setPa(0);
@@ -157,10 +179,5 @@ public class Controleur {
         }
     }
     
-    public void initPartie(){
-        
-        this.initGrille();
-        this.initJoueurs();
-        this.debutTour(joueur);
-    }
+
 }

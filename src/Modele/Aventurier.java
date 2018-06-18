@@ -13,25 +13,35 @@ import java.util.Scanner;
  *
  * @author bassetlu
  */
-public abstract class Aventurier {
+public class Aventurier {
 
     private String nom;
-    private ArrayList<Tuile> posPossible;
     private Pion couleur;
     private Tuile tuile;
-    protected NomTuile spawnPos;
+    protected Tuile spawnPos;
     
+    //constructeur
+    //pas sur que le premier soit utile, puisque avoir un aventurier sans possition sa n'a pas de sens
     public Aventurier(String nom, Pion couleur) {
         this.nom = nom;
         this.couleur = couleur;
-        this.tuile = tuile;
-        this.spawnPos=null;
+        this.tuile = null;
+        this.spawnPos= null;
+    }
+    
+    public Aventurier(String nom, Pion couleur, Tuile spawnPos) {
+        this.nom = nom;
+        this.couleur = couleur;
+        this.tuile = spawnPos;
+        this.spawnPos=spawnPos;
     }
    
+    //methodes
     
-    public ArrayList<Tuile> posAutourPossible( Tuile tuile, Grille g) {
+    public ArrayList<Tuile> posAutourPossible(Tuile tuile, Grille g) {
         int posX = tuile.getPosition().getX();
         int posY = tuile.getPosition().getY();
+        ArrayList<Tuile> p = new ArrayList<>();
         
         if ((posX == 0 && posY == 2)
                 || (posX == 1 && posY == 1)
@@ -88,44 +98,12 @@ public abstract class Aventurier {
         return p;
     }
 
-    public void seDeplacer(Grille grille) {
-        Tuile tuile = this.getPosition();
-        tuile.getPosition().getX();
-       // int posX = posJoueur.getX();
-        //int posY = posJoueur.getY();
-        posAutourPossible(posPossible, tuile, grille);
-
-        //proposer posPossible au joueur, il doit en choisir une, 
-        //si il n'y en pas le lui dire
-        if (posPossible.isEmpty()){
-            System.out.println("déplacement impossible (pas de cases adjacente)");
-        } else {
-            for (int i = 0; i < posPossible.size(); i++) {
-                System.out.print(i+". ");
-                System.out.print("x = "+posPossible.get(i).getPosition().getX());
-                System.out.println("y = "+posPossible.get(i).getPosition().getY());
-            }
-                Scanner sc = new Scanner(System.in);
-                System.out.println("Veuillez saisir un chiffre entre 0 et" + (posPossible.size()-1) + " :");
-                String str = sc.nextLine();
-                System.out.println("Vous avez saisi : " + str);
-                int choix = Integer.parseInt(str);
-                System.out.print(choix+". ");
-                System.out.print("x = "+posPossible.get(choix).getPosition().getX());
-                System.out.println("y = "+posPossible.get(choix).getPosition().getY());
-                this.setPosition(posPossible.get(choix));
-        }
-        
-        
-        
+    public void seDeplacer(Tuile tuile) {
+       this.tuile=tuile;
     }
 
-    private Tuile getPosition() {
+    public Tuile getTuile() {
         return this.tuile;
-    }
-
-    private void setPosition(Tuile tuileChoisie) {
-         this.tuile=tuileChoisie;
     }
 
     public Pion getCouleur() {
@@ -136,7 +114,7 @@ public abstract class Aventurier {
         return nom;
     }
 
-    public NomTuile getSpawnPos() {
+   /* public NomTuile getSpawnPos() {
         return spawnPos;
     }
 
@@ -146,7 +124,7 @@ public abstract class Aventurier {
 
     public Tuile getTuile() {
         return tuile;
-    }
+    }*/
     
     
 }

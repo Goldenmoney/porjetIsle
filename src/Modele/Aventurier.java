@@ -39,7 +39,7 @@ public class Aventurier {
     //methodes
     
     //demande depalcement : pospossible(liste cases dispo)-->choix puis deplacement
-    
+
     public ArrayList<Tuile> posAutourPossible(Grille g) {
         int posX = this.tuile.getPosX();
         int posY = this.tuile.getPosY();

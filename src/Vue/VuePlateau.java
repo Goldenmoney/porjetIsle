@@ -37,6 +37,7 @@ public class VuePlateau extends JPanel {
                 JButton button = new JButton();
 
                 if (tuile != null) {
+                    
                     String str = tuile.getNomTuile().toString();
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);

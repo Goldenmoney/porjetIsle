@@ -14,6 +14,7 @@ import Modele.Grille;
 import Modele.Tuile;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
+import Util.Utils.Pion;
 import static Util.Utils.Pion.BLEU;
 import static Util.Utils.Pion.ROUGE;
 import Vue.VuePlateau;
@@ -32,6 +33,8 @@ public class Controleur {
     private boolean aventurierMort;
     private int pa;
     private ArrayList<Tuile> tuiles;
+    
+    private Pion pion;
 
     // Associations
     private Grille grille;
@@ -71,16 +74,42 @@ public class Controleur {
         grille.afficheNomGrille();
     }
 
-    public void initJoueurs() {
-        joueur1 = new Aventurier("je sais pas qui avec le nom du joueur 1", ROUGE, grille.getTuileCase(2, 2));
-        joueur2 = new Aventurier("quelq'un qui sera le joueur 2", BLEU, grille.getTuileCase(1, 4));
+    public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
+        
+       ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
+       Tuile spawn;
+       
+        for (int i = 0; i < 6; i++) {
+            if(pionsRandom.get(i) == Pion.ROUGE) {
+                spawn = grille.
+            }
+        }
+        
+        if (nbJoueurs == 2) {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), );
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur);     
+        } else if (nbJoueurs == 3) {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur); 
+        } else {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur);
+            joueur4 = new Aventurier(j4, pionsRandom.get(3), //spawn associé à la couleur); 
+        }
+
+        //joueur1 = new Aventurier("je sais pas qui avec le nom du joueur 1", ROUGE, grille.getTuileCase(2, 2));
     }
-    
-   public void initPartie(){
+
+    public void initJoueurs() {
+    }
+
+    public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         this.initGrille();
-        this.initJoueurs();
+        this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
         this.joueurCourant = joueur1;
-        this.niveauEau = 10;
+        this.niveauEau = difficulte;
         System.out.println("c'est a " + joueurCourant.getNom());
         this.debutTour(joueurCourant);
     }
@@ -299,21 +328,28 @@ public class Controleur {
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
         switch (msg.type) {
+            case JOUER:
+                initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
+                break;
+
             case SE_DEPLACER:
                 ////
-                if (getPA()!= 0){
-                   deplacement(getJoueurCourant()); 
+                if (getPA() != 0) {
+                    deplacement(getJoueurCourant());
                 }
                 break;
+
             case ASSECHER:
                 ////
-                if (getPA()!= 0){
-                   assechement(getJoueurCourant()); 
+                if (getPA() != 0) {
+                    assechement(getJoueurCourant());
                 }
                 break;
+
             case ECHANGER:
                 ////
                 break;
+
             case RECUP_TRESOR:
                 ////
                 break;

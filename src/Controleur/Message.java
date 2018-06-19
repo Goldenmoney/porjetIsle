@@ -10,7 +10,9 @@ package Controleur;
  */
 public class Message {
     public TypesMessages type;  // type de message
-    public String joueur;
+    public String joueur1, joueur2, joueur3, joueur4;
     public int uneCase;
-    
+    public int difficulte;
+    public int nbJoueurs;
 }
+

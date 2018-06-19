@@ -20,42 +20,6 @@ public class VueDebut extends Observe{
      */
     public VueDebut() {
         initComponents();
-
-        jLabel6.setEnabled(false);//6
-        jLabel7.setEnabled(false);//7
-        jTextField3.setEnabled(false);
-        jTextField4.setEnabled(false);
-
-        jSpinner1.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                int nbJoueurs = (int) jSpinner1.getValue();
-                if (nbJoueurs == 2) {
-                    jLabel6.setEnabled(false);//6
-                    jLabel7.setEnabled(false);//7
-                    jTextField3.setEnabled(false);
-                    jTextField4.setEnabled(false);
-                } else if (nbJoueurs == 3) {
-                    jLabel6.setEnabled(true);//6
-                    jLabel7.setEnabled(false);//7
-                    jTextField3.setEnabled(true);
-                    jTextField4.setEnabled(false);
-                } else {
-                    jLabel6.setEnabled(true);//6
-                    jLabel7.setEnabled(true);//7
-                    jTextField3.setEnabled(true);
-                    jTextField4.setEnabled(true);
-                }
-
-            }
-        });
-
-        jButton1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
     }
 
     /**
@@ -216,7 +180,28 @@ public class VueDebut extends Observe{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        int nbJoueurs = (int) jSpinner1.getValue();
+        
         Message m = new Message();
+        
+        m.nbJoueurs = nbJoueurs;
+        
+        if(nbJoueurs == 2) {
+            m.joueur1 = jTextField1.getText();
+            m.joueur2 = jTextField2.getText();
+        } else if (nbJoueurs == 3) {
+            m.joueur1 = jTextField1.getText();
+            m.joueur2 = jTextField2.getText();
+            m.joueur3 = jTextField3.getText();
+        } else {
+            m.joueur1 = jTextField1.getText();
+            m.joueur2 = jTextField2.getText();
+            m.joueur3 = jTextField3.getText();
+            m.joueur4 = jTextField4.getText();
+        }
+        
+        m.difficulte = (int) jSpinner2.getValue();
+        
         m.type = TypesMessages.JOUER;
         notifierObservateur(m);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -237,6 +222,44 @@ public class VueDebut extends Observe{
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField4ActionPerformed
 
+    private void changeEtatJoueurs() {
+        jLabel6.setEnabled(false);//6
+        jLabel7.setEnabled(false);//7
+        jTextField3.setEnabled(false);
+        jTextField4.setEnabled(false);
+        
+        jSpinner1.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int nbJoueurs = (int) jSpinner1.getValue();
+                if (nbJoueurs == 2) {
+                    jLabel6.setEnabled(false);//6
+                    jLabel7.setEnabled(false);//7
+                    jTextField3.setEnabled(false);
+                    jTextField4.setEnabled(false);
+                } else if (nbJoueurs == 3) {
+                    jLabel6.setEnabled(true);//6
+                    jLabel7.setEnabled(false);//7
+                    jTextField3.setEnabled(true);
+                    jTextField4.setEnabled(false);
+                } else {
+                    jLabel6.setEnabled(true);//6
+                    jLabel7.setEnabled(true);//7
+                    jTextField3.setEnabled(true);
+                    jTextField4.setEnabled(true);
+                }
+
+            }
+        });
+        
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+    }
+    
     /**
      * @param args the command line arguments
      */

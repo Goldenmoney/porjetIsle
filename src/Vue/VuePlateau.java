@@ -20,14 +20,15 @@ public class VuePlateau extends JPanel {
 
     private ArrayList<JButton> buttons;
    // private ArrayList<Tuile> tuiles;
-    private Controleur controleur;//passer parametres
 
-    public VuePlateau() {
+    public VuePlateau(Controleur controleur) {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
-     //   tuiles = new ArrayList<>();
-        controleur=new Controleur();//suppr
-        controleur.initGrille(); // suppr 
+     // tuiles = new ArrayList<>();
+     
+     
+        /*this.controleur=controleur;//suppr
+        controleur.initGrille(); // suppr */
         Grille g= controleur.getGrille();
 
         JPanel panelBody = new JPanel(new BorderLayout());

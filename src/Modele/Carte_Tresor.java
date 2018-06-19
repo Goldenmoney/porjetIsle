@@ -6,21 +6,13 @@
 package Modele;
 
 import Modele.Aventurier;
+import Util.Utils.*;
 
 /**
  *
  * @author bassetlu
  */
-public class Carte_Tresor extends Cartes {
-    
-    public enum TypeCarteTresor {
-        TRESOR_ROUGE,
-        TRESOR_GRIS,
-        TRESOR_ORANGE,
-        HELICOPTERE,
-        SAC_DE_SABLE,
-        MONTEE_EAUX
-    }
+public class Carte_Tresor{
 
     // Association
     private TypeCarteTresor type;
@@ -34,6 +26,9 @@ public class Carte_Tresor extends Cartes {
     
     public TypeCarteTresor getType() {
         return type;
+    }
+    
+    public void action(){
     }
     
     

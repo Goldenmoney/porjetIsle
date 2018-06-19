@@ -6,6 +6,7 @@
 package Modele;
 
 import Util.Utils.*;
+import static Util.Utils.Pion.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,8 +26,6 @@ public class Aventurier {
     public Aventurier(String nom, Pion couleur) {
         this.nom = nom;
         this.couleur = couleur;
-        this.tuile = null;
-        this.spawnPos= null;
     }
     
     public Aventurier(String nom, Pion couleur, Tuile spawnPos) {

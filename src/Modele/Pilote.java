@@ -11,12 +11,12 @@ import Util.Utils;
  *
  * @author bassetlu
  */
-public class Pilote extends Aventurier {
+public class Pilote /*extends Aventurier {
     private boolean aUtiliseCapacite; 
     
     
     public Pilote(String nom) {
         super(nom, Utils.Pion.ROUGE);
         this.aUtiliseCapacite=aUtiliseCapacite;
-    }
+    }*/{
 }

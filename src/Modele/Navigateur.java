@@ -11,9 +11,9 @@ import Util.Utils;
  *
  * @author bassetlu
  */
-public class Navigateur extends Aventurier {
+public class Navigateur /**extends Aventurier {
     
     public Navigateur(String nom) {
         super(nom, Utils.Pion.ROUGE);
-    }
+    }*/{
 }

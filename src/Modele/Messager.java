@@ -11,9 +11,9 @@ import Util.Utils;
  *
  * @author bassetlu
  */
-public class Messager extends Aventurier {
+public class Messager /*extends Aventurier {
     
     public Messager(String nom) {
         super(nom, Utils.Pion.ROUGE);
-    }
+    }*/{
 }

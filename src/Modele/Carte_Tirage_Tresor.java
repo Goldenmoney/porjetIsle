@@ -14,10 +14,20 @@ import Util.Utils.TypeCarteTresor;
  */
 
 public abstract class Carte_Tirage_Tresor {
-    private Aventurier joueur;
-    private TypeCarteTresor type;
+    protected Aventurier aventurier;
+    protected TypeCarteTresor type;
     
     public Carte_Tirage_Tresor(TypeCarteTresor type) {
         this.type = type;
     }
+    
+    public void setAventurier(Aventurier aventurier) {
+        this.aventurier = aventurier;
+    }
+
+    public TypeCarteTresor getType() {
+        return type;
+    }
+    
+    public abstract void action();
 }

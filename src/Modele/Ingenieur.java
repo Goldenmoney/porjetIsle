@@ -11,11 +11,11 @@ import Util.Utils;
  *
  * @author bassetlu
  */
-public class Ingenieur extends Aventurier {
+public class Ingenieur /*extends Aventurier {
 
     public Ingenieur(String nom) {
         super(nom, Utils.Pion.ROUGE);
-    }
+    }*/
     
-    
+{
 }

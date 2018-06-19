@@ -5,9 +5,7 @@
  */
 package Modele;
 
-import Modele.Aventurier;
 import Util.Utils.*;
-import static Util.Utils.TypeCarteTresor.*;
 
 /**
  *
@@ -16,8 +14,6 @@ import static Util.Utils.TypeCarteTresor.*;
 public class Carte_Tresor extends Carte_Tirage_Tresor {
 
     // Association
-    private TypeCarteTresor type;
-    private Aventurier aventurier;
     
     // constructeur
     public Carte_Tresor(TypeCarteTresor type) {
@@ -25,23 +21,9 @@ public class Carte_Tresor extends Carte_Tirage_Tresor {
     }
     
     //méthodes
-    public TypeCarteTresor getType() {
-        return type;
-    }
 
-    public void setAventurier(Aventurier aventurier) {
-        this.aventurier = aventurier;
+    @Override
+    public void action() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void action(){
-        if (getType()== HELICOPTERE){
-            //un truc de déplacement
-        } else if (getType()== SAC_DE_SABLE){
-            //un truc d'assechement
-        } else if (getType()== MONTEE_DES_EAUX) {
-            //un truc pour faire monter l'eau
-        }
-    }
-    
-    
 }

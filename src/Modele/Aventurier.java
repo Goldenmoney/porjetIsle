@@ -18,8 +18,10 @@ public class Aventurier {
 
     private String nom;
     private Pion couleur;
+    private ArrayList<Carte_Tresor> cartes;
+    //un peu double emplois, on peu faire mieux
     private Tuile tuile;
-    protected Tuile spawnPos;
+    private Tuile spawnPos;
     
     //constructeur
     //pas sur que le premier soit utile, puisque avoir un aventurier sans possition sa n'a pas de sens

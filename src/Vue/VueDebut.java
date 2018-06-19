@@ -5,6 +5,7 @@
  */
 package Vue;
 
+import Controleur.Controleur;
 import Controleur.Message;
 import Controleur.Observateur;
 import Controleur.Observe;
@@ -182,6 +183,7 @@ public class VueDebut extends Observe{
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        setVisible(false);
         int nbJoueurs = (int) jSpinner1.getValue();
         
         Message m = new Message();
@@ -206,6 +208,7 @@ public class VueDebut extends Observe{
         
         m.type = TypesMessages.JOUER;
         notifierObservateur(m);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -296,9 +299,6 @@ public class VueDebut extends Observe{
             }
         });
 
-    }
-    public void affiche(){
-        new VueDebut().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

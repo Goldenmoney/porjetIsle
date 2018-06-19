@@ -5,6 +5,8 @@
  */
 package Controleur;
 
+import Vue.VueDebut;
+
 /**
  *
  * @author pontalc
@@ -16,6 +18,6 @@ public class PorjetIsle {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Controleur controleur = new Controleur();
+        new Controleur();
     }
 }

@@ -17,14 +17,12 @@ import javax.swing.*;
 public class VuePlateau extends JPanel {
 
     private ArrayList<JButton> buttons;
-    private Controleur controleur;
     private ArrayList<Tuile> tuiles;
 
     public VuePlateau() {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
         tuiles = new ArrayList<>();
-        controleur = new Controleur();
         Grille g = new Grille(tuiles);
 
         JPanel panelBody = new JPanel(new BorderLayout());

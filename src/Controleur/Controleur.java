@@ -9,15 +9,11 @@ import java.util.ArrayList;
 import Modele.Aventurier;
 import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
-import Modele.Explorateur;
 import Modele.Grille;
 import Modele.Tuile;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
 import Util.Utils.Pion;
-import static Util.Utils.Pion.BLEU;
-import static Util.Utils.Pion.ROUGE;
-import Vue.VuePlateau;
 import java.util.Scanner;
 
 /**
@@ -83,8 +79,16 @@ public class Controleur {
             if(pionsRandom.get(i) == Pion.ROUGE) {
                 spawn = grille.getTuileNom("La_Porte_de_Bronze");
             } else if(pionsRandom.get(i) == Pion.BLEU) {
-                spawn = grille.getTuileNom("");
-            } // A FINIIIIIIIIIIIIIIIIIIRRRRRRRRRRRN  ICICIICICICICIBIIBBIBIIIIIIIIIIIIIIIIIIIIIIIIIIII TOPUCHE PASSSS
+                spawn = grille.getTuileNom("Heliport");
+            } else if(pionsRandom.get(i) == Pion.JAUNE) {
+                spawn = grille.getTuileNom("La_Porte_dOr");
+            } else if(pionsRandom.get(i) == Pion.VERT) {
+                spawn = grille.getTuileNom("La_Porte_De_Cuivre");
+            } else if(pionsRandom.get(i) == Pion.VIOLET) {
+                spawn = grille.getTuileNom("La_Porte_de_Fer");
+            } else if(pionsRandom.get(i) == Pion.ORANGE) {
+                spawn = grille.getTuileNom("La_Porte_dArgent");
+            } 
         }
         
         if (nbJoueurs == 2) {
@@ -100,8 +104,6 @@ public class Controleur {
             joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
             joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
         }
-
-        //joueur1 = new Aventurier("je sais pas qui avec le nom du joueur 1", ROUGE, grille.getTuileCase(2, 2));
     }
 
     public void initJoueurs() {

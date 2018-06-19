@@ -6,8 +6,10 @@
 package Modele;
 
 //ca marche ?
+import Util.Parameters;
 import Util.Utils;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /** tuiles;
  *
@@ -153,6 +155,10 @@ public class Grille {
         Le_Jardin_des_Murmures.setTypeTresor(Utils.TypeTresor.LA_STATUE_DU_ZEPHYR);
         Le_Jardin_des_Murmures.setCarte_Inond(Carte_Inond_Le_Jardin_des_Murmures);
         tuiles.add(Le_Jardin_des_Murmures);
+        
+        if (Parameters.ALEAS) {
+                Collections.shuffle(tuiles);
+            }
 
         for (int i = 0; i < tuiles.size(); i++) {
 

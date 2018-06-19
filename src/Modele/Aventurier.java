@@ -34,6 +34,7 @@ public class Aventurier {
         this.couleur = couleur;
         this.tuile = spawnPos;
         this.spawnPos=spawnPos;
+        this.spawnPos.addJoueur(this);
     }
    
     //methodes

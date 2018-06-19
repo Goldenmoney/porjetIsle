@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import Util.Utils.EtatTuile;
 import Util.Utils.NomTuile;
 import Util.Utils.Pion;
+import Util.Utils.*;
 /**
  *
  * @author bassetlu
@@ -20,11 +21,11 @@ public class Tuile {
     private final NomTuile nomTuile;
     private int posX;
     private int posY;
+    private TypeTresor typeTresor;
 
     // Associations
     private Carte_Inond carte;
     private ArrayList<Aventurier> joueurs;
-    private Position posCase;
     private Carte_Tresor tresor;
     
     // METHODES
@@ -35,12 +36,11 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.joueurs = new ArrayList<>();
     }
     
-    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position posCase, Carte_Tresor tresor) {
+    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Carte_Tresor tresor) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.carte = carte;
         this.joueurs = joueurs;
-        this.posCase = posCase;
         this.tresor = tresor;
     }
     
@@ -48,6 +48,10 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.carte = carte;
+    }
+
+    public void setTypeTresor(TypeTresor typeTresor) {
+        this.typeTresor = typeTresor;
     }
 
     public void setPosX(int posX) {
@@ -66,11 +70,6 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         return posY;
     }
 
-    public void setPosCase(int x, int y) {
-        this.posCase.setX(x);
-        this.posCase.setY(y);
-    }
-    
     public void addJoueur(Aventurier aventurier) {
         this.joueurs.add(aventurier);
     }
@@ -93,10 +92,6 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
 
     public ArrayList<Aventurier> getJoueurs() {
         return joueurs;
-    }
-
-    public Position getPosition() {
-        return posCase;
     }
 
     public boolean verifCoulee() {

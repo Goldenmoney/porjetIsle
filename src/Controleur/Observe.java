@@ -13,6 +13,7 @@ import Controleur.Message;
  * @author bassetlu
  */
 public class Observe extends javax.swing.JFrame {
+    
     private Observateur observateur;
     
     public void addObservateur(Observateur o) {
@@ -23,6 +24,6 @@ public class Observe extends javax.swing.JFrame {
         if (observateur != null) {
             observateur.traiterMessage(m);
         }
-        System.out.println("LOOOOOOOOOOOOL");
+        System.out.println("test");
     }
 }

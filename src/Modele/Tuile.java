@@ -54,6 +54,10 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.typeTresor = typeTresor;
     }
 
+    public TypeTresor getTypeTresor() {
+        return typeTresor;
+    }
+
     public void setPosX(int posX) {
         this.posX = posX;
     }

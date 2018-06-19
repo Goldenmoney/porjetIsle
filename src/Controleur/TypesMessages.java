@@ -12,7 +12,8 @@ package Controleur;
 public enum TypesMessages {
     JOUER,
     PASSER,
-    SE_DEPLACER,
+    CHOISIR_SE_DELPACER,
+    SE_DEPLACER_VERS,
     ASSECHER,
     ECHANGER,
     RECUP_TRESOR

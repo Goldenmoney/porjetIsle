@@ -15,7 +15,7 @@ import static Util.Utils.TypeCarteTresor.MONTEE_DES_EAUX;
  */
 public class Carte_Montee_Des_Eaux extends Carte_Tirage_Tresor {
     
-    public Carte_Montee_Des_Eaux(TypeCarteTresor type) {
+    public Carte_Montee_Des_Eaux() {
         super(MONTEE_DES_EAUX);
     }
 

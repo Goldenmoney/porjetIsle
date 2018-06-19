@@ -15,7 +15,7 @@ import static Util.Utils.TypeCarteTresor.SAC_DE_SABLE;
  */
 public class Carte_Sac extends Carte_Tirage_Tresor {
     
-    public Carte_Sac(TypeCarteTresor type) {
+    public Carte_Sac() {
         super(SAC_DE_SABLE);
     }
 

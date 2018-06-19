@@ -6,16 +6,12 @@
 package Controleur;
 
 import java.util.ArrayList;
-import Modele.Aventurier;
-import Modele.Carte_Inond;
-import Modele.Carte_Tirage_Tresor;
-import Modele.Carte_Tresor;
-import Modele.Grille;
-import Modele.Tuile;
+import Modele.*;
 import Util.Parameters;
 import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
+import static Util.Utils.TypeCarteTresor.*;
 import Vue.IHM1;
 import Vue.VueDebut;
 import Vue.VuePlateau;
@@ -58,7 +54,6 @@ public class Controleur implements Observateur {
         vueDebut.setVisible(true);
         vueDebut.addObservateur(this);
         this.piocheTresor = new ArrayList<>();
-        
     }
 
     // methodes de la classe
@@ -163,7 +158,34 @@ public class Controleur implements Observateur {
     }
 
     public void initPiocheTresor() {
-        ////
+        Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT); piocheTresor.add(le_Cristal_ardent_1);
+        Carte_Tirage_Tresor le_Cristal_ardent_2 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_2);
+        Carte_Tirage_Tresor le_Cristal_ardent_3 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_3);
+        Carte_Tirage_Tresor le_Cristal_ardent_4 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_4);
+        Carte_Tirage_Tresor le_Cristal_ardent_5 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_5);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_1 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_1);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_2 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_2);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_3 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_3);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_4 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_4);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_5 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_5);
+        Carte_Tirage_Tresor le_Calice_de_londe_1 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_1);
+        Carte_Tirage_Tresor le_Calice_de_londe_2 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_2);
+        Carte_Tirage_Tresor le_Calice_de_londe_3 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_3);
+        Carte_Tirage_Tresor le_Calice_de_londe_4 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_4);
+        Carte_Tirage_Tresor le_Calice_de_londe_5 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_5);
+        Carte_Tirage_Tresor la_Pierre_sacree_1 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_1);
+        Carte_Tirage_Tresor la_Pierre_sacree_2 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_2);
+        Carte_Tirage_Tresor la_Pierre_sacree_3 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_3);
+        Carte_Tirage_Tresor la_Pierre_sacree_4 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_4);
+        Carte_Tirage_Tresor la_Pierre_sacree_5 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_5);
+        Carte_Tirage_Tresor montee_des_eaux_1 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_1);
+        Carte_Tirage_Tresor montee_des_eaux_2 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_2);
+        Carte_Tirage_Tresor montee_des_eaux_3 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_3);
+        Carte_Tirage_Tresor helicoptere_1 = new Carte_Helico();piocheTresor.add(helicoptere_1);
+        Carte_Tirage_Tresor helicoptere_2 = new Carte_Helico();piocheTresor.add(helicoptere_2);
+        Carte_Tirage_Tresor helicoptere_3 = new Carte_Helico();piocheTresor.add(helicoptere_3);
+        Carte_Tirage_Tresor sac_1 = new Carte_Sac();piocheTresor.add(sac_1);
+        Carte_Tirage_Tresor sac_2 = new Carte_Sac();piocheTresor.add(sac_2);
     }
 
     public void initPositionAventurier() {
@@ -188,7 +210,7 @@ public class Controleur implements Observateur {
     }
 
     public void monteeEau(int monte) {
-        niveauEau = +monte;
+        niveauEau =+ monte;
     }
 
     public void piocherCarte(Aventurier Aventurier) {
@@ -362,10 +384,17 @@ public class Controleur implements Observateur {
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
                 break;
 
-            case SE_DEPLACER:
-                ////
+            case CHOISIR_SE_DELPACER:
+                //quand le joueur choisie de ce déplacer, l'ihm lui propose les cases sur lesuqels le déplacement est possible
                 if (getPA() != 0) {
-                    deplacement(getJoueurCourant());
+                    getJoueurCourant().posAutourPossible();
+                }
+                break;
+            
+            case SE_DEPLACER_VERS:
+                //le joueur choisie une case parmi celle proposée précdement
+                if (getPA() != 0) {
+                   // getJoueurCourant().seDeplacer(msg.tuileChoisie);
                 }
                 break;
 

@@ -334,6 +334,7 @@ public class Controleur {
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
+                
                 break;
 
             case SE_DEPLACER:

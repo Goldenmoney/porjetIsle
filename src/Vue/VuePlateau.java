@@ -17,14 +17,12 @@ import javax.swing.*;
 public class VuePlateau extends JPanel {
 
     private ArrayList<JButton> buttons;
-    private Controleur controleur;
     private ArrayList<Tuile> tuiles;
 
     public VuePlateau() {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
         tuiles = new ArrayList<>();
-        controleur = new Controleur();
         Grille g = new Grille(tuiles);
 
         JPanel panelBody = new JPanel(new BorderLayout());
@@ -32,6 +30,7 @@ public class VuePlateau extends JPanel {
         JPanel panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
+               
                 if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.COULEE) {
                     String str = g.getTuileCase(x, y).getNomTuile().toString();
                     JButton button = new JButton(str);

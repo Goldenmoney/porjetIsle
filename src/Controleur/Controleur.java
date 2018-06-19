@@ -8,6 +8,7 @@ package Controleur;
 import java.util.ArrayList;
 import Modele.Aventurier;
 import Modele.Carte_Inond;
+import Modele.Carte_Tirage_Tresor;
 import Modele.Carte_Tresor;
 import Modele.Grille;
 import Modele.Tuile;
@@ -44,8 +45,8 @@ public class Controleur implements Observateur {
     private Aventurier joueur3;
     private Aventurier joueur4;
     private Aventurier joueurCourant;
-    private Carte_Tresor piocheTresor;
-    private Carte_Tresor defausseTresor;
+    private ArrayList<Carte_Tirage_Tresor> piocheTresor;
+    private ArrayList<Carte_Tirage_Tresor> defausseTresor;
     private Carte_Inond piocheInond;
     private Carte_Inond supprimeInond;
 
@@ -54,6 +55,8 @@ public class Controleur implements Observateur {
         vueDebut = new VueDebut();
         vueDebut.setVisible(true);
         vueDebut.addObservateur(this);
+        this.piocheTresor = new ArrayList<>();
+        
     }
 
     // methodes de la classe
@@ -107,17 +110,17 @@ public class Controleur implements Observateur {
 
             // CREATION DES JOUEURS
             if (nbJoueurs == 2) {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);//spawn associé à la couleur);   
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);//spawn associé à la couleur);   
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
             } else if (nbJoueurs == 3) {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
-                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
+                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn, this);
             } else {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
-                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
-                joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
+                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn, this);
+                joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn, this);
             }
         }
     }
@@ -210,7 +213,7 @@ public class Controleur implements Observateur {
 
     public void deplacement(Aventurier aventurier) {
         ArrayList<Tuile> posPosi = new ArrayList<>();
-        posPosi = aventurier.posAutourPossible(grille);
+        posPosi = aventurier.posAutourPossible();
         for (int i = 0; i < posPosi.size(); i++) {
             System.out.print(i + ". ");
             System.out.println(posPosi.get(i).getNomTuile());
@@ -233,7 +236,7 @@ public class Controleur implements Observateur {
     public void deplacementGratuit(Aventurier aventurier) {
         System.out.println("Le joueur est sur une case coulée au début de son tour, il peu donc se déplacer sur une tuile adjacente gratuitement");
         ArrayList<Tuile> posPosi = new ArrayList<>();
-        posPosi = aventurier.posAutourPossible(grille);
+        posPosi = aventurier.posAutourPossible();
         for (int i = 0; i < posPosi.size(); i++) {
             System.out.print(i + ". ");
             System.out.println(posPosi.get(i).getNomTuile());
@@ -254,7 +257,7 @@ public class Controleur implements Observateur {
 
     public void assechement(Aventurier aventurier) {
         ArrayList<Tuile> asse = new ArrayList<>();
-        asse = aventurier.AssechementAutourPossible(grille);
+        asse = aventurier.AssechementAutourPossible();
         for (int i = 0; i < asse.size(); i++) {
             System.out.print(i + ". ");
             System.out.println(asse.get(i).getNomTuile());

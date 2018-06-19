@@ -14,13 +14,14 @@ import Modele.Tuile;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
 import Util.Utils.Pion;
+import Vue.VueDebut;
 import java.util.Scanner;
 
 /**
  *
  * @author bassetlu
  */
-public class Controleur {
+public class Controleur implements Observateur{
 
     private int niveauEau;
     private boolean tresorsRecup;
@@ -29,9 +30,11 @@ public class Controleur {
     private boolean aventurierMort;
     private int pa;
     private ArrayList<Tuile> tuiles;
-    
-    private Pion pion;
 
+    private Pion pion; 
+    
+    private VueDebut vueDebut;
+    
     // Associations
     private Grille grille;
     private Aventurier joueur1;
@@ -46,13 +49,11 @@ public class Controleur {
 
     // constructeur
     public void controleur() {
-        this.tuiles = new ArrayList<>();
-        //this.joueurs = new ArrayList<>();
-        this.grille = getGrille();
-    }          
-    
-    // methodes de la classe
+        vueDebut = new VueDebut();
+        vueDebut.affiche();
+    }
 
+    // methodes de la classe
     public void addTresor() {
         ////
     }
@@ -60,9 +61,7 @@ public class Controleur {
     public int getPA() {
         return pa;
     }
-    
-    
-    
+
     public void initGrille() {
         grille = new Grille(tuiles);
         grille.afficheGrille();
@@ -71,38 +70,45 @@ public class Controleur {
     }
 
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
-        
-       ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-       Tuile spawn = null;
-       
+
+        ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
+        Tuile spawn = null;
+
         for (int i = 0; i < 6; i++) {
-            if(pionsRandom.get(i) == Pion.ROUGE) {
+            // AFFECTATION COULEUR/TUILE
+            if (pionsRandom.get(i) == Pion.ROUGE) {
                 spawn = grille.getTuileNom("La_Porte_de_Bronze");
-            } else if(pionsRandom.get(i) == Pion.BLEU) {
+
+            } else if (pionsRandom.get(i) == Pion.BLEU) {
                 spawn = grille.getTuileNom("Heliport");
-            } else if(pionsRandom.get(i) == Pion.JAUNE) {
+
+            } else if (pionsRandom.get(i) == Pion.JAUNE) {
                 spawn = grille.getTuileNom("La_Porte_dOr");
-            } else if(pionsRandom.get(i) == Pion.VERT) {
+
+            } else if (pionsRandom.get(i) == Pion.VERT) {
                 spawn = grille.getTuileNom("La_Porte_De_Cuivre");
-            } else if(pionsRandom.get(i) == Pion.VIOLET) {
+
+            } else if (pionsRandom.get(i) == Pion.VIOLET) {
                 spawn = grille.getTuileNom("La_Porte_de_Fer");
-            } else if(pionsRandom.get(i) == Pion.ORANGE) {
+
+            } else if (pionsRandom.get(i) == Pion.ORANGE) {
                 spawn = grille.getTuileNom("La_Porte_dArgent");
-            } 
-        }
-        
-        if (nbJoueurs == 2) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);//spawn associé à la couleur);   
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
-        } else if (nbJoueurs == 3) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
-        } else {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
-            joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
+            }
+
+            // CREATION DES JOUEURS
+            if (nbJoueurs == 2) {
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);//spawn associé à la couleur);   
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+            } else if (nbJoueurs == 3) {
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
+            } else {
+                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
+                joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
+            }
         }
     }
 
@@ -125,13 +131,13 @@ public class Controleur {
     public int getNiveauEau() {
         return niveauEau;
     }
-    
+
     public void setPA(int pa) {
         this.pa = pa;
     }
-    
+
     public void setPAMoins1(int pa) {
-        this.pa = pa-1;
+        this.pa = pa - 1;
         System.out.println("PA actuel : " + getPA());
     }
 
@@ -148,19 +154,19 @@ public class Controleur {
     }
 
     public boolean verifPartieFinie() {
-        if (getNiveauEau()==10){
+        if (getNiveauEau() == 10) {
             return true;
         } else {
             return false;
         }
     }
-    
+
     ///true si la partie est gagné, false si elle est perdue
     public boolean verifPartieGagnee() {
         //if () {
-            return true;
+        return true;
         //} else {
-            //return false;
+        //return false;
         //}
     }
 
@@ -173,13 +179,13 @@ public class Controleur {
     }
 
     public void piocherCarteInondation() {
-        if (getNiveauEau() <= 2){
+        if (getNiveauEau() <= 2) {
             //nb de cartes a piocher = 2
         } else if (getNiveauEau() <= 5) {
             //nb de cartes a piocher = 3
         } else if (getNiveauEau() <= 7) {
             //nb de cartes a piocher = 4
-        } else if (getNiveauEau() <= 9){
+        } else if (getNiveauEau() <= 9) {
             //nb de cartes a piocher = 5
         }
     }
@@ -191,70 +197,70 @@ public class Controleur {
     public Aventurier getJoueurCourant() {
         return joueurCourant;
     }
-    
+
     public void deplacement(Aventurier aventurier) {
-            ArrayList<Tuile> posPosi = new ArrayList<>();
-            posPosi = aventurier.posAutourPossible(grille);
-            for (int i = 0; i < posPosi.size();i ++) {
-                System.out.print(i + ". ");
-                System.out.println(posPosi.get(i).getNomTuile());
+        ArrayList<Tuile> posPosi = new ArrayList<>();
+        posPosi = aventurier.posAutourPossible(grille);
+        for (int i = 0; i < posPosi.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(posPosi.get(i).getNomTuile());
         }
-            if (!posPosi.isEmpty()){
-                 Scanner sc2 = new Scanner(System.in);
-                System.out.print("choisir une des positions proposé : ");
-                String str2 = sc2.nextLine();
-                int int2 = Integer.parseInt(str2);
-                int x = posPosi.get(int2).getPosX();
-                int y = posPosi.get(int2).getPosY();
-                aventurier.seDeplacer(grille.getTuileCase(x,y));
-                setPAMoins1(getPA());
-            } else {
-                System.out.println("pas de déplacement possible");
-            }
-            System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
+        if (!posPosi.isEmpty()) {
+            Scanner sc2 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str2 = sc2.nextLine();
+            int int2 = Integer.parseInt(str2);
+            int x = posPosi.get(int2).getPosX();
+            int y = posPosi.get(int2).getPosY();
+            aventurier.seDeplacer(grille.getTuileCase(x, y));
+            setPAMoins1(getPA());
+        } else {
+            System.out.println("pas de déplacement possible");
+        }
+        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
     }
-    
+
     public void deplacementGratuit(Aventurier aventurier) {
-            System.out.println("Le joueur est sur une case coulée au début de son tour, il peu donc se déplacer sur une tuile adjacente gratuitement");
-            ArrayList<Tuile> posPosi = new ArrayList<>();
-            posPosi = aventurier.posAutourPossible(grille);
-            for (int i = 0; i < posPosi.size();i ++) {
-                System.out.print(i + ". ");
-                System.out.println(posPosi.get(i).getNomTuile());
+        System.out.println("Le joueur est sur une case coulée au début de son tour, il peu donc se déplacer sur une tuile adjacente gratuitement");
+        ArrayList<Tuile> posPosi = new ArrayList<>();
+        posPosi = aventurier.posAutourPossible(grille);
+        for (int i = 0; i < posPosi.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(posPosi.get(i).getNomTuile());
         }
-            if (!posPosi.isEmpty()){
-                 Scanner sc2 = new Scanner(System.in);
-                System.out.print("choisir une des positions proposé : ");
-                String str2 = sc2.nextLine();
-                int int2 = Integer.parseInt(str2);
-                int x = posPosi.get(int2).getPosX();
-                int y = posPosi.get(int2).getPosY();
-                aventurier.seDeplacer(grille.getTuileCase(x,y));
-            } else {
-                System.out.println("pas de déplacement possible");
-            }
-            System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
+        if (!posPosi.isEmpty()) {
+            Scanner sc2 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str2 = sc2.nextLine();
+            int int2 = Integer.parseInt(str2);
+            int x = posPosi.get(int2).getPosX();
+            int y = posPosi.get(int2).getPosY();
+            aventurier.seDeplacer(grille.getTuileCase(x, y));
+        } else {
+            System.out.println("pas de déplacement possible");
+        }
+        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
     }
-    
+
     public void assechement(Aventurier aventurier) {
-            ArrayList<Tuile> asse = new ArrayList<>();
-            asse = aventurier.AssechementAutourPossible(grille);
-            for (int i = 0; i < asse.size();i ++) {
-                System.out.print(i + ". ");
-                System.out.println(asse.get(i).getNomTuile());
-            }
-            if (!asse.isEmpty()){
-                Scanner sc4 = new Scanner(System.in);
-                System.out.print("choisir une des positions proposé : ");
-                String str4 = sc4.nextLine();
-                int int4 = Integer.parseInt(str4);
-                asse.get(int4).majEtat(ASSECHEE);
-                System.out.println("tuile " + asse.get(int4).getNomTuile() + " assechée");
-                setPAMoins1(getPA());
-            } else {
-                System.out.println("pas d'assechement possible");
-            }
-            /*ArrayList<Tuile> asseAft = new ArrayList<>();
+        ArrayList<Tuile> asse = new ArrayList<>();
+        asse = aventurier.AssechementAutourPossible(grille);
+        for (int i = 0; i < asse.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(asse.get(i).getNomTuile());
+        }
+        if (!asse.isEmpty()) {
+            Scanner sc4 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str4 = sc4.nextLine();
+            int int4 = Integer.parseInt(str4);
+            asse.get(int4).majEtat(ASSECHEE);
+            System.out.println("tuile " + asse.get(int4).getNomTuile() + " assechée");
+            setPAMoins1(getPA());
+        } else {
+            System.out.println("pas d'assechement possible");
+        }
+        /*ArrayList<Tuile> asseAft = new ArrayList<>();
             asseAft = aventurier.AssechementAutourPossible(grille);
              if (!asseAft.isEmpty()){
                  for (int i = 0; i < asseAft.size();i ++) {
@@ -269,36 +275,36 @@ public class Controleur {
     public void debutTour(Aventurier aventurier) {
         setPA(3);
         System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
-        if (aventurier.getTuile().getEtat() == COULEE){
+        if (aventurier.getTuile().getEtat() == COULEE) {
             deplacementGratuit(aventurier);
         }
         System.out.println("PA actuel : " + getPA());
         boolean changementJoueur = false;
-        while (getPA()>0 && !changementJoueur){
+        while (getPA() > 0 && !changementJoueur) {
             Scanner sc = new Scanner(System.in);
             System.out.println("se deplacer? oui ou non?");
             String str = sc.nextLine();
-            if (str.equalsIgnoreCase("oui")){
+            if (str.equalsIgnoreCase("oui")) {
                 deplacement(aventurier);
             }
-            if (getPA() != 0){
+            if (getPA() != 0) {
                 Scanner sc3 = new Scanner(System.in);
                 System.out.println("assecher ? oui ou non ?");
                 String str3 = sc3.nextLine();
-                if (str3.equalsIgnoreCase("oui")){
+                if (str3.equalsIgnoreCase("oui")) {
                     assechement(aventurier);
-                } 
+                }
             }
-            if (getPA() != 0){
+            if (getPA() != 0) {
                 Scanner sc5 = new Scanner(System.in);
                 System.out.println("terminer tour ? oui ou non ?");
                 String str5 = sc5.nextLine();
-                if (str5.equalsIgnoreCase("oui")){
+                if (str5.equalsIgnoreCase("oui")) {
                     changementJoueur = true;
                 }
             }
         }
-        if (getPA() == 0){
+        if (getPA() == 0) {
             System.out.println("Plus de PA dispo");
         }
         terminerTour();
@@ -306,20 +312,20 @@ public class Controleur {
 
     public void terminerTour() {
         System.out.println("Tour terminer");
-        if (verifPartieFinie()){
-            if (verifPartieGagnee()){
+        if (verifPartieFinie()) {
+            if (verifPartieGagnee()) {
                 System.out.println("partie finit et gagné");
-            }else{
+            } else {
                 System.out.println("partie finit et perdu");
             }
         } else {
             piocherCarteInondation();
-            if (joueurCourant == joueur1){
+            if (joueurCourant == joueur1) {
                 joueurCourant = joueur2;
-            }else if (joueurCourant == joueur2 && joueur3 != null){
+            } else if (joueurCourant == joueur2 && joueur3 != null) {
                 joueurCourant = joueur3;
-            }else if (joueurCourant == joueur3 && joueur4 != null) {
-               joueurCourant = joueur4;
+            } else if (joueurCourant == joueur3 && joueur4 != null) {
+                joueurCourant = joueur4;
             } else {
                 joueurCourant = joueur1;
             }
@@ -334,7 +340,7 @@ public class Controleur {
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
-                
+                System.out.println("BLABLABLAB");
                 break;
 
             case SE_DEPLACER:
@@ -360,6 +366,5 @@ public class Controleur {
                 break;
         }
     }
-    
 
 }

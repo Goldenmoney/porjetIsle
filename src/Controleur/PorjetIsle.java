@@ -5,9 +5,6 @@
  */
 package Controleur;
 
-import Modele.Grille;
-import java.util.Scanner;
-
 /**
  *
  * @author pontalc
@@ -20,6 +17,5 @@ public class PorjetIsle {
     public static void main(String[] args) {
         // TODO code application logic here
         Controleur controleur = new Controleur();
-        controleur.initPartie();
     }
 }

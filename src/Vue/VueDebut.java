@@ -6,6 +6,7 @@
 package Vue;
 
 import Controleur.Message;
+import Controleur.Observateur;
 import Controleur.Observe;
 import Controleur.TypesMessages;
 import java.awt.event.ActionEvent;
@@ -13,8 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class VueDebut extends Observe{
-
+public class VueDebut extends Observe{  
+    
     /**
      * Creates new form VueDebut
      */
@@ -295,6 +296,9 @@ public class VueDebut extends Observe{
             }
         });
 
+    }
+    public void affiche(){
+        new VueDebut().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

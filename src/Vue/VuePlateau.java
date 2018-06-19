@@ -19,13 +19,16 @@ import Util.Utils.*;
 public class VuePlateau extends JPanel {
 
     private ArrayList<JButton> buttons;
-    private ArrayList<Tuile> tuiles;
+   // private ArrayList<Tuile> tuiles;
+    private Controleur controleur;//passer parametres
 
     public VuePlateau() {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
-        tuiles = new ArrayList<>();
-        Grille g = new Grille(tuiles);
+     //   tuiles = new ArrayList<>();
+        controleur=new Controleur();//suppr
+        controleur.initGrille(); // suppr 
+        Grille g= controleur.getGrille();
 
         JPanel panelBody = new JPanel(new BorderLayout());
 
@@ -37,6 +40,7 @@ public class VuePlateau extends JPanel {
                 JButton button = new JButton();
 
                 if (tuile != null) {
+                    
                     String str = tuile.getNomTuile().toString();
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);

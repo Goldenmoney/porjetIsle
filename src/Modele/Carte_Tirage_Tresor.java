@@ -5,10 +5,19 @@
  */
 package Modele;
 
+import Util.Utils;
+import Util.Utils.TypeCarteTresor;
+
 /**
  *
  * @author bassetlu
  */
-public class Cartes {
+
+public abstract class Carte_Tirage_Tresor {
     private Aventurier joueur;
+    private TypeCarteTresor type;
+    
+    public Carte_Tirage_Tresor(TypeCarteTresor type) {
+        this.type = type;
+    }
 }

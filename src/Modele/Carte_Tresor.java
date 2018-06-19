@@ -13,7 +13,7 @@ import static Util.Utils.TypeCarteTresor.*;
  *
  * @author bassetlu
  */
-public class Carte_Tresor{
+public class Carte_Tresor extends Carte_Tirage_Tresor {
 
     // Association
     private TypeCarteTresor type;
@@ -21,7 +21,7 @@ public class Carte_Tresor{
     
     // constructeur
     public Carte_Tresor(TypeCarteTresor type) {
-        this.type = type;
+       super(type);
     }
     
     //méthodes

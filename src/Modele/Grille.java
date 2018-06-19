@@ -18,6 +18,7 @@ public class Grille {
 //je fais la grille (jules)
 
     private final int nbTuiles = 36;
+    private ArrayList<Tuile> tuilesDansGrille;
     private Tuile tableauTuiles[][] = new Tuile[6][6];
 
     // construction
@@ -207,6 +208,7 @@ public class Grille {
                 }
             }
         }
+        tuilesDansGrille = tuiles;
     }
 
      //Getters
@@ -216,6 +218,14 @@ public class Grille {
     
     public Tuile getTuileCase(int x, int y) {
         return this.tableauTuiles[x][y];
+    }
+    
+    public Tuile getTuileNom(String nomTuile){
+        int i=0;
+        while (nomTuile != tuilesDansGrille.get(i).getNomTuile().toString() && i<36){
+            i++;
+        }
+        return tuilesDansGrille.get(i);
     }
  
   public void afficheGrille() {

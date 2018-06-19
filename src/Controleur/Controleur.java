@@ -77,26 +77,28 @@ public class Controleur {
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
         
        ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-       Tuile spawn;
+       Tuile spawn = null;
        
         for (int i = 0; i < 6; i++) {
             if(pionsRandom.get(i) == Pion.ROUGE) {
-                spawn = grille.
-            }
+                spawn = grille.getTuileNom("La_Porte_de_Bronze");
+            } else if(pionsRandom.get(i) == Pion.BLEU) {
+                spawn = grille.getTuileNom("");
+            } // A FINIIIIIIIIIIIIIIIIIIRRRRRRRRRRRN  ICICIICICICICIBIIBBIBIIIIIIIIIIIIIIIIIIIIIIIIIIII TOPUCHE PASSSS
         }
         
         if (nbJoueurs == 2) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), );
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur);     
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);//spawn associé à la couleur);   
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
         } else if (nbJoueurs == 3) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur); 
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
         } else {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur);
-            joueur4 = new Aventurier(j4, pionsRandom.get(3), //spawn associé à la couleur); 
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
+            joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
         }
 
         //joueur1 = new Aventurier("je sais pas qui avec le nom du joueur 1", ROUGE, grille.getTuileCase(2, 2));

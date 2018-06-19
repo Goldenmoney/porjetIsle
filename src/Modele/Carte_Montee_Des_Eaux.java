@@ -21,7 +21,9 @@ public class Carte_Montee_Des_Eaux extends Carte_Tirage_Tresor {
 
     @Override
     public void action() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        aventurier.getControleur().monteeEau(1);
+        aventurier.getControleur().piocherCarteInondation();
+        aventurier.defausserCarte(this);
     }
     
 }

@@ -7,6 +7,8 @@ package Modele;
 
 import Controleur.Controleur;
 import Util.Utils.*;
+import static Util.Utils.EtatTuile.COULEE;
+import static Util.Utils.EtatTuile.INONDEE;
 import static Util.Utils.Pion.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -152,6 +154,52 @@ public class Aventurier {
         return p;
     }
 
+    //méthode pour parcourir toute la grille
+    //etat  = INONDEE pour déplacement et etat = COULEE pour l'assèchement
+    public ArrayList<Tuile> posPosibleAll(EtatTuile etat){
+        ArrayList<Tuile> p = new ArrayList<>();
+        for(int i = 0; i<=5; i++){
+            if(i == 0 || i == 5){
+                for(int j = 2; i <= 3; i++){
+                    if (etat == INONDEE){ //pour le déplacement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                            }
+                        } else if (etat == COULEE){ //pour l'assèchement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                       }  
+                    }
+                }
+             }else if (i == 1 || i == 4){
+                for(int j = 1; i <= 4; i++){
+                    if (etat == INONDEE){ //pour le déplacement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                            }
+                        } else if (etat == COULEE){ //pour l'assèchement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                       }  
+                    }
+                }
+            }else {
+                for(int j = 0; i <= 5; i++){
+                    if (etat == INONDEE){ //pour le déplacement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                            }
+                        } else if (etat == COULEE){ //pour l'assèchement
+                        if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
+                            p.add(controleur.getGrille().getTuileCase(i, j));
+                       }  
+                    }
+                }
+            }
+        }
+        return p;
+    }
+    
     public void seDeplacer(Tuile tuile) {
        this.tuile.supprJoueur(this);
        this.tuile=tuile;
@@ -170,6 +218,10 @@ public class Aventurier {
         return nom;
     }
 
+    public Controleur getControleur() {
+        return controleur;
+    }
+    
     public void updateNbCartes(){
         this.nb_cartes = inventaire.size();
         if (nb_cartes >9){
@@ -180,5 +232,9 @@ public class Aventurier {
     public int getNbCartes(){
         updateNbCartes();
             return this.nb_cartes;
+    }
+    
+    public void defausserCarte(Carte_Tirage_Tresor carte){
+        this.inventaire.remove(carte);
     }
 }

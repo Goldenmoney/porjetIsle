@@ -14,6 +14,7 @@ import java.awt.GridLayout;
 import java.awt.Label;
 import java.util.ArrayList;
 import javax.swing.*;
+import Util.Utils.*;
 
 public class VuePlateau extends JPanel {
 
@@ -37,35 +38,55 @@ public class VuePlateau extends JPanel {
 
                 if (tuile != null) {
                     String str = tuile.getNomTuile().toString();
-                    
-                    if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
+                    JPanel paneltuile = new JPanel(new BorderLayout());
+                    JLabel labelnomTuile = new JLabel(str);
+                    paneltuile.add(labelnomTuile, BorderLayout.CENTER);
 
-                        button.setText(str);
+                    if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
                         Color c = new Color(96, 96, 96);
+                        paneltuile.setBackground(c);
                         button.setBackground(c);
+                        button.add(paneltuile);
                         panelGrille.add(button);
                     } else if (tuile.getEtat() == Utils.EtatTuile.INONDEE) {
 
-                        button.setText(str);
                         Color c = new Color(102, 175, 255);
                         button.setBackground(c);
+                        paneltuile.setBackground(c);
+                        button.add(paneltuile);
                         panelGrille.add(button);
+
                     } else if (tuile.getEtat() == Utils.EtatTuile.ASSECHEE) {
 
-                        button.setText(str);
                         Color c = new Color(255, 255, 153);
+                        paneltuile.setBackground(c);
                         button.setBackground(c);
+                        button.add(paneltuile);
                         panelGrille.add(button);
 
                     }
-                    JPanel paneltresor=new JPanel();
 
-                    if(tuile.getTypeTresor()==Utils.TypeTresor.LA_PIERRE_SACREE){
-                      Label labelTresor=  new Label("Pierre Sacree");
-                      
-                        paneltresor.add(labelTresor, BorderLayout.SOUTH);
-                        button.add(paneltresor);
+                    if (tuile.getTypeTresor() == TypeTresor.LA_PIERRE_SACREE) {
+                        Label labelTresor = new Label(TypeTresor.LA_PIERRE_SACREE.toString());
+
+                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltuile);
+                    } else if (tuile.getTypeTresor() == Utils.TypeTresor.LA_STATUE_DU_ZEPHYR) {
+                        Label labelTresor = new Label(TypeTresor.LA_STATUE_DU_ZEPHYR.toString());
+
+                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltuile);
+                    } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CALICE_DE_LONDE) {
+                        Label labelTresor = new Label(TypeTresor.LE_CALICE_DE_LONDE.toString());
+
+                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltuile);
+                    } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CRISTAL_ARDENT) {
+                        Label labelTresor = new Label(TypeTresor.LE_CRISTAL_ARDENT.toString());
+                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltuile);
                     }
+
                 } else {
                     button.setVisible(false);
                     panelGrille.add(button);

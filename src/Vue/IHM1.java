@@ -6,6 +6,8 @@
 package Vue;
 
    //////////////IL FAUT METTRE : GRIL
+import Controleur.Controleur;
+import Controleur.Observe;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
                //JOUEURS + CHOIX(DEPLACER, ASSECHER, CS)
@@ -14,14 +16,14 @@ import javax.swing.JPanel;
 *
  * @author vialjule
  */
-public class IHM1 extends javax.swing.JFrame {
+public class IHM1 extends Observe {
 
     /**
      * Creates new form IHM1
      */
-    public IHM1() {
+    public IHM1(Controleur controleur) {
         initComponents();
-        VuePlateau plateau = new VuePlateau();
+        VuePlateau plateau = new VuePlateau(controleur);
         jPanel3.setLayout(new BorderLayout());
         jPanel3.add(plateau,BorderLayout.CENTER);
     }
@@ -324,7 +326,7 @@ public class IHM1 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM1().setVisible(true);
+                new IHM1(controleur).setVisible(true);
             }
         });
     }

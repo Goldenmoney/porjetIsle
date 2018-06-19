@@ -17,6 +17,7 @@ import javax.swing.event.ChangeListener;
 
 public class VueDebut extends Observe{  
     
+    private Controleur controleur;
     /**
      * Creates new form VueDebut
      */

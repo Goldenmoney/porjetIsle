@@ -15,6 +15,7 @@ import Util.Parameters;
 import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
+import Vue.IHM1;
 import Vue.VueDebut;
 import java.util.Collections;
 import java.util.Scanner;
@@ -34,6 +35,7 @@ public class Controleur implements Observateur {
     private ArrayList<Tuile> tuiles;
 
     private VueDebut vueDebut;
+    private IHM1 jeuPrincipal;//
 
     // Associations
     private Grille grille;
@@ -83,6 +85,7 @@ public class Controleur implements Observateur {
         if (Parameters.ALEAS) {
             Collections.shuffle(pionsRandom);
         }
+        
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         Tuile spawn = null;
 
@@ -95,7 +98,7 @@ public class Controleur implements Observateur {
             } else if (pionsRandom.get(i) == Pion.JAUNE) {
                 spawn = grille.getTuileNom("La_Porte_dOr");
             } else if (pionsRandom.get(i) == Pion.VERT) {
-                spawn = grille.getTuileNom("La_Porte_De_Cuivre");
+                spawn = grille.getTuileNom("La_Porte_de_Cuivre");
             } else if (pionsRandom.get(i) == Pion.VIOLET) {
                 spawn = grille.getTuileNom("La_Porte_de_Fer");
             } else if (pionsRandom.get(i) == Pion.ORANGE) {
@@ -346,8 +349,10 @@ public class Controleur implements Observateur {
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case JOUER:
+                jeuPrincipal = new IHM1(this);
+                jeuPrincipal.setVisible(true);
+                jeuPrincipal.addObservateur(this);
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
-                System.out.println("BLABLABLAB");
                 break;
 
             case SE_DEPLACER:

@@ -228,7 +228,7 @@ public class Grille {
     
     public Tuile getTuileNom(String nomTuile){
         int i=0;
-        while (nomTuile != tuilesDansGrille.get(i).getNomTuile().toString() && i<36){
+        while (nomTuile != tuilesDansGrille.get(i).getNomTuile().toString() && i<24){
             i++;
         }
         return tuilesDansGrille.get(i);

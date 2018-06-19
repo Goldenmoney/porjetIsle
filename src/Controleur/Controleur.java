@@ -16,6 +16,7 @@ import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
 import static Util.Utils.Pion.BLEU;
 import static Util.Utils.Pion.ROUGE;
+import Vue.VuePlateau;
 import java.util.Scanner;
 
 /**

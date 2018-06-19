@@ -138,7 +138,7 @@ public class Utils {
             return null ;
         }
         
-        public ArrayList<Pion> getListePions() {
+        /*public ArrayList<Pion> getListePions() {
             ArrayList<Pion> listePions = new ArrayList<>();
             listePions.add(ROUGE);
             listePions.add(VERT);
@@ -147,9 +147,9 @@ public class Utils {
             listePions.add(VIOLET);
             listePions.add(JAUNE);
             return listePions;
-        }
+        }*/
 
-        public ArrayList<Pion> getListePionsRandom() {
+        /*public ArrayList<Pion> getListePionsRandom() {
             ArrayList<Pion> listePions = new ArrayList<>();
             listePions.add(ROUGE);
             listePions.add(VERT);
@@ -161,7 +161,7 @@ public class Utils {
                 Collections.shuffle(listePions);
             }
             return listePions;
-        }
+        }*/
     }
 
     public static ArrayList<Aventurier> melangerAventuriers(ArrayList<Aventurier> arrayList) {

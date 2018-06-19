@@ -11,17 +11,19 @@ import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
 import Modele.Grille;
 import Modele.Tuile;
+import Util.Parameters;
+import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
-import Util.Utils.Pion;
 import Vue.VueDebut;
+import java.util.Collections;
 import java.util.Scanner;
 
 /**
  *
  * @author bassetlu
  */
-public class Controleur implements Observateur{
+public class Controleur implements Observateur {
 
     private int niveauEau;
     private boolean tresorsRecup;
@@ -31,10 +33,8 @@ public class Controleur implements Observateur{
     private int pa;
     private ArrayList<Tuile> tuiles;
 
-    private Pion pion; 
-    
     private VueDebut vueDebut;
-    
+
     // Associations
     private Grille grille;
     private Aventurier joueur1;
@@ -48,9 +48,10 @@ public class Controleur implements Observateur{
     private Carte_Inond supprimeInond;
 
     // constructeur
-    public void controleur() {
+    public Controleur() {
         vueDebut = new VueDebut();
-        vueDebut.affiche();
+        vueDebut.setVisible(true);
+        vueDebut.addObservateur(this);
     }
 
     // methodes de la classe
@@ -71,26 +72,32 @@ public class Controleur implements Observateur{
 
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
 
-        ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
+        ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
+        pionsRandom.add(Pion.ROUGE);
+        pionsRandom.add(Pion.VERT);
+        pionsRandom.add(Pion.BLEU);
+        pionsRandom.add(Pion.ORANGE);
+        pionsRandom.add(Pion.VIOLET);
+        pionsRandom.add(Pion.JAUNE);
+
+        if (Parameters.ALEAS) {
+            Collections.shuffle(pionsRandom);
+        }
+        //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         Tuile spawn = null;
 
         for (int i = 0; i < 6; i++) {
             // AFFECTATION COULEUR/TUILE
             if (pionsRandom.get(i) == Pion.ROUGE) {
                 spawn = grille.getTuileNom("La_Porte_de_Bronze");
-
             } else if (pionsRandom.get(i) == Pion.BLEU) {
                 spawn = grille.getTuileNom("Heliport");
-
             } else if (pionsRandom.get(i) == Pion.JAUNE) {
                 spawn = grille.getTuileNom("La_Porte_dOr");
-
             } else if (pionsRandom.get(i) == Pion.VERT) {
                 spawn = grille.getTuileNom("La_Porte_De_Cuivre");
-
             } else if (pionsRandom.get(i) == Pion.VIOLET) {
                 spawn = grille.getTuileNom("La_Porte_de_Fer");
-
             } else if (pionsRandom.get(i) == Pion.ORANGE) {
                 spawn = grille.getTuileNom("La_Porte_dArgent");
             }

@@ -29,7 +29,7 @@ public class VuePlateau extends JPanel {
 
         JPanel panelBody = new JPanel(new BorderLayout());
 
-        JPanel panelJeu = new JPanel(new GridLayout(6, 6));
+        JPanel panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
                 if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.COULEE) {
@@ -37,71 +37,36 @@ public class VuePlateau extends JPanel {
                     JButton button = new JButton(str);
                     Color c=new Color(96,96,96);
                     button.setBackground(c);
-                    panelJeu.add(button);
+                    panelGrille.add(button);
                 } else if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.INONDEE) {
                     String str = g.getTuileCase(x, y).getNomTuile().toString();
                     JButton button = new JButton(str);
                     Color c=new Color(102,175,255);
                     button.setBackground(c);
-                    panelJeu.add(button);
+                    panelGrille.add(button);
                 } else if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.ASSECHEE) {
                     String str = g.getTuileCase(x, y).getNomTuile().toString();
                     JButton button = new JButton(str);
                     Color c=new Color(255,255,153);
                     button.setBackground(c);
-                    panelJeu.add(button);
+                    panelGrille.add(button);
                 } else {
                     JButton button = new JButton();
                     button.setVisible(false);
-                    panelJeu.add(button);
+                    panelGrille.add(button);
                 }
 
             }
-
-//        for (int i = 0; i < 36; i++) {
-//            JButton button = new JButton();
-//
-//            
-//            
-//            if (i == 0) {
-//                button.setVisible(false);
-//
-//            } else if (i == 1) {
-//                button.setVisible(false);
-//            } else if (i == 4) {
-//               button.setVisible(false);
-//            } else if (i == 5) {
-//                button.setVisible(false);
-//            } else if (i == 6) {
-//               button.setVisible(false);
-//            } else if (i == 11) {
-//                button.setVisible(false);
-//            } else if (i == 24) {
-//                button.setVisible(false);
-//            } else if (i == 29) {
-//                button.setVisible(false);
-//            } else if (i == 30) {
-//                button.setVisible(false);
-//            } else if (i == 31) {
-//                button.setVisible(false);
-//            } else if (i == 34) {
-//               button.setVisible(false);
-//            } else if (i == 35) {
-//               button.setVisible(false);
-//            }
-//            buttons[i] = button;
-            // final int numCase = i;
 //            button.addActionListener((ActionEvent e) -> {
 //                Message m = new Message();
 //                m.type = TypesMessages.JOUER_COUP;
 //                m.no_case = numCase;
 //                
 //                notifierObservateur(m);
-            //}};
-            //panelJeu.add(button);
+       
         }
 
-        panelBody.add(panelJeu, BorderLayout.CENTER);
+        panelBody.add(panelGrille, BorderLayout.CENTER);
         this.add(panelBody);
     }
 

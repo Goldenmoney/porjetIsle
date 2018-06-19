@@ -30,6 +30,7 @@ public class VuePlateau extends JPanel {
         JPanel panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
+               
                 if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.COULEE) {
                     String str = g.getTuileCase(x, y).getNomTuile().toString();
                     JButton button = new JButton(str);

@@ -114,12 +114,12 @@ public class VuePlateau extends JPanel {
         frame.setVisible(true);
     }
 
-    public void afficher() {
+    /*public void afficher() {
         JFrame frame = new JFrame();
         frame.setTitle("plateau");
         frame.setSize(900, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new VuePlateau());
         frame.setVisible(true);
-    }
+    }*/
 }

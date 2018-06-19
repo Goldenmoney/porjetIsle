@@ -11,6 +11,7 @@ import Util.Utils;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.util.ArrayList;
 import javax.swing.*;
 
@@ -30,27 +31,42 @@ public class VuePlateau extends JPanel {
         JPanel panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
-               
-                if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.COULEE) {
-                    String str = g.getTuileCase(x, y).getNomTuile().toString();
-                    JButton button = new JButton(str);
-                    Color c=new Color(96,96,96);
-                    button.setBackground(c);
-                    panelGrille.add(button);
-                } else if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.INONDEE) {
-                    String str = g.getTuileCase(x, y).getNomTuile().toString();
-                    JButton button = new JButton(str);
-                    Color c=new Color(102,175,255);
-                    button.setBackground(c);
-                    panelGrille.add(button);
-                } else if (g.getTuileCase(x, y) != null && g.getTuileCase(x, y).getEtat() == Utils.EtatTuile.ASSECHEE) {
-                    String str = g.getTuileCase(x, y).getNomTuile().toString();
-                    JButton button = new JButton(str);
-                    Color c=new Color(255,255,153);
-                    button.setBackground(c);
-                    panelGrille.add(button);
+                Tuile tuile = g.getTuileCase(x, y);
+
+                JButton button = new JButton();
+
+                if (tuile != null) {
+                    String str = tuile.getNomTuile().toString();
+                    
+                    if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
+
+                        button.setText(str);
+                        Color c = new Color(96, 96, 96);
+                        button.setBackground(c);
+                        panelGrille.add(button);
+                    } else if (tuile.getEtat() == Utils.EtatTuile.INONDEE) {
+
+                        button.setText(str);
+                        Color c = new Color(102, 175, 255);
+                        button.setBackground(c);
+                        panelGrille.add(button);
+                    } else if (tuile.getEtat() == Utils.EtatTuile.ASSECHEE) {
+
+                        button.setText(str);
+                        Color c = new Color(255, 255, 153);
+                        button.setBackground(c);
+                        panelGrille.add(button);
+
+                    }
+                    JPanel paneltresor=new JPanel();
+
+                    if(tuile.getTypeTresor()==Utils.TypeTresor.LA_PIERRE_SACREE){
+                      Label labelTresor=  new Label("Pierre Sacree");
+                      
+                        paneltresor.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltresor);
+                    }
                 } else {
-                    JButton button = new JButton();
                     button.setVisible(false);
                     panelGrille.add(button);
                 }
@@ -62,11 +78,10 @@ public class VuePlateau extends JPanel {
 //                m.no_case = numCase;
 //                
 //                notifierObservateur(m);
-       
-        }
 
-        panelBody.add(panelGrille, BorderLayout.CENTER);
-        this.add(panelBody);
+            panelBody.add(panelGrille, BorderLayout.CENTER);
+            this.add(panelBody);
+        }
     }
 
     public static void main(String[] args) {

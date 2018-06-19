@@ -16,27 +16,27 @@ import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
 
-public class VuePlateau extends JPanel {
+public class VuePlateau extends JPanel{
 
     private ArrayList<JButton> buttons;
-   // private ArrayList<Tuile> tuiles;
-
+    private ArrayList<Tuile> tuiles;
+    private static Controleur controleur;
+    private Grille grille;
+    
     public VuePlateau(Controleur controleur) {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
-     // tuiles = new ArrayList<>();
-     
-     
-        /*this.controleur=controleur;//suppr
-        controleur.initGrille(); // suppr */
-        Grille g= controleur.getGrille();
+        this.controleur = controleur;
+        
+        controleur.initGrille();
+        Grille grille = controleur.getGrille();
 
         JPanel panelBody = new JPanel(new BorderLayout());
 
         JPanel panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
-                Tuile tuile = g.getTuileCase(x, y);
+                Tuile tuile = grille.getTuileCase(x, y);
 
                 JButton button = new JButton();
 
@@ -115,16 +115,7 @@ public class VuePlateau extends JPanel {
         frame.setTitle("plateau");
         frame.setSize(900, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VuePlateau());
+        frame.add(new VuePlateau(controleur));
         frame.setVisible(true);
     }
-
-    /*public void afficher() {
-        JFrame frame = new JFrame();
-        frame.setTitle("plateau");
-        frame.setSize(900, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VuePlateau());
-        frame.setVisible(true);
-    }*/
 }

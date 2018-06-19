@@ -9,7 +9,6 @@ package Vue;
 import Controleur.Controleur;
 import Controleur.Observe;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
                //JOUEURS + CHOIX(DEPLACER, ASSECHER, CS)
                //NIVEAU EAU
 /**
@@ -17,11 +16,11 @@ import javax.swing.JPanel;
  * @author vialjule
  */
 public class IHM1 extends Observe {
-
+    private static Controleur controleur;
     /**
      * Creates new form IHM1
      */
-    public IHM1(Controleur controleur) {
+    public IHM1() {
         initComponents();
         VuePlateau plateau = new VuePlateau(controleur);
         jPanel3.setLayout(new BorderLayout());
@@ -299,6 +298,13 @@ public class IHM1 extends Observe {
     /**
      * @param args the command line arguments
      */
+    public void afficher(){
+        this.setVisible(true);
+    }
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -313,20 +319,20 @@ public class IHM1 extends Observe {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(IHM1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(IHM1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(IHM1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(IHM1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new IHM1(controleur).setVisible(true);
+                new VueDebut().setVisible(true);
             }
         });
     }

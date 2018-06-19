@@ -18,6 +18,7 @@ import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
 import Vue.IHM1;
 import Vue.VueDebut;
+import Vue.VuePlateau;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -37,6 +38,7 @@ public class Controleur implements Observateur {
 
     private VueDebut vueDebut;
     private IHM1 jeuPrincipal;//
+    private VuePlateau plateau;
 
     // Associations
     private Grille grille;
@@ -123,12 +125,14 @@ public class Controleur implements Observateur {
                 joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn, this);
             }
         }
+        System.out.println("Joueurs initalisés");
     }
 
     public void initJoueurs() {
     }
 
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
+        System.out.println("TEYVUVEUV");
         this.initGrille();
         this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
         this.joueurCourant = joueur1;
@@ -352,7 +356,7 @@ public class Controleur implements Observateur {
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case JOUER:
-                jeuPrincipal = new IHM1(this);
+                jeuPrincipal = new IHM1();
                 jeuPrincipal.setVisible(true);
                 jeuPrincipal.addObservateur(this);
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);

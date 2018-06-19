@@ -172,10 +172,13 @@ public class Aventurier {
 
     public void updateNbCartes(){
         this.nb_cartes = inventaire.size();
+        if (nb_cartes >9){
+            System.err.println("nombres de cartes maximun du joueur dépassé(+ de 9)");
+        }
     }
     
     public int getNbCartes(){
         updateNbCartes();
-        return this.nb_cartes;
+            return this.nb_cartes;
     }
 }

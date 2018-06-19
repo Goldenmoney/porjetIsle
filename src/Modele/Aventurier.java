@@ -157,7 +157,9 @@ public class Aventurier {
     }
 
     public void seDeplacer(Tuile tuile) {
+       this.tuile.supprJoueur(this);
        this.tuile=tuile;
+       this.tuile.addJoueur(this);
     }
 
     public Tuile getTuile() {

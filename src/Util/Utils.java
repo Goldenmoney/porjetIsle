@@ -36,6 +36,24 @@ public class Utils {
         }
     }
     
+    public enum TypeTresor {
+        LA_PIERRE_SACREE("La Pierre sacrée"),
+        LA_STATUE_DU_ZEPHYR("La Statue du zéphyr"), 
+        LE_CRISTAL_ARDENT("Le Cristal ardent"), 
+        LE_CALICE_DE_LONDE("Le Calice de l’onde");
+
+        String libelle ;
+        
+        TypeTresor(String libelle) {
+            this.libelle = libelle ;
+        }
+
+        @Override
+        public String toString() {
+            return this.libelle ;
+        }
+    }
+    
     public enum NomTuile {
         Le_Pont_des_Abimes,
         La_Porte_de_Bronze,

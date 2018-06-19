@@ -18,5 +18,10 @@ public class Carte_Sac extends Carte_Tirage_Tresor {
     public Carte_Sac(TypeCarteTresor type) {
         super(SAC_DE_SABLE);
     }
+
+    @Override
+    public void action() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

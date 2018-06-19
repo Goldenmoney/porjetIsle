@@ -18,5 +18,10 @@ public class Carte_Montee_Des_Eaux extends Carte_Tirage_Tresor {
     public Carte_Montee_Des_Eaux(TypeCarteTresor type) {
         super(MONTEE_DES_EAUX);
     }
+
+    @Override
+    public void action() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

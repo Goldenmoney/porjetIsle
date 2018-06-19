@@ -9,15 +9,11 @@ import java.util.ArrayList;
 import Modele.Aventurier;
 import Modele.Carte_Inond;
 import Modele.Carte_Tresor;
-import Modele.Explorateur;
 import Modele.Grille;
 import Modele.Tuile;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.COULEE;
 import Util.Utils.Pion;
-import static Util.Utils.Pion.BLEU;
-import static Util.Utils.Pion.ROUGE;
-import Vue.VuePlateau;
 import java.util.Scanner;
 
 /**
@@ -77,29 +73,37 @@ public class Controleur {
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
         
        ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-       Tuile spawn;
+       Tuile spawn = null;
        
         for (int i = 0; i < 6; i++) {
             if(pionsRandom.get(i) == Pion.ROUGE) {
-                spawn = grille.
-            }
+                spawn = grille.getTuileNom("La_Porte_de_Bronze");
+            } else if(pionsRandom.get(i) == Pion.BLEU) {
+                spawn = grille.getTuileNom("Heliport");
+            } else if(pionsRandom.get(i) == Pion.JAUNE) {
+                spawn = grille.getTuileNom("La_Porte_dOr");
+            } else if(pionsRandom.get(i) == Pion.VERT) {
+                spawn = grille.getTuileNom("La_Porte_De_Cuivre");
+            } else if(pionsRandom.get(i) == Pion.VIOLET) {
+                spawn = grille.getTuileNom("La_Porte_de_Fer");
+            } else if(pionsRandom.get(i) == Pion.ORANGE) {
+                spawn = grille.getTuileNom("La_Porte_dArgent");
+            } 
         }
         
         if (nbJoueurs == 2) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), );
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur);     
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);//spawn associé à la couleur);   
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
         } else if (nbJoueurs == 3) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur); 
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
         } else {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), //spawn associé à la couleur);
-            joueur2 = new Aventurier(j2, pionsRandom.get(1), //spawn associé à la couleur); 
-            joueur3 = new Aventurier(j3, pionsRandom.get(2), //spawn associé à la couleur);
-            joueur4 = new Aventurier(j4, pionsRandom.get(3), //spawn associé à la couleur); 
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn);
+            joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn);
         }
-
-        //joueur1 = new Aventurier("je sais pas qui avec le nom du joueur 1", ROUGE, grille.getTuileCase(2, 2));
     }
 
     public void initJoueurs() {
@@ -330,6 +334,7 @@ public class Controleur {
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
+                
                 break;
 
             case SE_DEPLACER:

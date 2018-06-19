@@ -20,6 +20,7 @@ public class VueDebut extends Observe{
      */
     public VueDebut() {
         initComponents();
+        changeEtatJoueurs();
     }
 
     /**

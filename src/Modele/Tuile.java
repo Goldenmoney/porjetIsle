@@ -32,10 +32,7 @@ public class Tuile {
 public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.etat = etat;
         this.nomTuile = nomTuile;
-        this.carte = carte;
-        this.joueurs = joueurs;
-        this.posCase = null;
-        this.tresor = null;
+        this.joueurs = new ArrayList<>();
     }
     
     public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Position posCase, Carte_Tresor tresor) {
@@ -45,6 +42,12 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.joueurs = joueurs;
         this.posCase = posCase;
         this.tresor = tresor;
+    }
+    
+     public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte) {
+        this.etat = etat;
+        this.nomTuile = nomTuile;
+        this.carte = carte;
     }
 
     public void setPosX(int posX) {
@@ -103,4 +106,10 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
     public boolean verifInondee() {
         return getEtat()==EtatTuile.INONDEE;
     }
+
+    public void setCarte_Inond(Carte_Inond carte) {
+        this.carte = carte;
+    }
+    
+    
 }

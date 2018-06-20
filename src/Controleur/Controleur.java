@@ -43,6 +43,7 @@ public class Controleur implements Observateur {
     private Aventurier joueur2 = null;
     private Aventurier joueur3 = null;
     private Aventurier joueur4 = null;
+    private int nbJoueurs;
     private Aventurier joueurCourant;
     private ArrayList<Carte_Tirage_Tresor> piocheTresor;
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
@@ -86,7 +87,7 @@ public class Controleur implements Observateur {
         this.grille = grille; // this.joueurCourant = joueur1;grille;
     }
 
-    public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
+    public void initJoueurs(String j1, String j2, String j3, String j4) {
 
         ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
         pionsRandom.add(Pion.ROUGE);
@@ -154,21 +155,37 @@ public class Controleur implements Observateur {
         setJoueurCourant(joueur1);
     }
 
-    public Aventurier getJoueur1() {
-        return joueur1;
+    public ArrayList<Aventurier> getJoueurs() {
+        ArrayList<Aventurier> joueurs = new ArrayList<>();
+        if (nbJoueurs == 2) {
+            joueurs.add(joueur1);
+            joueurs.add(joueur2);
+        }else if(nbJoueurs == 3) {
+            joueurs.add(joueur1);
+            joueurs.add(joueur2);
+            joueurs.add(joueur3);
+        }else if(nbJoueurs == 3) {
+            joueurs.add(joueur1);
+            joueurs.add(joueur2);
+            joueurs.add(joueur3);
+            joueurs.add(joueur4);
+        }
+        
+        
+        return joueurs;
     }
 
 
     /* public void initJoueurs() {
     }*/
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
-
+        nbJoueurs = nbJoueurs;
         this.initGrille();
 
         initPiocheInondation();
         initPiocheTresor();
 
-        this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
+        this.initJoueurs(j1, j2, j3, j4);
         this.niveauEau = difficulte;
 
         jeuPrincipal = new VuePlateauJoueur(this);

@@ -15,6 +15,7 @@ import java.awt.Label;
 import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
+import java.awt.Graphics;
 
 public class VueGrille extends JPanel {
 
@@ -101,13 +102,22 @@ public class VueGrille extends JPanel {
 
                     }
 
-                    for (Aventurier joueur : controleur.getAventuriers()) {
-                        if (joueur.getTuile() == tuile) {
+                    for (int i = 0; i < controleur.getJoueurs().size(); i++) {
+                        if (controleur.getJoueurs().get(i).getTuile() == tuile) {
+                            Label labelTresor = new Label(controleur.getJoueurs().get(i).getCouleur().toString());
+                            paneltuile.add(labelTresor, BorderLayout.SOUTH);
+
+                            JPanel pion=new JPanel(new GridLayout(2, 1));
+                            paneltuile.add(pion, BorderLayout.EAST);
                             
-                            Label labelPion = new Label(joueur.getCouleur().toString());
-                            paneltuile.add(labelPion, BorderLayout.SOUTH);
-                            button.add(paneltuile);
-                            
+                            Graphics g = getGraphics();
+                            CerclePion cerclePion = new CerclePion();
+                            cerclePion.setColor(controleur.getJoueurs().get(i).getCouleur().getCouleur());
+                            pion.add(cerclePion, BorderLayout.EAST);
+                            JLabel filler = new JLabel("LALAL");
+                            pion.add(filler, BorderLayout.EAST);
+                            filler.setVisible(false);
+                            pion.setBackground(paneltuile.getBackground());
                         }
                     }
 
@@ -129,12 +139,45 @@ public class VueGrille extends JPanel {
         }
     }
 
+    public void setPosJoueur(Aventurier joueur, Tuile tuile) {
+        int x = tuile.getPosX();
+        int y = tuile.getPosY();
+
+        if (joueur.getTuile() == tuile) {
+            JPanel posJoueur = new JPanel();
+            posJoueur.setBackground(joueur.getCouleur().getCouleur());
+            panelGrille.add(posJoueur, x, y);
+        }
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setTitle("plateau");
-        frame.setSize(900, 800);
+        frame.setSize(1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new VueGrille(controleur));
         frame.setVisible(true);
+    }
+
+    public class CerclePion extends JPanel {
+
+        Color color;
+        
+        public void setColor(Color color) {
+            this.color = color;
+        }
+        
+        public void paint(Graphics g) {
+            g.setColor(Color.BLACK);
+            drawCenteredCircle(g, 20, 20, 27);
+            g.setColor(color);
+            drawCenteredCircle(g, 20, 20, 25);
+        }
+    }
+
+    public void drawCenteredCircle(Graphics g, int x, int y, int r) {
+        x = x - (r / 2);
+        y = y - (r / 2);
+        g.fillOval(x, y, r, r);
     }
 }

@@ -157,7 +157,7 @@ public class Controleur implements Observateur {
     /* public void initJoueurs() {
     }*/
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
-        nbJoueurs = nbJoueurs;
+        this.nbJoueurs = nbJoueurs;
         this.initGrille();
 
         initPiocheInondation();

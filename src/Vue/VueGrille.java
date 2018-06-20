@@ -101,17 +101,17 @@ public class VueGrille extends JPanel {
                         panelGrille.add(button);
                     }
 
-                    for (int i = 0; i < controleur.getAventuriers().size(); i++) {
-                        if (controleur.getAventuriers().get(i).getTuile() == tuile) {
+                    for (Aventurier joueur: controleur.getAventuriers()) {
+                        if (joueur.getTuile() == tuile) {
 
                             JPanel pion = new JPanel(new GridLayout(2, 1));
                             paneltuile.add(pion, BorderLayout.EAST);
-
+                            
                             Graphics g = getGraphics();
                             CerclePion cerclePion = new CerclePion();
-                            cerclePion.setColor(controleur.getAventuriers().get(i).getCouleur().getCouleur());
+                            cerclePion.setColor(joueur.getCouleur().getCouleur());
                             pion.add(cerclePion);
-                            JLabel filler = new JLabel("LALAL");
+                            JLabel filler = new JLabel("             ");
                             pion.add(filler);
                             filler.setVisible(false);
                             pion.setBackground(paneltuile.getBackground());

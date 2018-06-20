@@ -103,7 +103,7 @@ public class Controleur implements Observateur {
         aventuriers = new ArrayList<>();
 
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-        Tuile spawn = null;
+        //Tuile spawn = null;
 
         // CREATION DES JOUEURS
         if (nbJoueurs == 2) {

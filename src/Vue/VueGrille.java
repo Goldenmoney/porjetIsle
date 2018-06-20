@@ -103,12 +103,11 @@ public class VueGrille extends JPanel {
 
                     for (Aventurier joueur : controleur.getAventuriers()) {
                         if (joueur.getTuile() == tuile) {
+                            
                             Label labelPion = new Label(joueur.getCouleur().toString());
                             paneltuile.add(labelPion, BorderLayout.SOUTH);
-                            //JPanel posJoueur = new JPanel();
-                            // posJoueur.setBackground(controleur.getJoueur1().getCouleur().getCouleur());
-                            // button.add(posJoueur);
                             button.add(paneltuile);
+                            
                         }
                     }
 
@@ -128,18 +127,6 @@ public class VueGrille extends JPanel {
             panelBody.add(panelGrille, BorderLayout.CENTER);
             this.add(panelBody);
         }
-    }
-
-    public void setPosJoueur(Aventurier joueur, Tuile tuile) {
-        int x = tuile.getPosX();
-        int y = tuile.getPosY();
-
-        if (joueur.getTuile() == tuile) {
-            JPanel posJoueur = new JPanel();
-            posJoueur.setBackground(joueur.getCouleur().getCouleur());
-            panelGrille.add(posJoueur, x, y);
-        }
-
     }
 
     public static void main(String[] args) {

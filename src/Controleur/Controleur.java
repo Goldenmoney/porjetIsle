@@ -104,14 +104,14 @@ public class Controleur implements Observateur {
         aventuriers = new ArrayList<>();
 
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-        //Tuile spawn = null;
+
         // CREATION DES JOUEURS
-        if (nbJoueurs == 2) {
+        if (this.nbJoueurs == 2) {
             joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
             joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
             aventuriers.add(joueur1);
             aventuriers.add(joueur2);
-        } else if (nbJoueurs == 3) {
+        } else if (this.nbJoueurs == 3) {
             joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
             joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
             joueur3 = new Aventurier(j3, pionsRandom.get(2), this);
@@ -157,7 +157,7 @@ public class Controleur implements Observateur {
     /* public void initJoueurs() {
     }*/
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
-        nbJoueurs = nbJoueurs;
+        this.nbJoueurs = nbJoueurs;
         this.initGrille();
 
         initPiocheInondation();

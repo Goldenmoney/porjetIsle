@@ -132,9 +132,20 @@ public class Controleur implements Observateur {
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         System.out.println("TEYVUVEUV");
         this.initGrille();
+        
+        initPiocheInondation();
+        initPiocheTresor();
+        
         this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
         this.joueurCourant = joueur1;
         this.niveauEau = difficulte;
+        
+        
+        
+        
+        
+        
+        
         System.out.println("c'est a " + joueurCourant.getNom());
         this.debutTour(joueurCourant);
     }
@@ -159,9 +170,8 @@ public class Controleur implements Observateur {
     //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
     //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
     public void initPiocheInondation() {
-        int i = 0;
-        for (Tuile tuile : tuiles){
-            if (tuile.getEtat() == COULEE){
+        for (int i = 0; i < piocheInond.size(); i++){
+            if (piocheInond.get(i).getTuile().getEtat() == COULEE){
                 supprimeInond.add(piocheInond.get(i));
                 piocheInond.remove(i);
             }
@@ -281,7 +291,7 @@ public class Controleur implements Observateur {
     }
 
     public void piocherCarte(Aventurier aventurier) {
-        aventurier.getInventaire().add((Carte_Tresor) (getPiocheTresor().get(0)));
+        aventurier.getInventaire().add((Carte_Tirage_Tresor) (getPiocheTresor().get(0)));
         getPiocheTresor().remove(0);
     }
     

@@ -21,7 +21,7 @@ public class Aventurier {
 
     private String nom;
     private Pion couleur;
-    private ArrayList<Carte_Tresor> inventaire;
+    private ArrayList<Carte_Tirage_Tresor> inventaire;
     private  int nb_cartes;
     private Tuile tuile;
     private Controleur controleur;
@@ -225,7 +225,7 @@ public class Aventurier {
         return controleur;
     }
 
-    public ArrayList<Carte_Tresor> getInventaire() {
+    public ArrayList<Carte_Tirage_Tresor> getInventaire() {
         return inventaire;
     }
     

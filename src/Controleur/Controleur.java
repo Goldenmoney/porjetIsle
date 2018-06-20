@@ -12,10 +12,10 @@ import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
-import Vue.IHM1;
+import Vue.VuePlateauJoueur;
 import Vue.VueDebut;
 import Vue.VueDebut;
-import Vue.VuePlateau;
+import Vue.VueGrille;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -34,8 +34,8 @@ public class Controleur implements Observateur {
     private ArrayList<Tuile> tuiles;
 
     private VueDebut vueDebut;
-    private IHM1 jeuPrincipal;//
-    private VuePlateau plateau;
+    private VuePlateauJoueur jeuPrincipal;//
+    private VueGrille plateau;
 
     // Associations
     private Grille grille;
@@ -147,8 +147,9 @@ public class Controleur implements Observateur {
         this.joueurCourant = joueur1;
         this.niveauEau = difficulte;
         
-        jeuPrincipal = new IHM1(this);
+        jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
+        jeuPrincipal.setNomJoueur(joueurCourant.getNom());
         
         System.out.println("c'est a " + joueurCourant.getNom());
         this.debutTour(joueurCourant);

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
 
-public class VuePlateau extends JPanel{
+public class VueGrille extends JPanel{
 
     private ArrayList<JButton> buttons;
     private static Controleur controleur;
     
-    public VuePlateau(Controleur controleur) {
+    public VueGrille(Controleur controleur) {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
         this.controleur = controleur;
@@ -112,7 +112,7 @@ public class VuePlateau extends JPanel{
         frame.setTitle("plateau");
         frame.setSize(900, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VuePlateau(controleur));
+        frame.add(new VueGrille(controleur));
         frame.setVisible(true);
     }
 }

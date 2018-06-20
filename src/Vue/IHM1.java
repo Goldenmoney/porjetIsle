@@ -32,6 +32,7 @@ public class IHM1 extends Observe {
         jPanel3.add(plateau,BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());
         jPanel4.add(vueNiveau);
+        fenetre.setVisible(true);
     }
 
     /**
@@ -321,11 +322,6 @@ public class IHM1 extends Observe {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-    }                                        
-
-    public void lancerVueNiveau() {
-        Integer niveauInitial = controleur.getNiveauEau();
-        VueNiveau niveau = new VueNiveau(niveauInitial);
     }
     
     /**

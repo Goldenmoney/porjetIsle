@@ -19,16 +19,13 @@ import Util.Utils.*;
 public class VuePlateau extends JPanel{
 
     private ArrayList<JButton> buttons;
-    private ArrayList<Tuile> tuiles;
     private static Controleur controleur;
-    private Grille grille;
     
     public VuePlateau(Controleur controleur) {
         this.setLayout(new BorderLayout());
         buttons = new ArrayList<>();
         this.controleur = controleur;
         
-        controleur.initGrille();
         Grille grille = controleur.getGrille();
 
         JPanel panelBody = new JPanel(new BorderLayout());

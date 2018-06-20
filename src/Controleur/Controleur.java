@@ -39,10 +39,10 @@ public class Controleur implements Observateur {
 
     // Associations
     private Grille grille;
-    private Aventurier joueur1;
-    private Aventurier joueur2;
-    private Aventurier joueur3;
-    private Aventurier joueur4;
+    private Aventurier joueur1 = null;
+    private Aventurier joueur2 = null;
+    private Aventurier joueur3 = null;
+    private Aventurier joueur4 = null;
     private Aventurier joueurCourant;
     private ArrayList<Carte_Tirage_Tresor> piocheTresor;
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
@@ -57,6 +57,7 @@ public class Controleur implements Observateur {
         this.defausseTresor = new ArrayList<>();
         this.piocheInond = new ArrayList<>();
         this.supprimeInond = new ArrayList<>();
+        setGrille(grille);
     }
 
     // methodes de la classe
@@ -73,8 +74,14 @@ public class Controleur implements Observateur {
         grille.afficheGrille();
         System.out.println("");
         grille.afficheNomGrille();
+        
     }
 
+    public void setGrille(Grille grille) {
+        this.grille = grille;
+    }
+
+    
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
 
         ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
@@ -130,7 +137,7 @@ public class Controleur implements Observateur {
     }*/
 
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
-        System.out.println("TEYVUVEUV");
+        
         this.initGrille();
         
         initPiocheInondation();
@@ -140,11 +147,8 @@ public class Controleur implements Observateur {
         this.joueurCourant = joueur1;
         this.niveauEau = difficulte;
         
-        
-        
-        
-        
-        
+        jeuPrincipal = new IHM1(this);
+        jeuPrincipal.addObservateur(this);
         
         System.out.println("c'est a " + joueurCourant.getNom());
         this.debutTour(joueurCourant);
@@ -460,8 +464,6 @@ public class Controleur implements Observateur {
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case JOUER:
-                jeuPrincipal = new IHM1(this);
-                jeuPrincipal.addObservateur(this);
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
                 break;
 

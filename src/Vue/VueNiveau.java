@@ -20,7 +20,6 @@ import Util.Parameters;
 public class VueNiveau extends JPanel {
     
     private Integer niveau ;
-    //private final JFrame window ;
     HashMap<Integer, JPanel> panelsGauches ;
     Integer cellWidth = 50 ;
     Integer cellHeight = (Parameters.HAUTEUR_AUTRES_VUES - 25 - (Parameters.UNDECORATED ? 0 : Parameters.DECORATION_HEIGHT)) / 10 ;

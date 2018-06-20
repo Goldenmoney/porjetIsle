@@ -21,7 +21,8 @@ public class VueDebut extends Observe{
     /**
      * Creates new form VueDebut
      */
-    public VueDebut() {
+    public VueDebut(Controleur controleur) {
+        this.controleur = controleur;
         initComponents();
         changeEtatJoueurs();
     }
@@ -73,7 +74,7 @@ public class VueDebut extends Observe{
 
         jLabel3.setText("Difiiculté :");
 
-        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 3, 1));
+        jSpinner2.setModel(new javax.swing.SpinnerNumberModel(1, 1, 4, 1));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -294,11 +295,11 @@ public class VueDebut extends Observe{
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VueDebut().setVisible(true);
             }
-        });
+        });*/
 
     }
 

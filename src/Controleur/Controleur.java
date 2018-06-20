@@ -50,7 +50,7 @@ public class Controleur implements Observateur {
 
     // constructeur
     public Controleur() {
-        vueDebut = new VueDebut();
+        vueDebut = new VueDebut(this);
         vueDebut.setVisible(true);
         vueDebut.addObservateur(this);
         this.piocheTresor = new ArrayList<>();
@@ -450,7 +450,7 @@ public class Controleur implements Observateur {
     public void traiterMessage(Message msg) {
         switch (msg.type) {
             case JOUER:
-                jeuPrincipal = new IHM1();
+                jeuPrincipal = new IHM1(this);
                 jeuPrincipal.setVisible(true);
                 jeuPrincipal.addObservateur(this);
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);

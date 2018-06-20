@@ -111,6 +111,7 @@ public class VueGrille extends JPanel {
                             CerclePion cerclePion = new CerclePion();
                             cerclePion.setColor(joueur.getCouleur().getCouleur());
                             pion.add(cerclePion);
+                            
                             JLabel filler = new JLabel("             ");
                             pion.add(filler);
                             filler.setVisible(false);

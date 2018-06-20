@@ -93,7 +93,7 @@ public class Controleur implements Observateur {
         pionsRandom.add(Pion.ROUGE);
         pionsRandom.add(Pion.VERT);
         pionsRandom.add(Pion.BLEU);
-        pionsRandom.add(Pion.ORANGE);
+        pionsRandom.add(Pion.ORANGE); 
         pionsRandom.add(Pion.VIOLET);
         pionsRandom.add(Pion.JAUNE);
 
@@ -299,8 +299,8 @@ public class Controleur implements Observateur {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
-                } else {
-                    System.err.println("on ne peu pas piocher une carte coulee");
+                } else { 
+                    System.err.println("on ne peut pas piocher une carte coulee");
                 }
             }
         } else if (getNiveauEau() <= 5) {
@@ -313,7 +313,7 @@ public class Controleur implements Observateur {
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
                 } else {
-                    System.err.println("on ne peu pas piocher une carte coulee");
+                    System.err.println("on ne peut pas piocher une carte coulee");
                 }
             }
         } else if (getNiveauEau() <= 7) {

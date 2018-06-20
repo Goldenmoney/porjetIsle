@@ -48,6 +48,7 @@ public class Controleur implements Observateur {
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
     private ArrayList<Carte_Inond> piocheInond;
     private ArrayList<Carte_Inond> supprimeInond;
+    private ArrayList<Aventurier> aventuriers;
 
     // constructeur
     public Controleur() {
@@ -63,6 +64,10 @@ public class Controleur implements Observateur {
     // methodes de la classe
     public void addTresor() {
         ////
+    }
+
+    public ArrayList<Aventurier> getAventuriers() {
+        return aventuriers;
     }
 
     public int getPA() {
@@ -95,14 +100,14 @@ public class Controleur implements Observateur {
             Collections.shuffle(pionsRandom);
         }
 
-        ArrayList<Aventurier> aventuriers = new ArrayList<>();
+        aventuriers = new ArrayList<>();
 
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         Tuile spawn = null;
 
         // CREATION DES JOUEURS
         if (nbJoueurs == 2) {
-            joueur1 = new Aventurier(j1, pionsRandom.get(0), this);//spawn associé à la couleur);
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
             joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
             aventuriers.add(joueur1);
             aventuriers.add(joueur2);
@@ -124,17 +129,22 @@ public class Controleur implements Observateur {
             aventuriers.add(joueur4);
         }
 
-        for (int i = 0; i < nbJoueurs; i++) {
+        for (int i =0; i < nbJoueurs; i++) {
             if (aventuriers.get(i).getCouleur() == Pion.ROUGE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Bronze"));
+                
             } else if (aventuriers.get(i).getCouleur() == Pion.BLEU) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("Heliport"));
+                
             } else if (aventuriers.get(i).getCouleur() == Pion.JAUNE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dOr"));
+                
             } else if (aventuriers.get(i).getCouleur() == Pion.VERT) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Cuivre"));
+                
             } else if (aventuriers.get(i).getCouleur() == Pion.VIOLET) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Fer"));
+                
             } else if (aventuriers.get(i).getCouleur() == Pion.ORANGE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dArgent"));
             }

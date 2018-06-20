@@ -154,25 +154,6 @@ public class Controleur implements Observateur {
         setJoueurCourant(joueur1);
     }
 
-    public ArrayList<Aventurier> getJoueurs() {
-        ArrayList<Aventurier> joueurs = new ArrayList<>();
-        if (nbJoueurs == 2) {
-            joueurs.add(joueur1);
-            joueurs.add(joueur2);
-        } else if (nbJoueurs == 3) {
-            joueurs.add(joueur1);
-            joueurs.add(joueur2);
-            joueurs.add(joueur3);
-        } else {
-            joueurs.add(joueur1);
-            joueurs.add(joueur2);
-            joueurs.add(joueur3);
-            joueurs.add(joueur4);
-        }
-        return joueurs;
-    }
-
-
     /* public void initJoueurs() {
     }*/
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {

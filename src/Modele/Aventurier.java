@@ -27,19 +27,18 @@ public class Aventurier {
     private Controleur controleur;
     
     //constructeur  
-    public Aventurier(String nom, Pion couleur, Tuile spawnPos, Controleur controleur) {
+    public Aventurier(String nom, Pion couleur, Controleur controleur) {
         this.nom = nom;
         this.couleur = couleur;
-        this.tuile = spawnPos;
-        this.tuile.addJoueur(this);
         this.inventaire = new ArrayList<>();
         this.nb_cartes = inventaire.size();
         this.controleur = controleur;
         //pioche 2 cartes pour chaque joueurs
         this.controleur.piocherCarte(this);
         this.controleur.piocherCarte(this);
+        this.tuile = tuile;
     }
-   
+    
     //methodes
     public ArrayList<Tuile> posAutourPossible() {
         int posX = this.tuile.getPosX();
@@ -243,5 +242,10 @@ public class Aventurier {
     
     public void defausserCarte(Carte_Tirage_Tresor carte){
         this.inventaire.remove(carte);
+    }
+
+    public void setTuile(Tuile tuile) {
+        //this.tuile.addJoueur(this);
+        this.tuile = tuile;
     }
 }

@@ -16,21 +16,23 @@ import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
 
-public class VuePlateau extends JPanel{
+public class VueGrille extends JPanel {
 
     private ArrayList<JButton> buttons;
     private static Controleur controleur;
-    
-    public VuePlateau(Controleur controleur) {
+    private JPanel panelGrille;
+
+    public VueGrille(Controleur controleur) {
         this.setLayout(new BorderLayout());
+
         buttons = new ArrayList<>();
         this.controleur = controleur;
-        
+
         Grille grille = controleur.getGrille();
 
         JPanel panelBody = new JPanel(new BorderLayout());
 
-        JPanel panelGrille = new JPanel(new GridLayout(6, 6));
+        panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
                 Tuile tuile = grille.getTuileCase(x, y);
@@ -38,7 +40,7 @@ public class VuePlateau extends JPanel{
                 JButton button = new JButton();
 
                 if (tuile != null) {
-                    
+
                     String str = tuile.getNomTuile().toString();
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
@@ -66,26 +68,44 @@ public class VuePlateau extends JPanel{
                         button.add(paneltuile);
                         panelGrille.add(button);
 
+                    } else {
+                        panelGrille.add(button);
                     }
 
                     if (tuile.getTypeTresor() == TypeTresor.LA_PIERRE_SACREE) {
+
                         Label labelTresor = new Label(TypeTresor.LA_PIERRE_SACREE.toString());
-
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
                         button.add(paneltuile);
+
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LA_STATUE_DU_ZEPHYR) {
+
                         Label labelTresor = new Label(TypeTresor.LA_STATUE_DU_ZEPHYR.toString());
-
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
                         button.add(paneltuile);
+
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CALICE_DE_LONDE) {
-                        Label labelTresor = new Label(TypeTresor.LE_CALICE_DE_LONDE.toString());
 
+                        Label labelTresor = new Label(TypeTresor.LE_CALICE_DE_LONDE.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
                         button.add(paneltuile);
+
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CRISTAL_ARDENT) {
+
                         Label labelTresor = new Label(TypeTresor.LE_CRISTAL_ARDENT.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        button.add(paneltuile);
+
+                    } else {
+                        panelGrille.add(button);
+
+                    }
+                    if (controleur.getJoueur1().getTuile() == tuile) {
+                        Label labelTresor = new Label(controleur.getJoueur1().getCouleur().toString());
+                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        //JPanel posJoueur = new JPanel();
+                        // posJoueur.setBackground(controleur.getJoueur1().getCouleur().getCouleur());
+                        // button.add(posJoueur);
                         button.add(paneltuile);
                     }
 
@@ -107,12 +127,24 @@ public class VuePlateau extends JPanel{
         }
     }
 
+    public void setPosJoueur(Aventurier joueur, Tuile tuile) {
+        int x = tuile.getPosX();
+        int y = tuile.getPosY();
+
+        if (joueur.getTuile() == tuile) {
+            JPanel posJoueur = new JPanel();
+            posJoueur.setBackground(joueur.getCouleur().getCouleur());
+            panelGrille.add(posJoueur, x, y);
+        }
+
+    }
+
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setTitle("plateau");
         frame.setSize(900, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VuePlateau(controleur));
+        frame.add(new VueGrille(controleur));
         frame.setVisible(true);
     }
 }

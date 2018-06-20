@@ -12,10 +12,10 @@ import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
-import Vue.IHM1;
+import Vue.VuePlateauJoueur;
 import Vue.VueDebut;
 import Vue.VueDebut;
-import Vue.VuePlateau;
+import Vue.VueGrille;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -34,8 +34,8 @@ public class Controleur implements Observateur {
     private ArrayList<Tuile> tuiles;
 
     private VueDebut vueDebut;
-    private IHM1 jeuPrincipal;//
-    private VuePlateau plateau;
+    private VuePlateauJoueur jeuPrincipal;//
+    private VueGrille plateau;
 
     // Associations
     private Grille grille;
@@ -95,43 +95,59 @@ public class Controleur implements Observateur {
             Collections.shuffle(pionsRandom);
         }
 
+        ArrayList<Aventurier> aventuriers = new ArrayList<>();
+
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         Tuile spawn = null;
 
-        for (int i = 0; i < 6; i++) {
-            // AFFECTATION COULEUR/TUILE
-            if (pionsRandom.get(i) == Pion.ROUGE) {
-                spawn = grille.getTuileNom("La_Porte_de_Bronze");
-            } else if (pionsRandom.get(i) == Pion.BLEU) {
-                spawn = grille.getTuileNom("Heliport");
-            } else if (pionsRandom.get(i) == Pion.JAUNE) {
-                spawn = grille.getTuileNom("La_Porte_dOr");
-            } else if (pionsRandom.get(i) == Pion.VERT) {
-                spawn = grille.getTuileNom("La_Porte_de_Cuivre");
-            } else if (pionsRandom.get(i) == Pion.VIOLET) {
-                spawn = grille.getTuileNom("La_Porte_de_Fer");
-            } else if (pionsRandom.get(i) == Pion.ORANGE) {
-                spawn = grille.getTuileNom("La_Porte_dArgent");
-            }
+        // CREATION DES JOUEURS
+        if (nbJoueurs == 2) {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), this);//spawn associé à la couleur);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
+            aventuriers.add(joueur1);
+            aventuriers.add(joueur2);
+        } else if (nbJoueurs == 3) {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), this);
+            aventuriers.add(joueur1);
+            aventuriers.add(joueur2);
+            aventuriers.add(joueur3);
+        } else {
+            joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
+            joueur2 = new Aventurier(j2, pionsRandom.get(1), this);
+            joueur3 = new Aventurier(j3, pionsRandom.get(2), this);
+            joueur4 = new Aventurier(j4, pionsRandom.get(3), this);
+            aventuriers.add(joueur1);
+            aventuriers.add(joueur2);
+            aventuriers.add(joueur3);
+            aventuriers.add(joueur4);
+        }
 
-            // CREATION DES JOUEURS
-            if (nbJoueurs == 2) {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);//spawn associé à la couleur);   
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
-            } else if (nbJoueurs == 3) {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
-                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn, this);
-            } else {
-                joueur1 = new Aventurier(j1, pionsRandom.get(0), spawn, this);
-                joueur2 = new Aventurier(j2, pionsRandom.get(1), spawn, this);
-                joueur3 = new Aventurier(j3, pionsRandom.get(2), spawn, this);
-                joueur4 = new Aventurier(j4, pionsRandom.get(3), spawn, this);
+        for (int i = 0; i < nbJoueurs; i++) {
+            if (aventuriers.get(i).getCouleur() == Pion.ROUGE) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Bronze"));
+            } else if (aventuriers.get(i).getCouleur() == Pion.BLEU) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("Heliport"));
+            } else if (aventuriers.get(i).getCouleur() == Pion.JAUNE) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dOr"));
+            } else if (aventuriers.get(i).getCouleur() == Pion.VERT) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Cuivre"));
+            } else if (aventuriers.get(i).getCouleur() == Pion.VIOLET) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Fer"));
+            } else if (aventuriers.get(i).getCouleur() == Pion.ORANGE) {
+                aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dArgent"));
             }
         }
+
         System.out.println("Joueurs initalisés");
         setJoueurCourant(joueur1);
     }
+
+    public Aventurier getJoueur1() {
+        return joueur1;
+    }
+
 
     /* public void initJoueurs() {
     }*/
@@ -145,16 +161,20 @@ public class Controleur implements Observateur {
         this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
         this.niveauEau = difficulte;
 
-        jeuPrincipal = new IHM1(this);
+        jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
+        jeuPrincipal.setNomJoueur(joueurCourant.getNom());
 
-        this.debutTour(joueurCourant);
+        System.out.println("aled1");
+        // System.out.println("c'est a " + joueurCourant.getNom());
+        //this.debutTour(joueurCourant);
+        //this.debutTour(joueur1);
+        System.out.println("aled2");
     }
 
     public void setJoueurCourant(Aventurier joueurCourant) {
         this.joueurCourant = joueurCourant;
     }
-
 
     public Grille getGrille() {
         return grille;
@@ -492,7 +512,7 @@ public class Controleur implements Observateur {
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
-               
+
                 break;
 
             case CHOISIR_SE_DELPACER:

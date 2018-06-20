@@ -36,7 +36,6 @@ public class Aventurier {
         //pioche 2 cartes pour chaque joueurs
         this.controleur.piocherCarte(this);
         this.controleur.piocherCarte(this);
-        this.tuile = tuile;
     }
     
     //methodes

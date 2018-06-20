@@ -74,14 +74,13 @@ public class Controleur implements Observateur {
         grille.afficheGrille();
         System.out.println("");
         grille.afficheNomGrille();
-        
+
     }
 
     public void setGrille(Grille grille) {
-        this.grille = grille;
+        this.grille = grille; // this.joueurCourant = joueur1;grille;
     }
 
-    
     public void initJoueurs(int nbJoueurs, String j1, String j2, String j3, String j4) {
 
         ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
@@ -95,7 +94,7 @@ public class Controleur implements Observateur {
         if (Parameters.ALEAS) {
             Collections.shuffle(pionsRandom);
         }
-        
+
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         Tuile spawn = null;
 
@@ -131,28 +130,31 @@ public class Controleur implements Observateur {
             }
         }
         System.out.println("Joueurs initalisés");
+        setJoueurCourant(joueur1);
     }
 
-   /* public void initJoueurs() {
+    /* public void initJoueurs() {
     }*/
-
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
-        
+
         this.initGrille();
-        
+
         initPiocheInondation();
         initPiocheTresor();
-        
+
         this.initJoueurs(nbJoueurs, j1, j2, j3, j4);
-        this.joueurCourant = joueur1;
         this.niveauEau = difficulte;
-        
+
         jeuPrincipal = new IHM1(this);
         jeuPrincipal.addObservateur(this);
-        
-        System.out.println("c'est a " + joueurCourant.getNom());
+
         this.debutTour(joueurCourant);
     }
+
+    public void setJoueurCourant(Aventurier joueurCourant) {
+        this.joueurCourant = joueurCourant;
+    }
+
 
     public Grille getGrille() {
         return grille;
@@ -174,8 +176,8 @@ public class Controleur implements Observateur {
     //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
     //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
     public void initPiocheInondation() {
-        for (int i = 0; i < piocheInond.size(); i++){
-            if (piocheInond.get(i).getTuile().getEtat() == COULEE){
+        for (int i = 0; i < piocheInond.size(); i++) {
+            if (piocheInond.get(i).getTuile().getEtat() == COULEE) {
                 supprimeInond.add(piocheInond.get(i));
                 piocheInond.remove(i);
             }
@@ -183,34 +185,62 @@ public class Controleur implements Observateur {
     }
 
     public void initPiocheTresor() {
-        Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT); piocheTresor.add(le_Cristal_ardent_1);
-        Carte_Tirage_Tresor le_Cristal_ardent_2 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_2);
-        Carte_Tirage_Tresor le_Cristal_ardent_3 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_3);
-        Carte_Tirage_Tresor le_Cristal_ardent_4 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_4);
-        Carte_Tirage_Tresor le_Cristal_ardent_5 = new Carte_Tresor(LE_CRISTAL_ARDENT);piocheTresor.add(le_Cristal_ardent_5);
-        Carte_Tirage_Tresor la_Statue_du_zephyr_1 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_1);
-        Carte_Tirage_Tresor la_Statue_du_zephyr_2 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_2);
-        Carte_Tirage_Tresor la_Statue_du_zephyr_3 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_3);
-        Carte_Tirage_Tresor la_Statue_du_zephyr_4 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_4);
-        Carte_Tirage_Tresor la_Statue_du_zephyr_5 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);piocheTresor.add(la_Statue_du_zephyr_5);
-        Carte_Tirage_Tresor le_Calice_de_londe_1 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_1);
-        Carte_Tirage_Tresor le_Calice_de_londe_2 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_2);
-        Carte_Tirage_Tresor le_Calice_de_londe_3 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_3);
-        Carte_Tirage_Tresor le_Calice_de_londe_4 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_4);
-        Carte_Tirage_Tresor le_Calice_de_londe_5 = new Carte_Tresor(LE_CALICE_DE_LONDE);piocheTresor.add(le_Calice_de_londe_5);
-        Carte_Tirage_Tresor la_Pierre_sacree_1 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_1);
-        Carte_Tirage_Tresor la_Pierre_sacree_2 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_2);
-        Carte_Tirage_Tresor la_Pierre_sacree_3 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_3);
-        Carte_Tirage_Tresor la_Pierre_sacree_4 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_4);
-        Carte_Tirage_Tresor la_Pierre_sacree_5 = new Carte_Tresor(LA_PIERRE_SACREE);piocheTresor.add(la_Pierre_sacree_5);
-        Carte_Tirage_Tresor montee_des_eaux_1 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_1);
-        Carte_Tirage_Tresor montee_des_eaux_2 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_2);
-        Carte_Tirage_Tresor montee_des_eaux_3 = new Carte_Montee_Des_Eaux();piocheTresor.add(montee_des_eaux_3);
-        Carte_Tirage_Tresor helicoptere_1 = new Carte_Helico();piocheTresor.add(helicoptere_1);
-        Carte_Tirage_Tresor helicoptere_2 = new Carte_Helico();piocheTresor.add(helicoptere_2);
-        Carte_Tirage_Tresor helicoptere_3 = new Carte_Helico();piocheTresor.add(helicoptere_3);
-        Carte_Tirage_Tresor sac_1 = new Carte_Sac();piocheTresor.add(sac_1);
-        Carte_Tirage_Tresor sac_2 = new Carte_Sac();piocheTresor.add(sac_2);
+        Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT);
+        piocheTresor.add(le_Cristal_ardent_1);
+        Carte_Tirage_Tresor le_Cristal_ardent_2 = new Carte_Tresor(LE_CRISTAL_ARDENT);
+        piocheTresor.add(le_Cristal_ardent_2);
+        Carte_Tirage_Tresor le_Cristal_ardent_3 = new Carte_Tresor(LE_CRISTAL_ARDENT);
+        piocheTresor.add(le_Cristal_ardent_3);
+        Carte_Tirage_Tresor le_Cristal_ardent_4 = new Carte_Tresor(LE_CRISTAL_ARDENT);
+        piocheTresor.add(le_Cristal_ardent_4);
+        Carte_Tirage_Tresor le_Cristal_ardent_5 = new Carte_Tresor(LE_CRISTAL_ARDENT);
+        piocheTresor.add(le_Cristal_ardent_5);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_1 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);
+        piocheTresor.add(la_Statue_du_zephyr_1);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_2 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);
+        piocheTresor.add(la_Statue_du_zephyr_2);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_3 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);
+        piocheTresor.add(la_Statue_du_zephyr_3);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_4 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);
+        piocheTresor.add(la_Statue_du_zephyr_4);
+        Carte_Tirage_Tresor la_Statue_du_zephyr_5 = new Carte_Tresor(LA_STATUE_DU_ZEPHYR);
+        piocheTresor.add(la_Statue_du_zephyr_5);
+        Carte_Tirage_Tresor le_Calice_de_londe_1 = new Carte_Tresor(LE_CALICE_DE_LONDE);
+        piocheTresor.add(le_Calice_de_londe_1);
+        Carte_Tirage_Tresor le_Calice_de_londe_2 = new Carte_Tresor(LE_CALICE_DE_LONDE);
+        piocheTresor.add(le_Calice_de_londe_2);
+        Carte_Tirage_Tresor le_Calice_de_londe_3 = new Carte_Tresor(LE_CALICE_DE_LONDE);
+        piocheTresor.add(le_Calice_de_londe_3);
+        Carte_Tirage_Tresor le_Calice_de_londe_4 = new Carte_Tresor(LE_CALICE_DE_LONDE);
+        piocheTresor.add(le_Calice_de_londe_4);
+        Carte_Tirage_Tresor le_Calice_de_londe_5 = new Carte_Tresor(LE_CALICE_DE_LONDE);
+        piocheTresor.add(le_Calice_de_londe_5);
+        Carte_Tirage_Tresor la_Pierre_sacree_1 = new Carte_Tresor(LA_PIERRE_SACREE);
+        piocheTresor.add(la_Pierre_sacree_1);
+        Carte_Tirage_Tresor la_Pierre_sacree_2 = new Carte_Tresor(LA_PIERRE_SACREE);
+        piocheTresor.add(la_Pierre_sacree_2);
+        Carte_Tirage_Tresor la_Pierre_sacree_3 = new Carte_Tresor(LA_PIERRE_SACREE);
+        piocheTresor.add(la_Pierre_sacree_3);
+        Carte_Tirage_Tresor la_Pierre_sacree_4 = new Carte_Tresor(LA_PIERRE_SACREE);
+        piocheTresor.add(la_Pierre_sacree_4);
+        Carte_Tirage_Tresor la_Pierre_sacree_5 = new Carte_Tresor(LA_PIERRE_SACREE);
+        piocheTresor.add(la_Pierre_sacree_5);
+        Carte_Tirage_Tresor montee_des_eaux_1 = new Carte_Montee_Des_Eaux();
+        piocheTresor.add(montee_des_eaux_1);
+        Carte_Tirage_Tresor montee_des_eaux_2 = new Carte_Montee_Des_Eaux();
+        piocheTresor.add(montee_des_eaux_2);
+        Carte_Tirage_Tresor montee_des_eaux_3 = new Carte_Montee_Des_Eaux();
+        piocheTresor.add(montee_des_eaux_3);
+        Carte_Tirage_Tresor helicoptere_1 = new Carte_Helico();
+        piocheTresor.add(helicoptere_1);
+        Carte_Tirage_Tresor helicoptere_2 = new Carte_Helico();
+        piocheTresor.add(helicoptere_2);
+        Carte_Tirage_Tresor helicoptere_3 = new Carte_Helico();
+        piocheTresor.add(helicoptere_3);
+        Carte_Tirage_Tresor sac_1 = new Carte_Sac();
+        piocheTresor.add(sac_1);
+        Carte_Tirage_Tresor sac_2 = new Carte_Sac();
+        piocheTresor.add(sac_2);
     }
 
     public void initPositionAventurier() {
@@ -233,14 +263,14 @@ public class Controleur implements Observateur {
         //return false;
         //}
     }
-    
+
     public void piocherCarteInondation() {
         if (getNiveauEau() <= 2) {
             //nb de cartes a piocher = 2
-            for (int i = 0; i <= 1; i++){
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+            for (int i = 0; i <= 1; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
                     piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
@@ -250,10 +280,10 @@ public class Controleur implements Observateur {
             }
         } else if (getNiveauEau() <= 5) {
             //nb de cartes a piocher = 3
-            for (int i = 0; i <= 2; i++){
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+            for (int i = 0; i <= 2; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
                     piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
@@ -263,10 +293,10 @@ public class Controleur implements Observateur {
             }
         } else if (getNiveauEau() <= 7) {
             //nb de cartes a piocher = 4
-            for (int i = 0; i <= 3; i++){
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+            for (int i = 0; i <= 3; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
                     piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
@@ -276,10 +306,10 @@ public class Controleur implements Observateur {
             }
         } else if (getNiveauEau() <= 9) {
             //nb de cartes a piocher = 5
-            for (int i = 0; i <= 4; i++){
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+            for (int i = 0; i <= 4; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
                     piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
@@ -291,18 +321,18 @@ public class Controleur implements Observateur {
     }
 
     public void monteeEau(int monte) {
-        niveauEau =+ monte;
+        niveauEau = +monte;
     }
 
     public void piocherCarte(Aventurier aventurier) {
         aventurier.getInventaire().add((Carte_Tirage_Tresor) (getPiocheTresor().get(0)));
         getPiocheTresor().remove(0);
     }
-    
+
     //pour l'instant deffause les premières cartes
-    public void defausserCarteTresor(Aventurier aventurier){
-        if (aventurier.getNbCartes() >5){
-            while (aventurier.getNbCartes() >5){
+    public void defausserCarteTresor(Aventurier aventurier) {
+        if (aventurier.getNbCartes() > 5) {
+            while (aventurier.getNbCartes() > 5) {
                 defausseTresor.add(aventurier.getInventaire().get(0));
                 aventurier.getInventaire().remove(0);
             }
@@ -312,7 +342,6 @@ public class Controleur implements Observateur {
     /*public void piocherCarteTresor() {
         ////
     }*/
-
     public Aventurier getJoueurCourant() {
         return joueurCourant;
     }
@@ -320,8 +349,6 @@ public class Controleur implements Observateur {
     public ArrayList<Carte_Tirage_Tresor> getPiocheTresor() {
         return piocheTresor;
     }
-    
-    
 
     public void deplacement(Aventurier aventurier) {
         ArrayList<Tuile> posPosi = new ArrayList<>();
@@ -465,6 +492,7 @@ public class Controleur implements Observateur {
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
+               
                 break;
 
             case CHOISIR_SE_DELPACER:
@@ -473,11 +501,11 @@ public class Controleur implements Observateur {
                     getJoueurCourant().posAutourPossible();
                 }
                 break;
-            
+
             case SE_DEPLACER_VERS:
                 //le joueur choisie une case parmi celle proposée précdement
                 if (getPA() != 0) {
-                   // getJoueurCourant().seDeplacer(msg.tuileChoisie);
+                    // getJoueurCourant().seDeplacer(msg.tuileChoisie);
                 }
                 break;
 

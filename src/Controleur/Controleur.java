@@ -10,7 +10,7 @@ import Modele.*;
 import Util.Parameters;
 import static Util.Utils.*;
 import static Util.Utils.EtatTuile.ASSECHEE;
-import static Util.Utils.EtatTuile.COULEE;
+import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
 import Vue.IHM1;
 import Vue.VueDebut;
@@ -45,8 +45,8 @@ public class Controleur implements Observateur {
     private Aventurier joueurCourant;
     private ArrayList<Carte_Tirage_Tresor> piocheTresor;
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
-    private Carte_Inond piocheInond;
-    private Carte_Inond supprimeInond;
+    private ArrayList<Carte_Inond> piocheInond;
+    private ArrayList<Carte_Inond> supprimeInond;
 
     // constructeur
     public Controleur() {
@@ -54,6 +54,9 @@ public class Controleur implements Observateur {
         vueDebut.setVisible(true);
         vueDebut.addObservateur(this);
         this.piocheTresor = new ArrayList<>();
+        this.defausseTresor = new ArrayList<>();
+        this.piocheInond = new ArrayList<>();
+        this.supprimeInond = new ArrayList<>();
     }
 
     // methodes de la classe
@@ -66,7 +69,7 @@ public class Controleur implements Observateur {
     }
 
     public void initGrille() {
-        grille = new Grille(tuiles);
+        grille = new Grille(tuiles, piocheInond);
         grille.afficheGrille();
         System.out.println("");
         grille.afficheNomGrille();
@@ -123,8 +126,8 @@ public class Controleur implements Observateur {
         System.out.println("Joueurs initalisés");
     }
 
-    public void initJoueurs() {
-    }
+   /* public void initJoueurs() {
+    }*/
 
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         System.out.println("TEYVUVEUV");
@@ -153,8 +156,16 @@ public class Controleur implements Observateur {
         System.out.println("PA actuel : " + getPA());
     }
 
+    //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
+    //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
     public void initPiocheInondation() {
-        ////
+        int i = 0;
+        for (Tuile tuile : tuiles){
+            if (tuile.getEtat() == COULEE){
+                supprimeInond.add(piocheInond.get(i));
+                piocheInond.remove(i);
+            }
+        }
     }
 
     public void initPiocheTresor() {
@@ -208,34 +219,95 @@ public class Controleur implements Observateur {
         //return false;
         //}
     }
+    
+    public void piocherCarteInondation() {
+        if (getNiveauEau() <= 2) {
+            //nb de cartes a piocher = 2
+            for (int i = 0; i <= 1; i++){
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peu pas piocher une carte coulee");
+                }
+            }
+        } else if (getNiveauEau() <= 5) {
+            //nb de cartes a piocher = 3
+            for (int i = 0; i <= 2; i++){
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peu pas piocher une carte coulee");
+                }
+            }
+        } else if (getNiveauEau() <= 7) {
+            //nb de cartes a piocher = 4
+            for (int i = 0; i <= 3; i++){
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peu pas piocher une carte coulee");
+                }
+            }
+        } else if (getNiveauEau() <= 9) {
+            //nb de cartes a piocher = 5
+            for (int i = 0; i <= 4; i++){
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE){
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE){
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peu pas piocher une carte coulee");
+                }
+            }
+        }
+    }
 
     public void monteeEau(int monte) {
         niveauEau =+ monte;
     }
 
-    public void piocherCarte(Aventurier Aventurier) {
-        ////
+    public void piocherCarte(Aventurier aventurier) {
+        aventurier.getInventaire().add((Carte_Tresor) (getPiocheTresor().get(0)));
+        getPiocheTresor().remove(0);
     }
-
-    public void piocherCarteInondation() {
-        if (getNiveauEau() <= 2) {
-            //nb de cartes a piocher = 2
-        } else if (getNiveauEau() <= 5) {
-            //nb de cartes a piocher = 3
-        } else if (getNiveauEau() <= 7) {
-            //nb de cartes a piocher = 4
-        } else if (getNiveauEau() <= 9) {
-            //nb de cartes a piocher = 5
+    
+    //pour l'instant deffause les premières cartes
+    public void defausserCarteTresor(Aventurier aventurier){
+        if (aventurier.getNbCartes() >5){
+            while (aventurier.getNbCartes() >5){
+                defausseTresor.add(aventurier.getInventaire().get(0));
+                aventurier.getInventaire().remove(0);
+            }
         }
     }
 
-    public void piocherCarteTresor() {
+    /*public void piocherCarteTresor() {
         ////
-    }
+    }*/
 
     public Aventurier getJoueurCourant() {
         return joueurCourant;
     }
+
+    public ArrayList<Carte_Tirage_Tresor> getPiocheTresor() {
+        return piocheTresor;
+    }
+    
+    
 
     public void deplacement(Aventurier aventurier) {
         ArrayList<Tuile> posPosi = new ArrayList<>();

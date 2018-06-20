@@ -27,15 +27,4 @@ public class Carte_Inond {
     public Tuile getTuile() {
         return tuile;
     }
-    
-    public void action(){
-        if (this.tuile.getEtat()==ASSECHEE){
-            this.tuile.majEtat(INONDEE);
-        }else if (this.tuile.getEtat()==INONDEE) {
-            this.tuile.majEtat(COULEE);
-            //si une tuile coule la carte inondation lié va dans la pile de défausse
-        } else {
-            System.err.println("On ne peu pas plus coulée la tuile, il y a un problème de tirage");
-        }
-    }
 }

@@ -35,6 +35,9 @@ public class Aventurier {
         this.inventaire = new ArrayList<>();
         this.nb_cartes = inventaire.size();
         this.controleur = controleur;
+        //pioche 2 cartes pour chaque joueurs
+        this.controleur.piocherCarte(this);
+        this.controleur.piocherCarte(this);
     }
    
     //methodes
@@ -220,6 +223,10 @@ public class Aventurier {
 
     public Controleur getControleur() {
         return controleur;
+    }
+
+    public ArrayList<Carte_Tresor> getInventaire() {
+        return inventaire;
     }
     
     public void updateNbCartes(){

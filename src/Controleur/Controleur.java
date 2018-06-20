@@ -105,7 +105,6 @@ public class Controleur implements Observateur {
 
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
         //Tuile spawn = null;
-
         // CREATION DES JOUEURS
         if (nbJoueurs == 2) {
             joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
@@ -130,22 +129,22 @@ public class Controleur implements Observateur {
             aventuriers.add(joueur4);
         }
 
-        for (int i =0; i < nbJoueurs; i++) {
+        for (int i = 0; i < nbJoueurs; i++) {
             if (aventuriers.get(i).getCouleur() == Pion.ROUGE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Bronze"));
-                
+
             } else if (aventuriers.get(i).getCouleur() == Pion.BLEU) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("Heliport"));
-                
+
             } else if (aventuriers.get(i).getCouleur() == Pion.JAUNE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dOr"));
-                
+
             } else if (aventuriers.get(i).getCouleur() == Pion.VERT) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Cuivre"));
-                
+
             } else if (aventuriers.get(i).getCouleur() == Pion.VIOLET) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_de_Fer"));
-                
+
             } else if (aventuriers.get(i).getCouleur() == Pion.ORANGE) {
                 aventuriers.get(i).setTuile(grille.getTuileNom("La_Porte_dArgent"));
             }
@@ -160,18 +159,16 @@ public class Controleur implements Observateur {
         if (nbJoueurs == 2) {
             joueurs.add(joueur1);
             joueurs.add(joueur2);
-        }else if(nbJoueurs == 3) {
+        } else if (nbJoueurs == 3) {
             joueurs.add(joueur1);
             joueurs.add(joueur2);
             joueurs.add(joueur3);
-        }else if(nbJoueurs == 3) {
+        } else {
             joueurs.add(joueur1);
             joueurs.add(joueur2);
             joueurs.add(joueur3);
             joueurs.add(joueur4);
         }
-        
-        
         return joueurs;
     }
 

@@ -99,23 +99,20 @@ public class VueGrille extends JPanel {
 
                     } else {
                         panelGrille.add(button);
-
                     }
 
                     for (int i = 0; i < controleur.getJoueurs().size(); i++) {
                         if (controleur.getJoueurs().get(i).getTuile() == tuile) {
-                            Label labelTresor = new Label(controleur.getJoueurs().get(i).getCouleur().toString());
-                            paneltuile.add(labelTresor, BorderLayout.SOUTH);
 
-                            JPanel pion=new JPanel(new GridLayout(2, 1));
+                            JPanel pion = new JPanel(new GridLayout(2, 1));
                             paneltuile.add(pion, BorderLayout.EAST);
-                            
+
                             Graphics g = getGraphics();
                             CerclePion cerclePion = new CerclePion();
                             cerclePion.setColor(controleur.getJoueurs().get(i).getCouleur().getCouleur());
-                            pion.add(cerclePion, BorderLayout.EAST);
+                            pion.add(cerclePion);
                             JLabel filler = new JLabel("LALAL");
-                            pion.add(filler, BorderLayout.EAST);
+                            pion.add(filler);
                             filler.setVisible(false);
                             pion.setBackground(paneltuile.getBackground());
                         }
@@ -162,11 +159,11 @@ public class VueGrille extends JPanel {
     public class CerclePion extends JPanel {
 
         Color color;
-        
+
         public void setColor(Color color) {
             this.color = color;
         }
-        
+
         public void paint(Graphics g) {
             g.setColor(Color.BLACK);
             drawCenteredCircle(g, 20, 20, 27);

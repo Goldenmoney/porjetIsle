@@ -14,6 +14,7 @@ import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
 import Vue.IHM1;
 import Vue.VueDebut;
+import Vue.VueDebut;
 import Vue.VuePlateau;
 import java.util.Collections;
 import java.util.Scanner;
@@ -51,7 +52,6 @@ public class Controleur implements Observateur {
     // constructeur
     public Controleur() {
         vueDebut = new VueDebut(this);
-        vueDebut.setVisible(true);
         vueDebut.addObservateur(this);
         this.piocheTresor = new ArrayList<>();
         this.defausseTresor = new ArrayList<>();
@@ -451,7 +451,6 @@ public class Controleur implements Observateur {
         switch (msg.type) {
             case JOUER:
                 jeuPrincipal = new IHM1(this);
-                jeuPrincipal.setVisible(true);
                 jeuPrincipal.addObservateur(this);
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
                 break;

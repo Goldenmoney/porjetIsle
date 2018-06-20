@@ -12,7 +12,7 @@ import Controleur.Message;
  *
  * @author bassetlu
  */
-public class Observe extends javax.swing.JFrame {
+public class Observe {
     
     private Observateur observateur;
     

@@ -7,14 +7,11 @@ package Controleur;
 
 import java.util.ArrayList;
 import Modele.*;
-import Util.Parameters;
+import Util.*;
 import static Util.Utils.*;
-import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
-import Vue.VuePlateauJoueur;
-import Vue.VueInscription;
-import Vue.VueGrille;
+import Vue.*;
 import java.util.Collections;
 import java.util.Scanner;
 

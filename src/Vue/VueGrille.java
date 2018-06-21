@@ -22,23 +22,30 @@ public class VueGrille extends Observe {
     private static Controleur controleur;
     private JPanel panelGrille;
     private JPanel panelBody;
-    private JButton button[][] = new JButton[6][6];
+    private JButton[][] tableauButton = new JButton[6][6];
     private ArrayList<JButton> buttonsGrille;
 
     public VueGrille(Controleur controleur) {
-
+        
         this.controleur = controleur;
         Grille grille = controleur.getGrille();
 
         panelBody = new JPanel(new BorderLayout());
         panelGrille = new JPanel(new GridLayout(6, 6));
+
+        buttonsGrille = new ArrayList<JButton>();
+        for (int i = 0; i < 36; i++) {
+            buttonsGrille.add(new JButton());
+        }
+        
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
+                for (int i = 0; i < buttonsGrille.size(); i++) {
+                    tableauButton[x][y]=buttonsGrille.get(i);
+                }
+                
                 Tuile tuile = grille.getTuileCase(x, y);
-                button = new JButton[x][y];
-
-                panelGrille.add(button[x][y]);
-                buttonsGrille.add(button[x][y]);
+                
 
                 if (tuile != null) {
 
@@ -46,24 +53,25 @@ public class VueGrille extends Observe {
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
                     paneltuile.add(labelnomTuile, BorderLayout.CENTER);
-                    button[x][y].add(paneltuile);
+                    panelGrille.add(tableauButton[x][y]);
+                    tableauButton[x][y].add(paneltuile);
 
                     if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
                         Color c = new Color(96, 96, 96);
                         paneltuile.setBackground(c);
-                        button[x][y].setBackground(c);
+                        tableauButton[x][y].setBackground(c);
 
                     } else if (tuile.getEtat() == Utils.EtatTuile.INONDEE) {
 
                         Color c = new Color(102, 175, 255);
-                        button[x][y].setBackground(c);
+                        tableauButton[x][y].setBackground(c);
                         paneltuile.setBackground(c);
 
                     } else if (tuile.getEtat() == Utils.EtatTuile.ASSECHEE) {
 
                         Color c = new Color(255, 255, 153);
                         paneltuile.setBackground(c);
-                        button[x][y].setBackground(c);
+                        tableauButton[x][y].setBackground(c);
 
                     }
 
@@ -106,11 +114,9 @@ public class VueGrille extends Observe {
                             pion.setBackground(paneltuile.getBackground());
                         }
                     }
-
                 } else {
-                    button[x][y].setVisible(false);
+                    tableauButton[x][y].setVisible(false);
                 }
-
             }
 //            button.addActionListener((ActionEvent e) -> {
 //                Message m = new Message();

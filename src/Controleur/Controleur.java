@@ -544,7 +544,8 @@ public class Controleur implements Observateur {
                     System.out.println("Je reçois X : " + msg.uneCaseX);
                     System.out.println("Je reçois Y : " + msg.uneCaseY);
                     joueurCourant.setTuile(getGrille().getTuileCase(x, y));
-                    jeuPrincipal = new VuePlateauJoueur(this);
+                    jeuPrincipal.updatePlateauJoueur();
+                    
                 }
                 break;
 
@@ -564,5 +565,10 @@ public class Controleur implements Observateur {
                 break;
         }
     }
+
+    public void setJeuPrincipal(VuePlateauJoueur jeuPrincipal) {
+        this.jeuPrincipal = jeuPrincipal;
+    }
+    
 
 }

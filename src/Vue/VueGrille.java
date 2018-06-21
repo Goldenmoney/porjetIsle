@@ -15,6 +15,7 @@ import java.awt.Label;
 import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,11 +29,13 @@ public class VueGrille extends Observe {
     private JPanel panelBody;
     private JButton[][] tableauButton = new JButton[6][6];
     private ArrayList<JButton> buttonsGrille;
+    private JPanel panelTuile;
+    private Grille grille;
 
     public VueGrille(Controleur controleur) {
 
         this.controleur = controleur;
-        Grille grille = controleur.getGrille();
+        grille = controleur.getGrille();
 
         panelBody = new JPanel(new BorderLayout());
         panelGrille = new JPanel(new GridLayout(6, 6));
@@ -44,7 +47,7 @@ public class VueGrille extends Observe {
 
     public void afficherGrille() {
         int i = 0;
-        Grille grille = controleur.getGrille();
+        panelBody.repaint();
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
 
@@ -58,28 +61,28 @@ public class VueGrille extends Observe {
                 if (tuile != null) {
 
                     String str = tuile.getNomTuile().toString();
-                    JPanel paneltuile = new JPanel(new BorderLayout());
+                    panelTuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
-                    paneltuile.add(labelnomTuile, BorderLayout.CENTER);
+                    panelTuile.add(labelnomTuile, BorderLayout.CENTER);
 
                     panelGrille.add(tableauButton[x][y]);
-                    tableauButton[x][y].add(paneltuile);
+                    tableauButton[x][y].add(panelTuile);
 
                     if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
                         Color c = new Color(96, 96, 96);
-                        paneltuile.setBackground(c);
+                        panelTuile.setBackground(c);
                         tableauButton[x][y].setBackground(c);
 
                     } else if (tuile.getEtat() == Utils.EtatTuile.INONDEE) {
 
                         Color c = new Color(102, 175, 255);
                         tableauButton[x][y].setBackground(c);
-                        paneltuile.setBackground(c);
+                        panelTuile.setBackground(c);
 
                     } else if (tuile.getEtat() == Utils.EtatTuile.ASSECHEE) {
 
                         Color c = new Color(255, 255, 153);
-                        paneltuile.setBackground(c);
+                        panelTuile.setBackground(c);
                         tableauButton[x][y].setBackground(c);
 
                     }
@@ -87,42 +90,26 @@ public class VueGrille extends Observe {
                     if (tuile.getTypeTresor() == TypeTresor.LA_PIERRE_SACREE) {
 
                         Label labelTresor = new Label(TypeTresor.LA_PIERRE_SACREE.toString());
-                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        panelTuile.add(labelTresor, BorderLayout.SOUTH);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LA_STATUE_DU_ZEPHYR) {
 
                         Label labelTresor = new Label(TypeTresor.LA_STATUE_DU_ZEPHYR.toString());
-                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        panelTuile.add(labelTresor, BorderLayout.SOUTH);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CALICE_DE_LONDE) {
 
                         Label labelTresor = new Label(TypeTresor.LE_CALICE_DE_LONDE.toString());
-                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        panelTuile.add(labelTresor, BorderLayout.SOUTH);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CRISTAL_ARDENT) {
 
                         Label labelTresor = new Label(TypeTresor.LE_CRISTAL_ARDENT.toString());
-                        paneltuile.add(labelTresor, BorderLayout.SOUTH);
+                        panelTuile.add(labelTresor, BorderLayout.SOUTH);
 
                     }
+                    this.affichePion(tuile);
 
-                    for (Aventurier joueur : controleur.getAventuriers()) {
-                        if (joueur.getTuile() == tuile) {
-
-                            JPanel pion = new JPanel(new GridLayout(2, 1));
-                            paneltuile.add(pion, BorderLayout.EAST);
-
-                            Graphics g = panelGrille.getGraphics();
-                            CerclePion cerclePion = new CerclePion();
-                            cerclePion.setColor(joueur.getCouleur().getCouleur());
-                            pion.add(cerclePion);
-
-                            JLabel filler = new JLabel("             ");
-                            pion.add(filler);
-                            filler.setVisible(false);
-                            pion.setBackground(paneltuile.getBackground());
-                        }
-                    }
                 } else {
                     tableauButton[x][y].setVisible(false);
                     panelGrille.add(tableauButton[x][y]);
@@ -142,7 +129,6 @@ public class VueGrille extends Observe {
                 i++;
             }
             panelBody.add(panelGrille, BorderLayout.CENTER);
-            //this.add(panelBody);
             panelBody.setVisible(true);
         }
     }
@@ -158,6 +144,26 @@ public class VueGrille extends Observe {
 
     public JPanel getPanelBody() {
         return panelBody;
+    }
+
+    public void affichePion(Tuile tuile) {
+        JPanel pion = new JPanel(new GridLayout(2, 1));
+        for (Aventurier joueur : controleur.getAventuriers()) {
+            if (joueur.getTuile() == tuile) {
+
+                panelTuile.add(pion, BorderLayout.EAST);
+
+                Graphics g = panelGrille.getGraphics();
+                CerclePion cerclePion = new CerclePion();
+                cerclePion.setColor(joueur.getCouleur().getCouleur());
+                pion.add(cerclePion);
+
+                JLabel filler = new JLabel("         ");
+                pion.add(filler);
+                filler.setVisible(false);
+                pion.setBackground(panelTuile.getBackground());
+            }
+        }
     }
 
     public void affichePosPossible(ArrayList<Tuile> tuilesPossibles) {

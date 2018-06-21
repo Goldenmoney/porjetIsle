@@ -35,7 +35,6 @@ public class VuePlateauJoueur extends Observe {
      */
     public VuePlateauJoueur(Controleur controleur) {
         fenetre = new JFrame("L'île interdite");
-
         this.controleur = controleur;
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
@@ -48,6 +47,22 @@ public class VuePlateauJoueur extends Observe {
         fenetre.setVisible(true);
     }
 
+    public VueGrille getPlateau() {
+        return plateau;
+    }
+
+    public void updatePlateauJoueur(){
+      
+        fenetre.remove(jPanel3);
+        plateau = new VueGrille(controleur);
+        jPanel3.removeAll();
+        jPanel3.setVisible(false);
+        jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
+        
+        jPanel3.setVisible(true);
+        controleur.setPlateau(plateau);
+        fenetre.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

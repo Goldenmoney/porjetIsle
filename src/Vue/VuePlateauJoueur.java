@@ -35,7 +35,7 @@ public class VuePlateauJoueur extends Observe {
         VueNiveau vueNiveau = new VueNiveau(1);
         VueGrille plateau = new VueGrille(controleur);
         jPanel3.setLayout(new BorderLayout());
-        jPanel3.add(plateau, BorderLayout.CENTER);
+        jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());
         jPanel4.add(vueNiveau);
         fenetre.setVisible(true);
@@ -84,7 +84,7 @@ public class VuePlateauJoueur extends Observe {
         fenetre.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
-        jLabel21.setText("L'île");
+        jLabel21.setText("               L'île");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -352,13 +352,13 @@ public class VuePlateauJoueur extends Observe {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
     }

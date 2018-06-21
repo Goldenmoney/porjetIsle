@@ -17,22 +17,21 @@ import javax.swing.*;
 import Util.Utils.*;
 import java.awt.Graphics;
 
-public class VueGrille extends JPanel {
+public class VueGrille extends Observe {
 
     private ArrayList<JButton> buttons;
     private static Controleur controleur;
     private JPanel panelGrille;
+    private JPanel panelBody;
 
     public VueGrille(Controleur controleur) {
-        this.setLayout(new BorderLayout());
-
+        
         buttons = new ArrayList<>();
         this.controleur = controleur;
-
         Grille grille = controleur.getGrille();
 
-        JPanel panelBody = new JPanel(new BorderLayout());
-
+        
+        panelBody = new JPanel(new BorderLayout());
         panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
@@ -107,7 +106,7 @@ public class VueGrille extends JPanel {
                             JPanel pion = new JPanel(new GridLayout(2, 1));
                             paneltuile.add(pion, BorderLayout.EAST);
                             
-                            Graphics g = getGraphics();
+                            Graphics g = panelGrille.getGraphics();
                             CerclePion cerclePion = new CerclePion();
                             cerclePion.setColor(joueur.getCouleur().getCouleur());
                             pion.add(cerclePion);
@@ -133,7 +132,8 @@ public class VueGrille extends JPanel {
 //                notifierObservateur(m);
 
             panelBody.add(panelGrille, BorderLayout.CENTER);
-            this.add(panelBody);
+            //this.add(panelBody);
+            panelBody.setVisible(true);
         }
     }
 
@@ -142,8 +142,12 @@ public class VueGrille extends JPanel {
         frame.setTitle("plateau");
         frame.setSize(1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VueGrille(controleur));
+        frame.add(new VueGrille(controleur).getPanelBody());
         frame.setVisible(true);
+    }
+
+    public JPanel getPanelBody() {
+        return panelBody;
     }
 
     public class CerclePion extends JPanel {

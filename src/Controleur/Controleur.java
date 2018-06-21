@@ -13,8 +13,7 @@ import static Util.Utils.EtatTuile.ASSECHEE;
 import static Util.Utils.EtatTuile.*;
 import static Util.Utils.TypeCarteTresor.*;
 import Vue.VuePlateauJoueur;
-import Vue.VueDebut;
-import Vue.VueDebut;
+import Vue.VueInscription;
 import Vue.VueGrille;
 import java.util.Collections;
 import java.util.Scanner;
@@ -33,7 +32,7 @@ public class Controleur implements Observateur {
     private int pa;
     private ArrayList<Tuile> tuiles;
 
-    private VueDebut vueDebut;
+    private VueInscription vueDebut;
     private VuePlateauJoueur jeuPrincipal;//
     private VueGrille plateau;
 
@@ -53,7 +52,7 @@ public class Controleur implements Observateur {
 
     // constructeur
     public Controleur() {
-        vueDebut = new VueDebut(this);
+        vueDebut = new VueInscription(this);
         vueDebut.addObservateur(this);
         this.piocheTresor = new ArrayList<>();
         this.defausseTresor = new ArrayList<>();

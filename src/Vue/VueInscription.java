@@ -16,14 +16,14 @@ import javax.swing.JFrame;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class VueDebut extends Observe{  
+public class VueInscription extends Observe{  
     
     private Controleur controleur;
     private JFrame fenetre;
     /**
      * Creates new form VueDebut
      */
-    public VueDebut(Controleur controleur) {
+    public VueInscription(Controleur controleur) {
         fenetre = new JFrame();
         this.controleur = controleur;
         initComponents();
@@ -288,14 +288,21 @@ public class VueDebut extends Observe{
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VueDebut.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VueInscription.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
+        /* Create and display the form */
+        /*java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new VueDebut().setVisible(true);
+            }
         //</editor-fold>
         
         /* Create and display the form */

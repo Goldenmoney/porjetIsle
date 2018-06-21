@@ -19,8 +19,8 @@ public class Carte_Sac extends Carte_Tirage_Tresor {
         super(SAC_DE_SABLE);
     }
     
-    //envoye les positions de déplcament possible pour le joueur
-    // sur l'ihm lorsqu'il clique sur la carte sac de sable
+    // Envoye les positions de déplcament possible pour le joueur
+    // Sur l'ihm lorsqu'il clique sur la carte sac de sable
     @Override
     public void action() {
         aventurier.posPossibleAll(COULEE);

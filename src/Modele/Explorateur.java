@@ -5,15 +5,12 @@
  */
 package Modele;
 
-import Util.Utils.*;
-import java.util.HashSet;
-
 /**
  *
  * @author bassetlu
  */
 
-//non fonctionnel
+// Non fonctionnel
 public class Explorateur{
     
     

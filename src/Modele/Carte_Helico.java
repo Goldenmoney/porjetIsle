@@ -14,13 +14,13 @@ import static Util.Utils.TypeCarteTresor.HELICOPTERE;
  * @author pontalc
  */
 public class Carte_Helico extends Carte_Tirage_Tresor {
-    //constructeur
+    // Constructeur
     public Carte_Helico() {
         super(HELICOPTERE);
     }
 
-    //envoye les positions de déplcament possible pour le joueur
-    // sur l'ihm lorsqu'il clique sur la carte helico
+    // Envoye les positions de déplcament possible pour le joueur
+    // Sur l'ihm lorsqu'il clique sur la carte helico
     @Override
     public void action() {
         aventurier.posPossibleAll(INONDEE);

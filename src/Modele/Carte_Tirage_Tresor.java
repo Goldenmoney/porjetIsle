@@ -13,16 +13,16 @@ import Util.Utils.TypeCarteTresor;
  */
 
 public abstract class Carte_Tirage_Tresor {
-    //attributs
+    // Attributs
     protected Aventurier aventurier;
     protected TypeCarteTresor type;
     
-    //constructeur
+    // Constructeur
     public Carte_Tirage_Tresor(TypeCarteTresor type) {
         this.type = type;
     }
     
-    //methodes
+    // Methodes
     public TypeCarteTresor getType() {
         return type;
     }
@@ -30,6 +30,6 @@ public abstract class Carte_Tirage_Tresor {
     public void setAventurier(Aventurier aventurier) {
         this.aventurier = aventurier;
     }
-    //methode a appeler l'orsque l'on clique sur une carte
+    // Methode a appeler l'orsque l'on clique sur une carte
     public abstract void action();
 }

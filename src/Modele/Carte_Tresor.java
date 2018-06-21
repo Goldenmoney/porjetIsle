@@ -12,7 +12,7 @@ import Util.Utils.*;
  * @author bassetlu
  */
 public class Carte_Tresor extends Carte_Tirage_Tresor {   
-    // constructeur
+    // Constructeur
     public Carte_Tresor(TypeCarteTresor type) {
        super(type);
     }
@@ -20,6 +20,6 @@ public class Carte_Tresor extends Carte_Tirage_Tresor {
     // Methode
     @Override
     public void action() {
-        //rien carte les cartes des trésors n'ont pas d'action elle même
+        // Rien car les cartes des trésors n'ont pas d'actions elles mêmes
     }
 }

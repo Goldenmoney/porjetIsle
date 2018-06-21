@@ -7,11 +7,15 @@ package Vue;
 
 //////////////IL FAUT METTRE : GRIL
 import Controleur.Controleur;
+import Controleur.Message;
 import Controleur.Observe;
+import Controleur.TypesMessages;
 import Modele.Aventurier;
 import Util.Parameters;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 //JOUEURS + CHOIX(DEPLACER, ASSECHER, CS)
 //NIVEAU EAU
@@ -24,17 +28,18 @@ public class VuePlateauJoueur extends Observe {
 
     private Controleur controleur;
     private JFrame fenetre;
+    private VueGrille plateau;
 
     /**
      * Creates new form IHM1
      */
     public VuePlateauJoueur(Controleur controleur) {
         fenetre = new JFrame("L'île interdite");
-        
+
         this.controleur = controleur;
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
-        VueGrille plateau = new VueGrille(controleur);
+        plateau = new VueGrille(controleur);
         controleur.setPlateau(plateau);
         jPanel3.setLayout(new BorderLayout());
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
@@ -126,6 +131,12 @@ public class VuePlateauJoueur extends Observe {
         jLabel1.setText("NomJoueur");
 
         jButton1.setText("Se déplacer");
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton1ActionPerformed(e);
+            }
+        });
 
         jButton2.setText("Assécher une tuile");
 
@@ -332,9 +343,23 @@ public class VuePlateauJoueur extends Observe {
         // TODO add your handling code here:
     }
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        Message m = new Message();
+        m.type = TypesMessages.CHOISIR_SE_DEPLACER;
+        notifierObservateur(m);
+    }
+
     // Methodes
     public void setNomJoueur(String nomJoueur) {
         jLabel1.setText(nomJoueur);
+    }
+    
+    public void quandSeDeplacer() {
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setText("ANNULER");
     }
 
     /**

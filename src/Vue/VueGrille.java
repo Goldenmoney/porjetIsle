@@ -23,7 +23,7 @@ import javax.swing.border.LineBorder;
 
 public class VueGrille extends Observe {
 
-    private static Controleur controleur;
+    private Controleur controleur;
     private JPanel panelGrille;
     private JPanel panelBody;
     private JButton[][] tableauButton = new JButton[6][6];
@@ -38,14 +38,20 @@ public class VueGrille extends Observe {
         panelGrille = new JPanel(new GridLayout(6, 6));
 
         buttonsGrille = new ArrayList<JButton>();
-        int i = 0;
+        this.afficherGrille();
 
+    }
+
+    public void afficherGrille() {
+        int i = 0;
+        Grille grille = controleur.getGrille();
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
 
                 buttonsGrille.add(new JButton());
 
                 tableauButton[x][y] = buttonsGrille.get(i);
+                tableauButton[x][y].setEnabled(false);
 
                 Tuile tuile = grille.getTuileCase(x, y);
 
@@ -121,15 +127,20 @@ public class VueGrille extends Observe {
                     tableauButton[x][y].setVisible(false);
                     panelGrille.add(tableauButton[x][y]);
                 }
+                final int caseX = x;
+                final int caseY = y;
+
+                tableauButton[x][y].addActionListener((ActionEvent e) -> {
+                    Message m = new Message();
+                    m.type = TypesMessages.SE_DEPLACER_VERS;
+                    m.uneCaseX = caseX;
+                    m.uneCaseY = caseY;
+                    notifierObservateur(m);
+                    System.out.println("J'envoie X : " + caseX);
+                    System.out.println("J'envoie Y : " + caseY);
+                });
                 i++;
             }
-//            button.addActionListener((ActionEvent e) -> {
-//                Message m = new Message();
-//                m.type = TypesMessages.JOUER_COUP;
-//                m.no_case = numCase;
-//                
-//                notifierObservateur(m);
-
             panelBody.add(panelGrille, BorderLayout.CENTER);
             //this.add(panelBody);
             panelBody.setVisible(true);
@@ -137,12 +148,12 @@ public class VueGrille extends Observe {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setTitle("plateau");
-        frame.setSize(1000, 800);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(new VueGrille(controleur).getPanelBody());
-        frame.setVisible(true);
+//        JFrame frame = new JFrame();
+//        frame.setTitle("plateau");
+//        frame.setSize(1000, 800);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.add(new VueGrille(controleur).getPanelBody());
+//        frame.setVisible(true);
     }
 
     public JPanel getPanelBody() {
@@ -166,12 +177,12 @@ public class VueGrille extends Observe {
 
                         tableauButton[x][y].setBorder(new LineBorder(Color.red, 5));
                         tableauButton[x][y].setEnabled(true);
+
                     }
                 }
 
             }
         }
-
     }
 
     public class CerclePion extends JPanel {

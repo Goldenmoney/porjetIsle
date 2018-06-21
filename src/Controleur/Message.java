@@ -11,7 +11,8 @@ package Controleur;
 public class Message {
     public TypesMessages type;  // type de message
     public String joueur1, joueur2, joueur3, joueur4;
-    public int uneCase;
+    public int uneCaseX;
+    public int uneCaseY;
     public int difficulte;
     public int nbJoueurs;
 }

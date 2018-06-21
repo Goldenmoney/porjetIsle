@@ -88,7 +88,7 @@ public class Aventurier {
             this.tuile.supprJoueur(this);
         }
         this.tuile=tuile;
-        this.tuile.addJoueur(this);
+        tuile.addJoueur(this);
     }
     
     public void defausserCarte(Carte_Tirage_Tresor carte){

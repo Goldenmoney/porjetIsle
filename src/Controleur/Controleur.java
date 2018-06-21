@@ -20,6 +20,7 @@ import java.util.Scanner;
  * @author bassetlu
  */
 public class Controleur implements Observateur {
+
     // Attributs
     private int niveauEau;
     private boolean tresorsRecup;
@@ -29,7 +30,7 @@ public class Controleur implements Observateur {
     private int pa;
     private int nbJoueurs;
     private Aventurier joueurCourant;
-    
+
     // Vues
     private VueInscription vueDebut;
     private VuePlateauJoueur jeuPrincipal;
@@ -47,7 +48,6 @@ public class Controleur implements Observateur {
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
     private ArrayList<Carte_Inond> piocheInond;
     private ArrayList<Carte_Inond> supprimeInond;
-    
 
     // constructeur
     public Controleur() {
@@ -65,32 +65,32 @@ public class Controleur implements Observateur {
     public int getPA() {
         return pa;
     }
-    
+
     public ArrayList<Aventurier> getAventuriers() {
         return aventuriers;
     }
-    
+
     public Grille getGrille() {
         return grille;
     }
-    
+
     public int getNiveauEau() {
         return niveauEau;
     }
-     
+
     public Aventurier getJoueurCourant() {
         return joueurCourant;
     }
-    
+
     public ArrayList<Carte_Tirage_Tresor> getPiocheTresor() {
         return piocheTresor;
     }
-    
+
     // Setter 
     public void setGrille(Grille grille) {
         this.grille = grille; // this.joueurCourant = joueur1;grille;
     }
-     
+
     public void setJoueurCourant(Aventurier joueurCourant) {
         this.joueurCourant = joueurCourant;
     }
@@ -103,7 +103,7 @@ public class Controleur implements Observateur {
         this.pa = pa - 1;
         System.out.println("PA actuel : " + getPA());
     }
-     
+
     // Initialisation
     public void initGrille() {
         grille = new Grille(tuiles, piocheInond);
@@ -111,7 +111,7 @@ public class Controleur implements Observateur {
         System.out.println("");
         grille.afficheNomGrille();
     }
-    
+
     //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
     //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
     public void initPiocheInondation() {
@@ -122,14 +122,14 @@ public class Controleur implements Observateur {
             }
         }
     }
-    
+
     public void initJoueurs(String j1, String j2, String j3, String j4) {
 
         ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
         pionsRandom.add(Pion.ROUGE);
         pionsRandom.add(Pion.VERT);
         pionsRandom.add(Pion.BLEU);
-        pionsRandom.add(Pion.ORANGE); 
+        pionsRandom.add(Pion.ORANGE);
         pionsRandom.add(Pion.VIOLET);
         pionsRandom.add(Pion.JAUNE);
 
@@ -140,7 +140,6 @@ public class Controleur implements Observateur {
         aventuriers = new ArrayList<>();
 
         //ArrayList<Pion> pionsRandom = pion.getListePionsRandom();
-
         // CREATION DES JOUEURS
         if (this.nbJoueurs == 2) {
             joueur1 = new Aventurier(j1, pionsRandom.get(0), this);
@@ -188,8 +187,9 @@ public class Controleur implements Observateur {
 
         System.out.println("Joueurs initalisés");
         setJoueurCourant(joueur1);
+        this.pa = 3;
     }
-    
+
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         this.nbJoueurs = nbJoueurs;
         this.initGrille();
@@ -203,18 +203,17 @@ public class Controleur implements Observateur {
         jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
         jeuPrincipal.setNomJoueur(joueurCourant.getNom());
-        plateau.affichePosPossible(joueurCourant.posAutourPossible());
+        plateau.addObservateur(this);
 
         System.out.println("aled1");
         // System.out.println("c'est a " + joueurCourant.getNom());
         //this.debutTour(joueurCourant);
         System.out.println("aled2");
     }
-    
-     /* public void initJoueurs() {
+
+    /* public void initJoueurs() {
     }*/
-    
-     //creation de la pioche de carte trésor
+    //creation de la pioche de carte trésor
     public void initPiocheTresor() {
         Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT);
         piocheTresor.add(le_Cristal_ardent_1);
@@ -273,7 +272,7 @@ public class Controleur implements Observateur {
         Carte_Tirage_Tresor sac_2 = new Carte_Sac();
         piocheTresor.add(sac_2);
     }
-    
+
     public void initPositionAventurier() {
         ////
     }
@@ -281,8 +280,8 @@ public class Controleur implements Observateur {
     public void setPlateau(VueGrille plateau) {
         this.plateau = plateau;
     }
-    
-     public void debutTour(Aventurier aventurier) {
+
+    public void debutTour(Aventurier aventurier) {
         setPA(3);
         System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
         if (aventurier.getTuile().getEtat() == COULEE) {
@@ -344,7 +343,7 @@ public class Controleur implements Observateur {
             debutTour(joueurCourant);
         }
     }
-    
+
     // Verification
     // True si la parti est finie
     public boolean verifPartieFinie() {
@@ -354,7 +353,7 @@ public class Controleur implements Observateur {
             return false;
         }
     }
-    
+
     //true si la partie est gagné, false si elle est perdue
     public boolean verifPartieGagnee() {
         //if () {
@@ -363,7 +362,7 @@ public class Controleur implements Observateur {
         //return false;
         //}
     }
-    
+
     // Actions
     public void addTresor() {
         ////
@@ -379,7 +378,7 @@ public class Controleur implements Observateur {
                     piocheInond.get(i).getTuile().majEtat(COULEE);
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
-                } else { 
+                } else {
                     System.err.println("on ne peut pas piocher une carte coulee");
                 }
             }
@@ -514,7 +513,7 @@ public class Controleur implements Observateur {
              }*/
     }
 
-   public void monteeEau(int monte) {
+    public void monteeEau(int monte) {
         niveauEau = +monte;
     }
 
@@ -526,17 +525,26 @@ public class Controleur implements Observateur {
 
                 break;
 
-            case CHOISIR_SE_DELPACER:
+            case CHOISIR_SE_DEPLACER:
                 //quand le joueur choisie de ce déplacer, l'ihm lui propose les cases sur lesuqels le déplacement est possible
                 if (getPA() != 0) {
-                    getJoueurCourant().posAutourPossible();
+                    plateau.affichePosPossible(getJoueurCourant().posAutourPossible());
+                    jeuPrincipal.quandSeDeplacer();
+                    //joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                 }
                 break;
 
             case SE_DEPLACER_VERS:
                 //le joueur choisie une case parmi celle proposée précdement
+            System.out.println("test recoit dans deplacer vers (reception) "+msg.type);
                 if (getPA() != 0) {
-                    // getJoueurCourant().setTuile(msg.tuileChoisie);
+                    setPA(pa - 1);
+                    int x = msg.uneCaseX;
+                    int y = msg.uneCaseY;
+                    System.out.println("Je reçois X : " + msg.uneCaseX);
+                    System.out.println("Je reçois Y : " + msg.uneCaseY);
+                    joueurCourant.setTuile(getGrille().getTuileCase(x, y));
+                    jeuPrincipal = new VuePlateauJoueur(this);
                 }
                 break;
 

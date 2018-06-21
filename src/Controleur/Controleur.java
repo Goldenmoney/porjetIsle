@@ -203,6 +203,7 @@ public class Controleur implements Observateur {
         jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
         jeuPrincipal.setNomJoueur(joueurCourant.getNom());
+        plateau.affichePosPossible(joueurCourant.posAutourPossible());
 
         System.out.println("aled1");
         // System.out.println("c'est a " + joueurCourant.getNom());
@@ -275,6 +276,10 @@ public class Controleur implements Observateur {
     
     public void initPositionAventurier() {
         ////
+    }
+
+    public void setPlateau(VueGrille plateau) {
+        this.plateau = plateau;
     }
     
      public void debutTour(Aventurier aventurier) {

@@ -9,6 +9,7 @@ package Vue;
 import Controleur.Controleur;
 import Controleur.Observe;
 import Modele.Aventurier;
+import Util.Parameters;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -34,6 +35,7 @@ public class VuePlateauJoueur extends Observe {
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
         VueGrille plateau = new VueGrille(controleur);
+        controleur.setPlateau(plateau);
         jPanel3.setLayout(new BorderLayout());
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());

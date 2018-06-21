@@ -17,7 +17,7 @@ public class Carte_Tresor extends Carte_Tirage_Tresor {
        super(type);
     }
     
-    //méthode
+    // Methode
     @Override
     public void action() {
         //rien carte les cartes des trésors n'ont pas d'action elle même

@@ -23,7 +23,7 @@ public class Carte_Helico extends Carte_Tirage_Tresor {
     // sur l'ihm lorsqu'il clique sur la carte helico
     @Override
     public void action() {
-        aventurier.posPosibleAll(INONDEE);
+        aventurier.posPossibleAll(INONDEE);
     }
     
 }

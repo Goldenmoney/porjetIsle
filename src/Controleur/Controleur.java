@@ -173,7 +173,6 @@ public class Controleur implements Observateur {
         System.out.println("aled1");
         // System.out.println("c'est a " + joueurCourant.getNom());
         //this.debutTour(joueurCourant);
-        //this.debutTour(joueur1);
         System.out.println("aled2");
     }
 
@@ -326,7 +325,7 @@ public class Controleur implements Observateur {
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
                 } else {
-                    System.err.println("on ne peu pas piocher une carte coulee");
+                    System.err.println("on ne peut pas piocher une carte coulée");
                 }
             }
         } else if (getNiveauEau() <= 9) {
@@ -339,7 +338,7 @@ public class Controleur implements Observateur {
                     supprimeInond.add(piocheInond.get(i));
                     piocheInond.remove(i);
                 } else {
-                    System.err.println("on ne peu pas piocher une carte coulee");
+                    System.err.println("on ne peut pas piocher une carte coulée");
                 }
             }
         }
@@ -491,9 +490,9 @@ public class Controleur implements Observateur {
         System.out.println("Tour terminer");
         if (verifPartieFinie()) {
             if (verifPartieGagnee()) {
-                System.out.println("partie finit et gagné");
+                System.out.println("partie finie et gagnée");
             } else {
-                System.out.println("partie finit et perdu");
+                System.out.println("partie finie et perdue");
             }
         } else {
             piocherCarteInondation();

@@ -11,6 +11,8 @@ import Util.Utils;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Messager /*extends Aventurier {
     
     public Messager(String nom) {

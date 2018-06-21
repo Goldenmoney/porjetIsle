@@ -11,18 +11,15 @@ import Util.Utils.*;
  *
  * @author bassetlu
  */
-public class Carte_Tresor extends Carte_Tirage_Tresor {
-
-    // Association
-    
+public class Carte_Tresor extends Carte_Tirage_Tresor {   
     // constructeur
     public Carte_Tresor(TypeCarteTresor type) {
        super(type);
     }
     
-    //méthodes
-
+    //méthode
     @Override
     public void action() {
+        //rien carte les cartes des trésors n'ont pas d'action elle même
     }
 }

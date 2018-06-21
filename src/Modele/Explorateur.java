@@ -12,6 +12,8 @@ import java.util.HashSet;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Explorateur{
     
     
@@ -20,14 +22,14 @@ public class Explorateur{
         super(nom,Pion.VERT);
         this.spawnPos =NomTuile.La_Porte_de_Cuivre;
         
-    }   */
+    }
     
     public HashSet posAutourPossible(HashSet p, Tuile t) {
         //rajouter les cases en diagonale
         return p;
     }
 
-    /*@Override
+    @Override
     public void seDeplacer() {
         super.seDeplacer();
     }*/

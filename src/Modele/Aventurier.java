@@ -18,13 +18,14 @@ import java.util.Scanner;
  * @author bassetlu
  */
 public class Aventurier {
-
+    //attributs
     private String nom;
     private Pion couleur;
-    private ArrayList<Carte_Tirage_Tresor> inventaire;
     private  int nb_cartes;
-    private Tuile tuile;
+    //associations
     private Controleur controleur;
+    private Tuile tuile;
+    private ArrayList<Carte_Tirage_Tresor> inventaire;
     
     //constructeur  
     public Aventurier(String nom, Pion couleur, Controleur controleur) {
@@ -39,6 +40,69 @@ public class Aventurier {
     }
     
     //methodes
+    //getter
+    public Tuile getTuile() {
+        return this.tuile;
+    }
+
+    public Pion getCouleur() {
+        return couleur;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public Controleur getControleur() {
+        return controleur;
+    }
+    
+    public void updateNbCartes(){
+        this.nb_cartes = inventaire.size();
+        if (nb_cartes >9){
+            System.err.println("nombres de cartes maximun du joueur dépassé(+ de 9)");
+        }
+    }
+    
+    public int getNbCartes(){
+        updateNbCartes();
+        return this.nb_cartes;
+    }
+    
+    public ArrayList<Carte_Tirage_Tresor> getInventaire() {
+        return inventaire;
+    }
+    
+    public boolean getNbCartesTresorEgale4(TypeCarteTresor tresor){
+        int compteur = 0;
+        for (int i = 0; i < getNbCartes(); i++){
+            if (getInventaire().get(i).getType() == tresor){
+                compteur =+ 1;
+            }
+        }
+            return (compteur >= 4);
+    }
+    
+    //setter
+    //sert de setTuile si le joueur n'a pas de tuile de base
+    public void seDeplacer(Tuile tuile) {
+        if (this.tuile != null){
+           this.tuile.supprJoueur(this);
+        }
+            this.tuile=tuile;
+            this.tuile.addJoueur(this);
+    }
+    
+    //remplacer les setTuile par des seDeplacer, c'est devenu la même chose
+    public void setTuile(Tuile tuile) {
+        this.tuile = tuile;
+        this.tuile.addJoueur(this);
+    }
+    
+    public void defausserCarte(Carte_Tirage_Tresor carte){
+        this.inventaire.remove(carte);
+    }
+    
     public ArrayList<Tuile> posAutourPossible() {
         int posX = this.tuile.getPosX();
         int posY = this.tuile.getPosY();
@@ -201,50 +265,5 @@ public class Aventurier {
         return p;
     }
     
-    public void seDeplacer(Tuile tuile) {
-       this.tuile.supprJoueur(this);
-       this.tuile=tuile;
-       this.tuile.addJoueur(this);
-    }
-
-    public Tuile getTuile() {
-        return this.tuile;
-    }
-
-    public Pion getCouleur() {
-        return couleur;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public Controleur getControleur() {
-        return controleur;
-    }
-
-    public ArrayList<Carte_Tirage_Tresor> getInventaire() {
-        return inventaire;
-    }
-    
-    public void updateNbCartes(){
-        this.nb_cartes = inventaire.size();
-        if (nb_cartes >9){
-            System.err.println("nombres de cartes maximun du joueur dépassé(+ de 9)");
-        }
-    }
-    
-    public int getNbCartes(){
-        updateNbCartes();
-            return this.nb_cartes;
-    }
-    
-    public void defausserCarte(Carte_Tirage_Tresor carte){
-        this.inventaire.remove(carte);
-    }
-
-    public void setTuile(Tuile tuile) {
-        //this.tuile.addJoueur(this);
-        this.tuile = tuile;
-    }
+    //true si le joueur possede 4 cartes ou plus du trésor choisie en paramètre
 }

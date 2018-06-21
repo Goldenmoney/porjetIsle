@@ -14,11 +14,12 @@ import static Util.Utils.TypeCarteTresor.MONTEE_DES_EAUX;
  * @author pontalc
  */
 public class Carte_Montee_Des_Eaux extends Carte_Tirage_Tresor {
-    
+    // Constructeur
     public Carte_Montee_Des_Eaux() {
         super(MONTEE_DES_EAUX);
     }
 
+    //methode
     @Override
     public void action() {
         aventurier.getControleur().monteeEau(1);

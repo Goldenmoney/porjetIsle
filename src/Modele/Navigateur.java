@@ -11,6 +11,8 @@ import Util.Utils;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Navigateur /**extends Aventurier {
     
     public Navigateur(String nom) {

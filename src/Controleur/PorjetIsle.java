@@ -5,7 +5,7 @@
  */
 package Controleur;
 
-import Vue.VueDebut;
+import Vue.VueInscription;
 
 /**
  *

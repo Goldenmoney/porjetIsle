@@ -5,7 +5,7 @@
  */
 package Modele;
 
-import Util.Utils;
+import static Util.Utils.EtatTuile.INONDEE;
 import Util.Utils.TypeCarteTresor;
 import static Util.Utils.TypeCarteTresor.HELICOPTERE;
 
@@ -14,14 +14,16 @@ import static Util.Utils.TypeCarteTresor.HELICOPTERE;
  * @author pontalc
  */
 public class Carte_Helico extends Carte_Tirage_Tresor {
-    
+    //constructeur
     public Carte_Helico() {
         super(HELICOPTERE);
     }
 
+    //envoye les positions de déplcament possible pour le joueur
+    // sur l'ihm lorsqu'il clique sur la carte helico
     @Override
     public void action() {
-        
+        aventurier.posPosibleAll(INONDEE);
     }
     
 }

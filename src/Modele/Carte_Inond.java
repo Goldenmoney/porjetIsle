@@ -5,25 +5,21 @@
  */
 package Modele;
 
-import Modele.Tuile;
-import Util.Utils;
-import static Util.Utils.EtatTuile.*;
-
 /**
  *
  * @author bassetlu
  */
 public class Carte_Inond {
     
-    // Associations
+    // Association
     private Tuile tuile;
     
-    // METHODES
-
+    // Constructeur
     public Carte_Inond(Tuile tuile) {
         this.tuile = tuile;
     }
-
+    
+    // Methode
     public Tuile getTuile() {
         return tuile;
     }

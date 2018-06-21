@@ -14,6 +14,8 @@ import java.util.Iterator;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Plongeur /*extends Aventurier {
         private HashSet AVerifier;
         private HashSet Verifier; 

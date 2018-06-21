@@ -20,32 +20,34 @@ import java.util.Scanner;
  * @author bassetlu
  */
 public class Controleur implements Observateur {
-
+    // Attributs
     private int niveauEau;
     private boolean tresorsRecup;
     private int numTour;
     private int actionChoisie;
     private boolean aventurierMort;
     private int pa;
-    private ArrayList<Tuile> tuiles;
-
+    private int nbJoueurs;
+    private Aventurier joueurCourant;
+    
+    // Vues
     private VueInscription vueDebut;
-    private VuePlateauJoueur jeuPrincipal;//
+    private VuePlateauJoueur jeuPrincipal;
     private VueGrille plateau;
 
     // Associations
     private Grille grille;
-    private Aventurier joueur1 = null;
-    private Aventurier joueur2 = null;
-    private Aventurier joueur3 = null;
-    private Aventurier joueur4 = null;
-    private int nbJoueurs;
-    private Aventurier joueurCourant;
+    private Aventurier joueur1;
+    private Aventurier joueur2;
+    private Aventurier joueur3;
+    private Aventurier joueur4;
+    private ArrayList<Aventurier> aventuriers;
+    private ArrayList<Tuile> tuiles;
     private ArrayList<Carte_Tirage_Tresor> piocheTresor;
     private ArrayList<Carte_Tirage_Tresor> defausseTresor;
     private ArrayList<Carte_Inond> piocheInond;
     private ArrayList<Carte_Inond> supprimeInond;
-    private ArrayList<Aventurier> aventuriers;
+    
 
     // constructeur
     public Controleur() {
@@ -59,30 +61,68 @@ public class Controleur implements Observateur {
     }
 
     // methodes de la classe
-    public void addTresor() {
-        ////
-    }
-
-    public ArrayList<Aventurier> getAventuriers() {
-        return aventuriers;
-    }
-
+    //getter
     public int getPA() {
         return pa;
     }
+    
+    public ArrayList<Aventurier> getAventuriers() {
+        return aventuriers;
+    }
+    
+    public Grille getGrille() {
+        return grille;
+    }
+    
+    public int getNiveauEau() {
+        return niveauEau;
+    }
+     
+    public Aventurier getJoueurCourant() {
+        return joueurCourant;
+    }
+    
+    public ArrayList<Carte_Tirage_Tresor> getPiocheTresor() {
+        return piocheTresor;
+    }
+    
+    // Setter 
+    public void setGrille(Grille grille) {
+        this.grille = grille; // this.joueurCourant = joueur1;grille;
+    }
+     
+    public void setJoueurCourant(Aventurier joueurCourant) {
+        this.joueurCourant = joueurCourant;
+    }
 
+    public void setPA(int pa) {
+        this.pa = pa;
+    }
+
+    public void setPAMoins1(int pa) {
+        this.pa = pa - 1;
+        System.out.println("PA actuel : " + getPA());
+    }
+     
+    // Initialisation
     public void initGrille() {
         grille = new Grille(tuiles, piocheInond);
         grille.afficheGrille();
         System.out.println("");
         grille.afficheNomGrille();
-
     }
-
-    public void setGrille(Grille grille) {
-        this.grille = grille; // this.joueurCourant = joueur1;grille;
+    
+    //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
+    //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
+    public void initPiocheInondation() {
+        for (int i = 0; i < piocheInond.size(); i++) {
+            if (piocheInond.get(i).getTuile().getEtat() == COULEE) {
+                supprimeInond.add(piocheInond.get(i));
+                piocheInond.remove(i);
+            }
+        }
     }
-
+    
     public void initJoueurs(String j1, String j2, String j3, String j4) {
 
         ArrayList<Pion> pionsRandom = new ArrayList<Pion>();
@@ -149,9 +189,7 @@ public class Controleur implements Observateur {
         System.out.println("Joueurs initalisés");
         setJoueurCourant(joueur1);
     }
-
-    /* public void initJoueurs() {
-    }*/
+    
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         this.nbJoueurs = nbJoueurs;
         this.initGrille();
@@ -171,39 +209,11 @@ public class Controleur implements Observateur {
         //this.debutTour(joueurCourant);
         System.out.println("aled2");
     }
-
-    public void setJoueurCourant(Aventurier joueurCourant) {
-        this.joueurCourant = joueurCourant;
-    }
-
-    public Grille getGrille() {
-        return grille;
-    }
-
-    public int getNiveauEau() {
-        return niveauEau;
-    }
-
-    public void setPA(int pa) {
-        this.pa = pa;
-    }
-
-    public void setPAMoins1(int pa) {
-        this.pa = pa - 1;
-        System.out.println("PA actuel : " + getPA());
-    }
-
-    //vérifie que les tuiles coulée ne sont pas présente dans la pioche des cartes innondation
-    //peu aussi fonctionner si on boucle sur la pioche et que l'on utilise getTuile()
-    public void initPiocheInondation() {
-        for (int i = 0; i < piocheInond.size(); i++) {
-            if (piocheInond.get(i).getTuile().getEtat() == COULEE) {
-                supprimeInond.add(piocheInond.get(i));
-                piocheInond.remove(i);
-            }
-        }
-    }
-
+    
+     /* public void initJoueurs() {
+    }*/
+    
+     //creation de la pioche de carte trésor
     public void initPiocheTresor() {
         Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT);
         piocheTresor.add(le_Cristal_ardent_1);
@@ -262,189 +272,12 @@ public class Controleur implements Observateur {
         Carte_Tirage_Tresor sac_2 = new Carte_Sac();
         piocheTresor.add(sac_2);
     }
-
+    
     public void initPositionAventurier() {
         ////
     }
-
-    public boolean verifPartieFinie() {
-        if (getNiveauEau() == 10) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    ///true si la partie est gagné, false si elle est perdue
-    public boolean verifPartieGagnee() {
-        //if () {
-        return true;
-        //} else {
-        //return false;
-        //}
-    }
-
-    public void piocherCarteInondation() {
-        if (getNiveauEau() <= 2) {
-            //nb de cartes a piocher = 2
-            for (int i = 0; i <= 1; i++) {
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
-                    piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
-                    piocheInond.get(i).getTuile().majEtat(COULEE);
-                    supprimeInond.add(piocheInond.get(i));
-                    piocheInond.remove(i);
-                } else { 
-                    System.err.println("on ne peut pas piocher une carte coulee");
-                }
-            }
-        } else if (getNiveauEau() <= 5) {
-            //nb de cartes a piocher = 3
-            for (int i = 0; i <= 2; i++) {
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
-                    piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
-                    piocheInond.get(i).getTuile().majEtat(COULEE);
-                    supprimeInond.add(piocheInond.get(i));
-                    piocheInond.remove(i);
-                } else {
-                    System.err.println("on ne peut pas piocher une carte coulee");
-                }
-            }
-        } else if (getNiveauEau() <= 7) {
-            //nb de cartes a piocher = 4
-            for (int i = 0; i <= 3; i++) {
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
-                    piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
-                    piocheInond.get(i).getTuile().majEtat(COULEE);
-                    supprimeInond.add(piocheInond.get(i));
-                    piocheInond.remove(i);
-                } else {
-                    System.err.println("on ne peut pas piocher une carte coulée");
-                }
-            }
-        } else if (getNiveauEau() <= 9) {
-            //nb de cartes a piocher = 5
-            for (int i = 0; i <= 4; i++) {
-                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
-                    piocheInond.get(i).getTuile().majEtat(INONDEE);
-                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
-                    piocheInond.get(i).getTuile().majEtat(COULEE);
-                    supprimeInond.add(piocheInond.get(i));
-                    piocheInond.remove(i);
-                } else {
-                    System.err.println("on ne peut pas piocher une carte coulée");
-                }
-            }
-        }
-    }
-
-    public void monteeEau(int monte) {
-        niveauEau = +monte;
-    }
-
-    public void piocherCarte(Aventurier aventurier) {
-        aventurier.getInventaire().add((Carte_Tirage_Tresor) (getPiocheTresor().get(0)));
-        getPiocheTresor().remove(0);
-    }
-
-    //pour l'instant deffause les premières cartes
-    public void defausserCarteTresor(Aventurier aventurier) {
-        if (aventurier.getNbCartes() > 5) {
-            while (aventurier.getNbCartes() > 5) {
-                defausseTresor.add(aventurier.getInventaire().get(0));
-                aventurier.getInventaire().remove(0);
-            }
-        }
-    }
-
-    /*public void piocherCarteTresor() {
-        ////
-    }*/
-    public Aventurier getJoueurCourant() {
-        return joueurCourant;
-    }
-
-    public ArrayList<Carte_Tirage_Tresor> getPiocheTresor() {
-        return piocheTresor;
-    }
-
-    public void deplacement(Aventurier aventurier) {
-        ArrayList<Tuile> posPosi = new ArrayList<>();
-        posPosi = aventurier.posAutourPossible();
-        for (int i = 0; i < posPosi.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.println(posPosi.get(i).getNomTuile());
-        }
-        if (!posPosi.isEmpty()) {
-            Scanner sc2 = new Scanner(System.in);
-            System.out.print("choisir une des positions proposé : ");
-            String str2 = sc2.nextLine();
-            int int2 = Integer.parseInt(str2);
-            int x = posPosi.get(int2).getPosX();
-            int y = posPosi.get(int2).getPosY();
-            aventurier.seDeplacer(grille.getTuileCase(x, y));
-            setPAMoins1(getPA());
-        } else {
-            System.out.println("pas de déplacement possible");
-        }
-        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
-    }
-
-    public void deplacementGratuit(Aventurier aventurier) {
-        System.out.println("Le joueur est sur une case coulée au début de son tour, il peu donc se déplacer sur une tuile adjacente gratuitement");
-        ArrayList<Tuile> posPosi = new ArrayList<>();
-        posPosi = aventurier.posAutourPossible();
-        for (int i = 0; i < posPosi.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.println(posPosi.get(i).getNomTuile());
-        }
-        if (!posPosi.isEmpty()) {
-            Scanner sc2 = new Scanner(System.in);
-            System.out.print("choisir une des positions proposé : ");
-            String str2 = sc2.nextLine();
-            int int2 = Integer.parseInt(str2);
-            int x = posPosi.get(int2).getPosX();
-            int y = posPosi.get(int2).getPosY();
-            aventurier.seDeplacer(grille.getTuileCase(x, y));
-        } else {
-            System.out.println("pas de déplacement possible");
-        }
-        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
-    }
-
-    public void assechement(Aventurier aventurier) {
-        ArrayList<Tuile> asse = new ArrayList<>();
-        asse = aventurier.AssechementAutourPossible();
-        for (int i = 0; i < asse.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.println(asse.get(i).getNomTuile());
-        }
-        if (!asse.isEmpty()) {
-            Scanner sc4 = new Scanner(System.in);
-            System.out.print("choisir une des positions proposé : ");
-            String str4 = sc4.nextLine();
-            int int4 = Integer.parseInt(str4);
-            asse.get(int4).majEtat(ASSECHEE);
-            System.out.println("tuile " + asse.get(int4).getNomTuile() + " assechée");
-            setPAMoins1(getPA());
-        } else {
-            System.out.println("pas d'assechement possible");
-        }
-        /*ArrayList<Tuile> asseAft = new ArrayList<>();
-            asseAft = aventurier.AssechementAutourPossible(grille);
-             if (!asseAft.isEmpty()){
-                 for (int i = 0; i < asseAft.size();i ++) {
-                System.out.print(i + ". ");
-                System.out.println(asseAft.get(i).getNomTuile());
-                }  
-             } else {
-                 System.out.println("pas d'assechement possible");
-             }*/
-    }
-
-    public void debutTour(Aventurier aventurier) {
+    
+     public void debutTour(Aventurier aventurier) {
         setPA(3);
         System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
         if (aventurier.getTuile().getEtat() == COULEE) {
@@ -506,6 +339,179 @@ public class Controleur implements Observateur {
             debutTour(joueurCourant);
         }
     }
+    
+    // Verification
+    // True si la parti est finie
+    public boolean verifPartieFinie() {
+        if (getNiveauEau() == 10) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    //true si la partie est gagné, false si elle est perdue
+    public boolean verifPartieGagnee() {
+        //if () {
+        return true;
+        //} else {
+        //return false;
+        //}
+    }
+    
+    // Actions
+    public void addTresor() {
+        ////
+    }
+
+    public void piocherCarteInondation() {
+        if (getNiveauEau() <= 2) {
+            //nb de cartes a piocher = 2
+            for (int i = 0; i <= 1; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else { 
+                    System.err.println("on ne peut pas piocher une carte coulee");
+                }
+            }
+        } else if (getNiveauEau() <= 5) {
+            //nb de cartes a piocher = 3
+            for (int i = 0; i <= 2; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peut pas piocher une carte coulee");
+                }
+            }
+        } else if (getNiveauEau() <= 7) {
+            //nb de cartes a piocher = 4
+            for (int i = 0; i <= 3; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peut pas piocher une carte coulée");
+                }
+            }
+        } else if (getNiveauEau() <= 9) {
+            //nb de cartes a piocher = 5
+            for (int i = 0; i <= 4; i++) {
+                if (piocheInond.get(i).getTuile().getEtat() == ASSECHEE) {
+                    piocheInond.get(i).getTuile().majEtat(INONDEE);
+                } else if (piocheInond.get(i).getTuile().getEtat() == INONDEE) {
+                    piocheInond.get(i).getTuile().majEtat(COULEE);
+                    supprimeInond.add(piocheInond.get(i));
+                    piocheInond.remove(i);
+                } else {
+                    System.err.println("on ne peut pas piocher une carte coulée");
+                }
+            }
+        }
+    }
+
+    public void piocherCarte(Aventurier aventurier) {
+        aventurier.getInventaire().add((Carte_Tirage_Tresor) (getPiocheTresor().get(0)));
+        getPiocheTresor().remove(0);
+    }
+
+    //pour l'instant defause les premières cartes
+    public void defausserCarteTresor(Aventurier aventurier) {
+        if (aventurier.getNbCartes() > 5) {
+            while (aventurier.getNbCartes() > 5) {
+                defausseTresor.add(aventurier.getInventaire().get(0));
+                aventurier.getInventaire().remove(0);
+            }
+        }
+    }
+
+    public void deplacement(Aventurier aventurier) {
+        ArrayList<Tuile> posPosi = new ArrayList<>();
+        posPosi = aventurier.posAutourPossible();
+        for (int i = 0; i < posPosi.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(posPosi.get(i).getNomTuile());
+        }
+        if (!posPosi.isEmpty()) {
+            Scanner sc2 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str2 = sc2.nextLine();
+            int int2 = Integer.parseInt(str2);
+            int x = posPosi.get(int2).getPosX();
+            int y = posPosi.get(int2).getPosY();
+            aventurier.setTuile(grille.getTuileCase(x, y));
+            setPAMoins1(getPA());
+        } else {
+            System.out.println("pas de déplacement possible");
+        }
+        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
+    }
+
+    public void deplacementGratuit(Aventurier aventurier) {
+        System.out.println("Le joueur est sur une case coulée au début de son tour, il peu donc se déplacer sur une tuile adjacente gratuitement");
+        ArrayList<Tuile> posPosi = new ArrayList<>();
+        posPosi = aventurier.posAutourPossible();
+        for (int i = 0; i < posPosi.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(posPosi.get(i).getNomTuile());
+        }
+        if (!posPosi.isEmpty()) {
+            Scanner sc2 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str2 = sc2.nextLine();
+            int int2 = Integer.parseInt(str2);
+            int x = posPosi.get(int2).getPosX();
+            int y = posPosi.get(int2).getPosY();
+            aventurier.setTuile(grille.getTuileCase(x, y));
+        } else {
+            System.out.println("pas de déplacement possible");
+        }
+        System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
+    }
+
+    public void assechement(Aventurier aventurier) {
+        ArrayList<Tuile> asse = new ArrayList<>();
+        asse = aventurier.AssechementAutourPossible();
+        for (int i = 0; i < asse.size(); i++) {
+            System.out.print(i + ". ");
+            System.out.println(asse.get(i).getNomTuile());
+        }
+        if (!asse.isEmpty()) {
+            Scanner sc4 = new Scanner(System.in);
+            System.out.print("choisir une des positions proposé : ");
+            String str4 = sc4.nextLine();
+            int int4 = Integer.parseInt(str4);
+            asse.get(int4).majEtat(ASSECHEE);
+            System.out.println("tuile " + asse.get(int4).getNomTuile() + " assechée");
+            setPAMoins1(getPA());
+        } else {
+            System.out.println("pas d'assechement possible");
+        }
+        /*ArrayList<Tuile> asseAft = new ArrayList<>();
+            asseAft = aventurier.AssechementAutourPossible(grille);
+             if (!asseAft.isEmpty()){
+                 for (int i = 0; i < asseAft.size();i ++) {
+                System.out.print(i + ". ");
+                System.out.println(asseAft.get(i).getNomTuile());
+                }  
+             } else {
+                 System.out.println("pas d'assechement possible");
+             }*/
+    }
+
+   public void monteeEau(int monte) {
+        niveauEau = +monte;
+    }
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
@@ -525,7 +531,7 @@ public class Controleur implements Observateur {
             case SE_DEPLACER_VERS:
                 //le joueur choisie une case parmi celle proposée précdement
                 if (getPA() != 0) {
-                    // getJoueurCourant().seDeplacer(msg.tuileChoisie);
+                    // getJoueurCourant().setTuile(msg.tuileChoisie);
                 }
                 break;
 

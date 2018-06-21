@@ -84,19 +84,12 @@ public class Aventurier {
     }
     
     //setter
-    //sert de setTuile si le joueur n'a pas de tuile de base
-    public void seDeplacer(Tuile tuile) {
+    public void setTuile(Tuile tuile) {
         if (this.tuile != null){
            this.tuile.supprJoueur(this);
         }
             this.tuile=tuile;
             this.tuile.addJoueur(this);
-    }
-    
-    //remplacer les setTuile par des seDeplacer, c'est devenu la même chose
-    public void setTuile(Tuile tuile) {
-        this.tuile = tuile;
-        this.tuile.addJoueur(this);
     }
     
     public void defausserCarte(Carte_Tirage_Tresor carte){

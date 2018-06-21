@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import javax.swing.*;
 import Util.Utils.*;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import javax.swing.border.LineBorder;
 
 public class VueGrille extends Observe {
 
@@ -26,7 +30,7 @@ public class VueGrille extends Observe {
     private ArrayList<JButton> buttonsGrille;
 
     public VueGrille(Controleur controleur) {
-        
+
         this.controleur = controleur;
         Grille grille = controleur.getGrille();
 
@@ -34,18 +38,16 @@ public class VueGrille extends Observe {
         panelGrille = new JPanel(new GridLayout(6, 6));
 
         buttonsGrille = new ArrayList<JButton>();
-        
+        int i = 0;
+
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
-                
+
                 buttonsGrille.add(new JButton());
-                
-                for (int i = 0; i < buttonsGrille.size(); i++) {
-                    tableauButton[x][y]=buttonsGrille.get(i);
-                }
-                
+
+                tableauButton[x][y] = buttonsGrille.get(i);
+
                 Tuile tuile = grille.getTuileCase(x, y);
-                
 
                 if (tuile != null) {
 
@@ -53,7 +55,7 @@ public class VueGrille extends Observe {
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
                     paneltuile.add(labelnomTuile, BorderLayout.CENTER);
-                    
+
                     panelGrille.add(tableauButton[x][y]);
                     tableauButton[x][y].add(paneltuile);
 
@@ -119,6 +121,7 @@ public class VueGrille extends Observe {
                     tableauButton[x][y].setVisible(false);
                     panelGrille.add(tableauButton[x][y]);
                 }
+                i++;
             }
 //            button.addActionListener((ActionEvent e) -> {
 //                Message m = new Message();
@@ -145,11 +148,30 @@ public class VueGrille extends Observe {
     public JPanel getPanelBody() {
         return panelBody;
     }
-    
+
     public void affichePosPossible(ArrayList<Tuile> tuilesPossibles) {
+        // Mets les bouttons pas activés
         for (int i = 0; i < this.buttonsGrille.size(); i++) {
             this.buttonsGrille.get(i).setEnabled(false);
         }
+
+        // Cherche les boutons associés aux tuiles possibles
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+
+                for (int i = 0; i < tuilesPossibles.size(); i++) {
+
+                    if (tuilesPossibles.get(i).getPosX() == x
+                            && tuilesPossibles.get(i).getPosY() == y) {
+
+                        tableauButton[x][y].setBorder(new LineBorder(Color.red, 5));
+                        tableauButton[x][y].setEnabled(true);
+                    }
+                }
+
+            }
+        }
+
     }
 
     public class CerclePion extends JPanel {

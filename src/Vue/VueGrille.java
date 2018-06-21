@@ -19,25 +19,26 @@ import java.awt.Graphics;
 
 public class VueGrille extends Observe {
 
-    private ArrayList<JButton> buttons;
     private static Controleur controleur;
     private JPanel panelGrille;
     private JPanel panelBody;
+    private JButton button[][] = new JButton[6][6];
+    private ArrayList<JButton> buttonsGrille;
 
     public VueGrille(Controleur controleur) {
-        
-        buttons = new ArrayList<>();
+
         this.controleur = controleur;
         Grille grille = controleur.getGrille();
 
-        
         panelBody = new JPanel(new BorderLayout());
         panelGrille = new JPanel(new GridLayout(6, 6));
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
                 Tuile tuile = grille.getTuileCase(x, y);
+                button = new JButton[x][y];
 
-                JButton button = new JButton();
+                panelGrille.add(button[x][y]);
+                buttonsGrille.add(button[x][y]);
 
                 if (tuile != null) {
 
@@ -45,72 +46,60 @@ public class VueGrille extends Observe {
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
                     paneltuile.add(labelnomTuile, BorderLayout.CENTER);
+                    button[x][y].add(paneltuile);
 
                     if (tuile.getEtat() == Utils.EtatTuile.COULEE) {
                         Color c = new Color(96, 96, 96);
                         paneltuile.setBackground(c);
-                        button.setBackground(c);
-                        button.add(paneltuile);
-                        panelGrille.add(button);
+                        button[x][y].setBackground(c);
+
                     } else if (tuile.getEtat() == Utils.EtatTuile.INONDEE) {
 
                         Color c = new Color(102, 175, 255);
-                        button.setBackground(c);
+                        button[x][y].setBackground(c);
                         paneltuile.setBackground(c);
-                        button.add(paneltuile);
-                        panelGrille.add(button);
 
                     } else if (tuile.getEtat() == Utils.EtatTuile.ASSECHEE) {
 
                         Color c = new Color(255, 255, 153);
                         paneltuile.setBackground(c);
-                        button.setBackground(c);
-                        button.add(paneltuile);
-                        panelGrille.add(button);
+                        button[x][y].setBackground(c);
 
-                    } else {
-                        panelGrille.add(button);
                     }
 
                     if (tuile.getTypeTresor() == TypeTresor.LA_PIERRE_SACREE) {
 
                         Label labelTresor = new Label(TypeTresor.LA_PIERRE_SACREE.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
-                        button.add(paneltuile);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LA_STATUE_DU_ZEPHYR) {
 
                         Label labelTresor = new Label(TypeTresor.LA_STATUE_DU_ZEPHYR.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
-                        button.add(paneltuile);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CALICE_DE_LONDE) {
 
                         Label labelTresor = new Label(TypeTresor.LE_CALICE_DE_LONDE.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
-                        button.add(paneltuile);
 
                     } else if (tuile.getTypeTresor() == Utils.TypeTresor.LE_CRISTAL_ARDENT) {
 
                         Label labelTresor = new Label(TypeTresor.LE_CRISTAL_ARDENT.toString());
                         paneltuile.add(labelTresor, BorderLayout.SOUTH);
-                        button.add(paneltuile);
 
-                    } else {
-                        panelGrille.add(button);
                     }
 
-                    for (Aventurier joueur: controleur.getAventuriers()) {
+                    for (Aventurier joueur : controleur.getAventuriers()) {
                         if (joueur.getTuile() == tuile) {
 
                             JPanel pion = new JPanel(new GridLayout(2, 1));
                             paneltuile.add(pion, BorderLayout.EAST);
-                            
+
                             Graphics g = panelGrille.getGraphics();
                             CerclePion cerclePion = new CerclePion();
                             cerclePion.setColor(joueur.getCouleur().getCouleur());
                             pion.add(cerclePion);
-                            
+
                             JLabel filler = new JLabel("             ");
                             pion.add(filler);
                             filler.setVisible(false);
@@ -119,8 +108,7 @@ public class VueGrille extends Observe {
                     }
 
                 } else {
-                    button.setVisible(false);
-                    panelGrille.add(button);
+                    button[x][y].setVisible(false);
                 }
 
             }
@@ -148,6 +136,17 @@ public class VueGrille extends Observe {
 
     public JPanel getPanelBody() {
         return panelBody;
+    }
+
+    public void affichePosPossible(ArrayList<Tuile> tuilesPossibles) {
+        for (int i = 0; i < buttonsGrille.size(); i++) {
+            buttonsGrille.get(i).setEnabled(true);
+        }
+        for (int x = 0; x < 6; x++) {
+            for (int y = 0; y < 6; y++) {
+
+            }
+        }
     }
 
     public class CerclePion extends JPanel {

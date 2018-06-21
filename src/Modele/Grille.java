@@ -246,6 +246,10 @@ public class Grille {
     public int getNbTuiles() {
         return nbTuiles;
     }
+    
+    public ArrayList<Tuile> getTuilesPos() {
+        return tuilesDansGrille;
+    }
 
     public Tuile getTuileCase(int x, int y) {
         return this.tableauTuiles[x][y];

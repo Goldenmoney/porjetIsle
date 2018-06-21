@@ -19,7 +19,7 @@ public class Carte_Montee_Des_Eaux extends Carte_Tirage_Tresor {
         super(MONTEE_DES_EAUX);
     }
 
-    //methode
+    // Methode
     @Override
     public void action() {
         aventurier.getControleur().monteeEau(1);

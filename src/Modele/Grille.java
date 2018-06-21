@@ -12,23 +12,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * tuiles;
+ *
  *
  * @author bassetlu
  */
 public class Grille {
     // Associations
-//je fais la grille (jules)
-
     private final int nbTuiles = 36;
     private ArrayList<Tuile> tuilesDansGrille;
     private Tuile tableauTuiles[][] = new Tuile[6][6];
 
-    // construction
+    // constructeur
     public Grille(ArrayList<Tuile> tuiles, ArrayList<Carte_Inond> piocheInond) {
         tuiles = new ArrayList<>();
 
-        //remplissage arraylist tuiles
+        //remplissage arraylist tuiles et creation des tuiles ainsi que leur carte innondation associe
         Tuile Le_Pont_des_Abimes = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Pont_des_Abimes);
         Carte_Inond Carte_Inond_Le_Pont_des_Abimes = new Carte_Inond(Le_Pont_des_Abimes);
         Le_Pont_des_Abimes.setCarte_Inond(Carte_Inond_Le_Pont_des_Abimes);

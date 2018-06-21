@@ -30,7 +30,7 @@ public class Aventurier {
         this.nom = nom;
         this.couleur = couleur;
         this.inventaire = new ArrayList<>();
-        this.nb_cartes = inventaire.size();
+        updateNbCartes();
         this.controleur = controleur;
         //pioche 2 cartes pour chaque joueurs
         this.controleur.piocherCarte(this);
@@ -55,13 +55,6 @@ public class Aventurier {
         return controleur;
     }
     
-    public void updateNbCartes(){
-        this.nb_cartes = inventaire.size();
-        if (nb_cartes >9){
-            System.err.println("nombres de cartes maximun du joueur dépassé(+ de 9)");
-        }
-    }
-    
     public int getNbCartes(){
         updateNbCartes();
         return this.nb_cartes;
@@ -71,7 +64,7 @@ public class Aventurier {
         return inventaire;
     }
     
-    // True si le joueur possede 4 cartes ou plus du trésor choisie en paramètre
+    // True si le joueur possede 4 cartes ou plus du type de trésor choisie en paramètre
     public boolean getNbCartesTresorEgale4(TypeCarteTresor tresor){
         int compteur = 0;
         for (int i = 0; i < getNbCartes(); i++){
@@ -95,6 +88,13 @@ public class Aventurier {
         this.inventaire.remove(carte);
     }
     
+    public void updateNbCartes(){
+        this.nb_cartes = inventaire.size();
+        if (nb_cartes >9){
+            System.err.println("nombres de cartes maximun du joueur dépassé(+ de 9)");
+        }
+    }
+    
     // Return un arrayList des positions sur laquel l'aventurier peu se déplacer autour de lui
     public ArrayList<Tuile> posAutourPossible() {
         int posX = this.tuile.getPosX(); // récupération de la position actuel du joueur en x
@@ -105,11 +105,11 @@ public class Aventurier {
                 || (posX == 2 && posY == 0)
                 || (posX == 3 && posY == 0)
                 || (posX == 4 && posY == 1)
-                || (posX == 5 && posY == 2)) {//tuile inexistante au nord de la position actuel
+                || (posX == 5 && posY == 2)) {// tuile inexistante au nord de la position actuel
             System.out.println("Tuile au nord inexistante (déplacement)");//trace
         }else {
             if (!controleur.getGrille().getTuileCase(posX, posY - 1).verifCoulee()){ // la tuile ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX, posY - 1)); //ajout de la position possible
+                    p.add(controleur.getGrille().getTuileCase(posX, posY - 1)); // ajout de la position possible
             }
         }
         
@@ -118,11 +118,11 @@ public class Aventurier {
                 || (posX == 2 && posY == 5)
                 || (posX == 3 && posY == 5)
                 || (posX == 4 && posY == 4)
-                || (posX == 5 && posY == 3)) {//tuile inexistante au sud de la position actuel
-            System.out.println("Tuile au sud inexistante (déplacement)");//trace
+                || (posX == 5 && posY == 3)) {// tuile inexistante au sud de la position actuel
+            System.out.println("Tuile au sud inexistante (déplacement)");// trace
         }else {
             if (!controleur.getGrille().getTuileCase(posX, posY + 1).verifCoulee()){ // la tuile ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX, posY + 1)); //ajout de la tuile possible
+                    p.add(controleur.getGrille().getTuileCase(posX, posY + 1)); // ajout de la tuile possible
             }
         }
          
@@ -132,10 +132,10 @@ public class Aventurier {
                 || (posX == 0 && posY == 3)
                 || (posX == 1 && posY == 4)
                 || (posX == 2 && posY == 5)) {//tuile inexistante a l'ouest de la position actuel
-            System.out.println("Tuile à l'ouest inexistante (déplacement)");//trace
+            System.out.println("Tuile à l'ouest inexistante (déplacement)");// trace
         }else {
             if (!controleur.getGrille().getTuileCase(posX -1, posY).verifCoulee()){ // la tuile ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX -1, posY)); //ajout de la tuile possible
+                    p.add(controleur.getGrille().getTuileCase(posX -1, posY)); // ajout de la tuile possible
             }
         }
          
@@ -165,10 +165,10 @@ public class Aventurier {
                 || (posX == 3 && posY == 0)
                 || (posX == 4 && posY == 1)
                 || (posX == 5 && posY == 2)) {// tuile inexistante au nord de la position actuel
-            System.out.println("Tuile au nord inexistante (assèchement)"); //trace
+            System.out.println("Tuile au nord inexistante (assèchement)"); // trace
         }else {
             if (controleur.getGrille().getTuileCase(posX, posY - 1).verifInondee()){ // la tuille ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX, posY - 1)); //ajout de la position possible
+                    p.add(controleur.getGrille().getTuileCase(posX, posY - 1)); // ajout de la position possible
             }
         }
         
@@ -178,10 +178,10 @@ public class Aventurier {
                 || (posX == 3 && posY == 5)
                 || (posX == 4 && posY == 4)
                 || (posX == 5 && posY == 3)) {// tuile inexistante au sud de la position actuel
-            System.out.println("Tuile au sud inexistante (assèchement)"); //trace
+            System.out.println("Tuile au sud inexistante (assèchement)"); // trace
         }else {
             if (controleur.getGrille().getTuileCase(posX, posY + 1).verifInondee()){ // la tuille ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX, posY + 1)); //ajout de la position possible
+                    p.add(controleur.getGrille().getTuileCase(posX, posY + 1)); // ajout de la position possible
             }
         }
          
@@ -191,10 +191,10 @@ public class Aventurier {
                 || (posX == 0 && posY == 3)
                 || (posX == 1 && posY == 4)
                 || (posX == 2 && posY == 5)) {// tuile inexistante a l'ouest de la position actuel
-            System.out.println("Tuile à l'ouest inexistante (assèchement)"); //trace
+            System.out.println("Tuile à l'ouest inexistante (assèchement)"); // trace
         }else {
             if (controleur.getGrille().getTuileCase(posX -1, posY).verifInondee()){ // la tuille ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX -1, posY)); //ajout de la position possible
+                    p.add(controleur.getGrille().getTuileCase(posX -1, posY)); // ajout de la position possible
             }
         }
          
@@ -204,10 +204,10 @@ public class Aventurier {
                 || (posX == 5 && posY == 3)
                 || (posX == 4 && posY == 4)
                 || (posX == 3 && posY == 5)) {// tuile inexistante a l'est de la position actuel
-            System.out.println("Tuile à l'est inexistante (assèchement)"); //trace
+            System.out.println("Tuile à l'est inexistante (assèchement)"); // trace
         }else {
             if (controleur.getGrille().getTuileCase(posX + 1, posY).verifInondee()){ // la tuille ne doit pas être coulée
-                    p.add(controleur.getGrille().getTuileCase(posX + 1, posY)); //ajout de la position possible
+                    p.add(controleur.getGrille().getTuileCase(posX + 1, posY)); // ajout de la position possible
             }
           }
         return p;
@@ -220,11 +220,11 @@ public class Aventurier {
         for(int i = 0; i<=5; i++){
             if(i == 0 || i == 5){
                 for(int j = 2; i <= 3; i++){
-                    if (etat == INONDEE){ //pour le déplacement
+                    if (etat == INONDEE){ // pour le déplacement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }
-                    } else if (etat == COULEE){ //pour l'assèchement
+                    } else if (etat == COULEE){ // pour l'assèchement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }  
@@ -232,11 +232,11 @@ public class Aventurier {
                 }
             }else if (i == 1 || i == 4){
                 for(int j = 1; i <= 4; i++){
-                    if (etat == INONDEE){ //pour le déplacement
+                    if (etat == INONDEE){ // pour le déplacement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }
-                    } else if (etat == COULEE){ //pour l'assèchement
+                    } else if (etat == COULEE){ // pour l'assèchement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }  
@@ -244,11 +244,11 @@ public class Aventurier {
                 }
             }else {
                 for(int j = 0; i <= 5; i++){
-                    if (etat == INONDEE){ //pour le déplacement
+                    if (etat == INONDEE){ // pour le déplacement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() != etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }
-                    } else if (etat == COULEE){ //pour l'assèchement
+                    } else if (etat == COULEE){ // pour l'assèchement
                         if (controleur.getGrille().getTuileCase(i, j).getEtat() == etat){
                             p.add(controleur.getGrille().getTuileCase(i, j));
                         }  

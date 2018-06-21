@@ -53,15 +53,13 @@ public class VuePlateauJoueur extends Observe {
 
     public void updatePlateauJoueur(){
       
-        fenetre.remove(jPanel3);
         plateau = new VueGrille(controleur);
         jPanel3.removeAll();
         jPanel3.setVisible(false);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
-        
         jPanel3.setVisible(true);
         controleur.setPlateau(plateau);
-        fenetre.setVisible(true);
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.

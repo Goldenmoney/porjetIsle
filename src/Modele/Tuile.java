@@ -36,7 +36,8 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.joueurs = new ArrayList<>();
     }
     
-    public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Carte_Tresor tresor) {
+//2 constructeurs inutiles
+   /* public Tuile(EtatTuile etat, NomTuile nomTuile, Carte_Inond carte, ArrayList<Aventurier> joueurs, Carte_Tresor tresor) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.carte = carte;
@@ -48,7 +49,7 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
         this.etat = etat;
         this.nomTuile = nomTuile;
         this.carte = carte;
-    }
+    }*/
 
     public void setTypeTresor(TypeTresor typeTresor) {
         this.typeTresor = typeTresor;

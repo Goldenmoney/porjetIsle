@@ -34,12 +34,12 @@ public class VueGrille extends Observe {
         panelGrille = new JPanel(new GridLayout(6, 6));
 
         buttonsGrille = new ArrayList<JButton>();
-        for (int i = 0; i < 36; i++) {
-            buttonsGrille.add(new JButton());
-        }
         
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
+                
+                buttonsGrille.add(new JButton());
+                
                 for (int i = 0; i < buttonsGrille.size(); i++) {
                     tableauButton[x][y]=buttonsGrille.get(i);
                 }
@@ -53,6 +53,7 @@ public class VueGrille extends Observe {
                     JPanel paneltuile = new JPanel(new BorderLayout());
                     JLabel labelnomTuile = new JLabel(str);
                     paneltuile.add(labelnomTuile, BorderLayout.CENTER);
+                    
                     panelGrille.add(tableauButton[x][y]);
                     tableauButton[x][y].add(paneltuile);
 
@@ -116,6 +117,7 @@ public class VueGrille extends Observe {
                     }
                 } else {
                     tableauButton[x][y].setVisible(false);
+                    panelGrille.add(tableauButton[x][y]);
                 }
             }
 //            button.addActionListener((ActionEvent e) -> {

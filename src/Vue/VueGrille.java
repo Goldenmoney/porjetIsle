@@ -145,15 +145,10 @@ public class VueGrille extends Observe {
     public JPanel getPanelBody() {
         return panelBody;
     }
-
+    
     public void affichePosPossible(ArrayList<Tuile> tuilesPossibles) {
-        for (int i = 0; i < buttonsGrille.size(); i++) {
-            buttonsGrille.get(i).setEnabled(true);
-        }
-        for (int x = 0; x < 6; x++) {
-            for (int y = 0; y < 6; y++) {
-
-            }
+        for (int i = 0; i < this.buttonsGrille.size(); i++) {
+            this.buttonsGrille.get(i).setEnabled(false);
         }
     }
 

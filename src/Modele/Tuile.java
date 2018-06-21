@@ -83,8 +83,9 @@ public Tuile(EtatTuile etat, NomTuile nomTuile) {
        this.joueurs.remove(aventurier);
     }
 
+    //ou setEtat()
     public void majEtat(EtatTuile etatTuile) {
-        etat=etatTuile;
+        this.etat=etatTuile;
     }
 
     public EtatTuile getEtat() {

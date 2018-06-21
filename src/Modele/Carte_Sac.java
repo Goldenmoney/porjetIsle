@@ -14,11 +14,10 @@ import static Util.Utils.TypeCarteTresor.SAC_DE_SABLE;
  * @author pontalc
  */
 public class Carte_Sac extends Carte_Tirage_Tresor {
-    
+    // Constructeur
     public Carte_Sac() {
         super(SAC_DE_SABLE);
     }
-
     
     //envoye les positions de déplcament possible pour le joueur
     // sur l'ihm lorsqu'il clique sur la carte sac de sable

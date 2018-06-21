@@ -14,7 +14,7 @@ import static Util.Utils.TypeCarteTresor.HELICOPTERE;
  * @author pontalc
  */
 public class Carte_Helico extends Carte_Tirage_Tresor {
-    
+    //constructeur
     public Carte_Helico() {
         super(HELICOPTERE);
     }

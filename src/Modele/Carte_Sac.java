@@ -23,6 +23,6 @@ public class Carte_Sac extends Carte_Tirage_Tresor {
     // sur l'ihm lorsqu'il clique sur la carte sac de sable
     @Override
     public void action() {
-        aventurier.posPosibleAll(COULEE);
+        aventurier.posPossibleAll(COULEE);
     }
 }

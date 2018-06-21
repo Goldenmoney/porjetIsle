@@ -11,6 +11,8 @@ import Util.Utils;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Pilote /*extends Aventurier {
     private boolean aUtiliseCapacite; 
     

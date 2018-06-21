@@ -12,6 +12,7 @@ import java.util.HashSet;
  *
  * @author bassetlu
  */
+//non fonctionnel
 public class Explorateur{
     
     

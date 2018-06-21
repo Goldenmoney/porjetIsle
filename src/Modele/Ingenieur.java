@@ -11,6 +11,8 @@ import Util.Utils;
  *
  * @author bassetlu
  */
+
+//non fonctionnel
 public class Ingenieur /*extends Aventurier {
 
     public Ingenieur(String nom) {

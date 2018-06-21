@@ -201,10 +201,24 @@ public class Aventurier {
         return p;
     }
     
+    //true si le joueur possede 4 cartes ou plus du trésor choisie en paramètre
+    public boolean getNbCartesTresorEgale4(TypeCarteTresor tresor){
+        int compteur = 0;
+        for (int i = 0; i < getNbCartes(); i++){
+            if (getInventaire().get(i).getType() == tresor){
+                compteur =+ 1;
+            }
+        }
+            return (compteur >= 4);
+    }
+    
+    //sert de setTuile si le joueur n'a pas de tuile de base
     public void seDeplacer(Tuile tuile) {
-       this.tuile.supprJoueur(this);
-       this.tuile=tuile;
-       this.tuile.addJoueur(this);
+        if (this.tuile != null){
+           this.tuile.supprJoueur(this);
+        }
+            this.tuile=tuile;
+            this.tuile.addJoueur(this);
     }
 
     public Tuile getTuile() {
@@ -236,15 +250,16 @@ public class Aventurier {
     
     public int getNbCartes(){
         updateNbCartes();
-            return this.nb_cartes;
+        return this.nb_cartes;
     }
     
     public void defausserCarte(Carte_Tirage_Tresor carte){
         this.inventaire.remove(carte);
     }
 
+    //remplacer les setTuile par des seDeplacer, c'est devenu la même chose
     public void setTuile(Tuile tuile) {
-        //this.tuile.addJoueur(this);
         this.tuile = tuile;
+        this.tuile.addJoueur(this);
     }
 }

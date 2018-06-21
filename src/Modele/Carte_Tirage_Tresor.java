@@ -29,5 +29,6 @@ public abstract class Carte_Tirage_Tresor {
         return type;
     }
     
+    //methode a appeler l'orsque l'on clique sur une carte
     public abstract void action();
 }

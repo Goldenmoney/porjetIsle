@@ -51,16 +51,25 @@ public class VuePlateauJoueur extends Observe {
         return plateau;
     }
 
-    public void updatePlateauJoueur(){
-      
-        plateau = new VueGrille(controleur);
+    public void updatePlateauJoueur() {
+
         jPanel3.removeAll();
         jPanel3.setVisible(false);
-        jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
-        jPanel3.setVisible(true);
-        controleur.setPlateau(plateau);
         
+        plateau = new VueGrille(controleur);
+        jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
+        
+        jPanel3.setVisible(true);
+       
+        controleur.setPlateau(plateau);
+        controleur.setJeuPrincipal(this);
+        jButton1.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
+        jButton4.setEnabled(true);
+        jButton5.setText("TERMINER TOUR");
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -366,7 +375,7 @@ public class VuePlateauJoueur extends Observe {
     public void setNomJoueur(String nomJoueur) {
         jLabel1.setText(nomJoueur);
     }
-    
+
     public void quandSeDeplacer() {
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);

@@ -565,7 +565,7 @@ public class Controleur implements Observateur {
                         jeuPrincipal.setBtn5Etat();
 
                         jeuPrincipal.updatePlateauJoueur();
-                        jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
+                       // jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
 
                     } else if (casJeu == 1) { // cas ASSECHER
                         getGrille().getTuileCase(x, y).majEtat(ASSECHEE);

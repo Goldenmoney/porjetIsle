@@ -83,7 +83,8 @@ public class VuePlateauJoueur extends Observe {
         updateCartesJoueurs(controleur.getJoueurCourant());
         cartesSpeciales();
     }
-public Controleur getControleur() {
+
+    public Controleur getControleur() {
         return controleur;
     }
 
@@ -421,26 +422,35 @@ public Controleur getControleur() {
         jButtons.add(jButton18);
         jButtons.add(jButton19);
 
-        int actionSelect = 0;
         for (int i = 0; i < inventaire.size(); i++) {
             if (inventaire.get(i).getType().equals(HELICOPTERE)) {
-                actionSelect = 0;
+
+                Carte_Tirage_Tresor carteTresor = inventaire.get(i);
+                jButtons.get(i).addActionListener((ActionEvent e) -> {
+                    int nb = 0;
+                    nb = nb + 1;
+                    System.out.println( " helico action msg" + nb);
+                    Message m = new Message();
+                    m.type = TypesMessages.CARTE_ACTION;
+                    m.casJeu = 0;
+                    m.carte = carteTresor;
+                    notifierObservateur(m);
+                });
             } else if (inventaire.get(i).getType().equals(SAC_DE_SABLE)) {
 
-                actionSelect = 1;
+                  
+                  Carte_Tirage_Tresor carteTresor = inventaire.get(i);
+                jButtons.get(i).addActionListener((ActionEvent e) -> {
+                    int nb = 0;
+                    nb = nb + 1;
+                    System.out.println("ass action msg" + nb);
+                    Message m = new Message();
+                    m.type = TypesMessages.CARTE_ACTION;
+                    m.casJeu = 1;
+                    m.carte = carteTresor;
+                    notifierObservateur(m);
+                });
             }
-            int action = actionSelect;
-            Carte_Tirage_Tresor carteTresor = inventaire.get(i);
-
-            System.out.println(actionSelect);
-            // AJOUT ACTION
-            jButtons.get(i).addActionListener((ActionEvent e) -> {
-                Message m = new Message();
-                m.type = TypesMessages.CARTE_ACTION;
-                m.casJeu = action;
-                m.carte = carteTresor;
-                notifierObservateur(m);
-            });
         }
     }
 

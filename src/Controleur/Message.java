@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Controleur;
+
+import Modele.Carte_Tirage_Tresor;
+
 /**
  *
  * @author bassetlu
@@ -16,5 +19,6 @@ public class Message {
     public int difficulte;
     public int nbJoueurs;
     public int casJeu; // 0: Deplacement 1: Assechement
+    public Carte_Tirage_Tresor carte;
 }
 

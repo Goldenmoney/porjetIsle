@@ -63,6 +63,7 @@ public class VuePlateauJoueur extends Observe {
         jButton18.setText("      ");
         jButton19.setText("      ");
         updateCartesJoueurs(controleur.getJoueurCourant());
+        cartesSpeciales();
     }
 
     public void updatePlateauJoueur() {
@@ -80,6 +81,7 @@ public class VuePlateauJoueur extends Observe {
         jButton5.setText("TERMINER TOUR");
         plateau.addObservateur(controleur);
         updateCartesJoueurs(controleur.getJoueurCourant());
+        cartesSpeciales();
     }
 
     /**
@@ -387,27 +389,55 @@ public class VuePlateauJoueur extends Observe {
         jButtons.add(jButton17);
         jButtons.add(jButton18);
         jButtons.add(jButton19);
-        
-        for (int i = 0; i < jButtons.size(); i++) {
-            jButtons.get(i).addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    
-                }
-            });
-        }
 
+        // METTRE LES BOUTONS HELICO/SACS DANS SON INVENTAIRE ENABLED
         for (int i = 0; i < inventaire.size(); i++) {
             jButtons.get(i).setVisible(true);
             jButtons.get(i).setText(inventaire.get(i).getType().toString());
-            if(inventaire.get(i).getType() != HELICOPTERE && inventaire.get(i).getType() != SAC_DE_SABLE) {
+            if (inventaire.get(i).getType() != HELICOPTERE && inventaire.get(i).getType() != SAC_DE_SABLE) {
                 jButtons.get(i).setEnabled(false);
             } else {
                 jButtons.get(i).setEnabled(true);
             }
         }
+        // METTRES LES BOUTONS VISIBLES QUAND IL Y A UNE CARTE
         for (int i = inventaire.size(); i < jButtons.size(); i++) {
             jButtons.get(i).setVisible(false);
+        }
+    }
+
+    public void cartesSpeciales() {
+        // AJOUTER ACTION LISTENER AUX BOUTONS
+        ArrayList<Carte_Tirage_Tresor> inventaire = controleur.getJoueurCourant().getInventaire();
+        ArrayList<JButton> jButtons = new ArrayList<>();
+        jButtons.add(jButton13);
+        jButtons.add(jButton14);
+        jButtons.add(jButton15);
+        jButtons.add(jButton16);
+        jButtons.add(jButton17);
+        jButtons.add(jButton18);
+        jButtons.add(jButton19);
+
+        int actionSelect = 0;
+        for (int i = 0; i < inventaire.size(); i++) {
+            if (inventaire.get(i).getType().equals(HELICOPTERE)) {
+                actionSelect = 0;
+            } else if (inventaire.get(i).getType().equals(SAC_DE_SABLE)) {
+
+                actionSelect = 1;
+            }
+            int action = actionSelect;
+            Carte_Tirage_Tresor carteTresor = inventaire.get(i);
+
+            System.out.println(actionSelect);
+            // AJOUT ACTION
+            jButtons.get(i).addActionListener((ActionEvent e) -> {
+                Message m = new Message();
+                m.type = TypesMessages.CARTE_ACTION;
+                m.casJeu = action;
+                m.carte = carteTresor;
+                notifierObservateur(m);
+            });
         }
     }
 

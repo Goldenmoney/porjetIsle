@@ -21,9 +21,7 @@ public class Observe {
     }
     
     public void notifierObservateur(Message m) {
-        System.out.println("DEHORS");
         if (observateur != null) {
-            System.out.println("DEDANS");
             observateur.traiterMessage(m);
         }
     }

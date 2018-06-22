@@ -179,7 +179,6 @@ public class VueGrille extends Observe {
 
                         tableauButton[x][y].setBorder(new LineBorder(Color.red, 5));
                         tableauButton[x][y].setEnabled(true);
-
                     }
                 }
 

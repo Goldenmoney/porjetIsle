@@ -275,7 +275,7 @@ public class Controleur implements Observateur {
         piocheTresor.add(sac_1);
         Carte_Tirage_Tresor sac_2 = new Carte_Sac();
         piocheTresor.add(sac_2);
-        
+
         if (Parameters.ALEAS) {
             Collections.shuffle(piocheTresor);
         }
@@ -324,7 +324,6 @@ public class Controleur implements Observateur {
     }
 
     public void terminerTour() {
-        setPA(0);
         System.out.println("Tour terminé");
         if (verifPartieFinie()) {
             if (verifPartieGagnee()) {
@@ -333,20 +332,20 @@ public class Controleur implements Observateur {
                 System.out.println("partie finie et perdue");
             }
         } else {
-        piocherCarteInondation();
-        if (joueurCourant == joueur1) {
-            joueurCourant = joueur2;
-        } else if (joueurCourant == joueur2 && joueur3 != null) {
-            joueurCourant = joueur3;
-        } else if (joueurCourant == joueur3 && joueur4 != null) {
-            joueurCourant = joueur4;
-        } else {
-            joueurCourant = joueur1;
-        }
-        System.out.println("Joueur Suivant");
-        System.out.println("c'est a " + joueurCourant.getNom());
-        this.setPA(3);
-        //debutTour(joueurCourant);
+            piocherCarteInondation();
+            if (joueurCourant == joueur1) {
+                joueurCourant = joueur2;
+            } else if (joueurCourant == joueur2 && joueur3 != null) {
+                joueurCourant = joueur3;
+            } else if (joueurCourant == joueur3 && joueur4 != null) {
+                joueurCourant = joueur4;
+            } else {
+                joueurCourant = joueur1;
+            }
+            System.out.println("Joueur Suivant");
+            System.out.println("c'est a " + joueurCourant.getNom());
+            this.setPA(3);
+            //debutTour(joueurCourant);
         }
     }
 
@@ -436,13 +435,9 @@ public class Controleur implements Observateur {
     }
 
     //pour l'instant defause les premières cartes
-    public void defausserCarteTresor(Aventurier aventurier) {
-        if (aventurier.getNbCartes() > 5) {
-            while (aventurier.getNbCartes() > 5) {
-                defausseTresor.add(aventurier.getInventaire().get(0));
-                aventurier.getInventaire().remove(0);
-            }
-        }
+    public void defausserCarteTresor(Aventurier aventurier, Carte_Tirage_Tresor carte) {
+        aventurier.getInventaire().remove(carte);
+        carte.setAventurier(null);
     }
 
     public void deplacement(Aventurier aventurier) {
@@ -550,7 +545,6 @@ public class Controleur implements Observateur {
                 if (getPA() != 0) {
                     plateau.affichePosPossible(getJoueurCourant().AssechementAutourPossible());
                     jeuPrincipal.setBtn5Etat();
-
                     jeuPrincipal.quandSeDeplacer();
                     casJeu = msg.casJeu;
                 }
@@ -571,14 +565,13 @@ public class Controleur implements Observateur {
                         jeuPrincipal.setBtn5Etat();
 
                         jeuPrincipal.updatePlateauJoueur();
-                        //plateau.addObservateur(this);
+                        jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
 
                     } else if (casJeu == 1) { // cas ASSECHER
                         getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
                         jeuPrincipal.setBtn5Etat();
 
                         jeuPrincipal.updatePlateauJoueur();
-                        //plateau.addObservateur(this);
                     }
                     if (getPA() == 0) {
                         jeuPrincipal.tourTerminé();
@@ -599,15 +592,28 @@ public class Controleur implements Observateur {
                 System.out.println("test recoit terminé tour ) " + msg.type);
                 this.terminerTour();
                 jeuPrincipal.updatePlateauJoueur();
-                //plateau.addObservateur(this);
+                jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
                 break;
 
             case ANNULER_ACTION:
                 System.out.println("J'ai reçu annuler !");
                 jeuPrincipal.setBtn5Etat();
                 jeuPrincipal.updatePlateauJoueur();
-                //plateau.addObservateur(this);
-                // CONTINUE METHODE MEME SI ANNULER OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+                break;
+
+            case CARTE_ACTION:
+                if (getPA() != 0) {
+                    casJeu = msg.casJeu;
+                    jeuPrincipal.setBtn5Etat();
+                    jeuPrincipal.quandSeDeplacer();
+                    if (msg.casJeu == 0) { // Cas HELICOPTERE
+                        plateau.affichePosPossible(joueurCourant.posPossibleAll(COULEE));
+                        defausserCarteTresor(joueurCourant, msg.carte);
+                    } else if (msg.casJeu == 1) { // Cas SAC DE SABLE
+                        plateau.affichePosPossible(joueurCourant.posPossibleAll(INONDEE));
+                        defausserCarteTresor(joueurCourant, msg.carte);
+                    }
+                }
                 break;
         }
     }

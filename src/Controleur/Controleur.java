@@ -565,10 +565,4 @@ public class Controleur implements Observateur {
                 break;
         }
     }
-
-    public void setJeuPrincipal(VuePlateauJoueur jeuPrincipal) {
-        this.jeuPrincipal = jeuPrincipal;
-    }
-    
-
 }

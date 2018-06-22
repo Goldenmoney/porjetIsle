@@ -62,7 +62,6 @@ public class VuePlateauJoueur extends Observe {
         jPanel3.setVisible(true);
        
         controleur.setPlateau(plateau);
-        controleur.setJeuPrincipal(this);
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);

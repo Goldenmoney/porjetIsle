@@ -15,5 +15,6 @@ public class Message {
     public int uneCaseY;
     public int difficulte;
     public int nbJoueurs;
+    public int casJeu; // 0: Deplacement 1: Assechement
 }
 

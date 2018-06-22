@@ -11,11 +11,12 @@ package Controleur;
  */
 public enum TypesMessages {
     JOUER,
-    PASSER,
     CHOISIR_SE_DEPLACER,
     SE_DEPLACER_VERS,
-    ASSECHER,
+    CHOISIR_ASSECHER,
     ECHANGER,
-    RECUP_TRESOR
+    RECUP_TRESOR,
+    ANNULER_ACTION,
+    TERMINER_TOUR
     
 } //// A TERMINER

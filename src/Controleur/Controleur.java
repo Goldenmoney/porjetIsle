@@ -34,6 +34,7 @@ public class Controleur implements Observateur {
     private VueInscription vueDebut;
     private VuePlateauJoueur jeuPrincipal;
     private VueGrille plateau;
+    private int casJeu;
 
     // Associations
     private Grille grille;
@@ -103,8 +104,8 @@ public class Controleur implements Observateur {
         this.pa = pa - 1;
         System.out.println("PA actuel : " + getPA());
     }
-    
-     public void setPlateau(VueGrille plateau) {
+
+    public void setPlateau(VueGrille plateau) {
         this.plateau = plateau;
     }
 
@@ -320,28 +321,30 @@ public class Controleur implements Observateur {
     }
 
     public void terminerTour() {
-        System.out.println("Tour terminer");
-        if (verifPartieFinie()) {
-            if (verifPartieGagnee()) {
-                System.out.println("partie finie et gagnée");
-            } else {
-                System.out.println("partie finie et perdue");
-            }
+        setPA(0);
+        System.out.println("Tour terminé");
+//        if (verifPartieFinie()) {
+//            if (verifPartieGagnee()) {
+//                System.out.println("partie finie et gagnée");
+//            } else {
+//                System.out.println("partie finie et perdue");
+//            }
+//        } else {
+        // piocherCarteInondation();
+        if (joueurCourant == joueur1) {
+            joueurCourant = joueur2;
+        } else if (joueurCourant == joueur2 && joueur3 != null) {
+            joueurCourant = joueur3;
+        } else if (joueurCourant == joueur3 && joueur4 != null) {
+            joueurCourant = joueur4;
         } else {
-            piocherCarteInondation();
-            if (joueurCourant == joueur1) {
-                joueurCourant = joueur2;
-            } else if (joueurCourant == joueur2 && joueur3 != null) {
-                joueurCourant = joueur3;
-            } else if (joueurCourant == joueur3 && joueur4 != null) {
-                joueurCourant = joueur4;
-            } else {
-                joueurCourant = joueur1;
-            }
-            System.out.println("Joueur Suivant");
-            System.out.println("c'est a " + joueurCourant.getNom());
-            debutTour(joueurCourant);
+            joueurCourant = joueur1;
         }
+        System.out.println("Joueur Suivant");
+        System.out.println("c'est a " + joueurCourant.getNom());
+        this.setPA(3);
+        //debutTour(joueurCourant);
+//        }
     }
 
     // Verification
@@ -519,54 +522,68 @@ public class Controleur implements Observateur {
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
-        
+
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
-
                 break;
 
             case CHOISIR_SE_DEPLACER:
                 //quand le joueur choisie de ce déplacer, l'ihm lui propose les cases sur lesuqels le déplacement est possible
                 if (getPA() != 0) {
+                    casJeu = msg.casJeu;
                     plateau.affichePosPossible(getJoueurCourant().posAutourPossible());
+                    jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
-                    //joueurCourant.setTuile(getGrille().getTuileCase(x, y));
-                }else{
-                    jeuPrincipal.quandSeDeplacer();
+
+                } else {
+                    System.out.println("PLUS DE PA");
                 }
                 break;
 
             case SE_DEPLACER_VERS:
                 //le joueur choisie une case parmi celle proposée précdement
-            System.out.println("test recoit dans deplacer vers (reception) "+msg.type);
+                System.out.println("test recoit dans deplacer vers (reception) " + msg.type);
                 if (getPA() != 0) {
                     setPA(pa - 1);
                     int x = msg.uneCaseX;
                     int y = msg.uneCaseY;
                     System.out.println("Je reçois X : " + msg.uneCaseX);
                     System.out.println("Je reçois Y : " + msg.uneCaseY);
-                    joueurCourant.setTuile(getGrille().getTuileCase(x, y));
-                    jeuPrincipal.updatePlateauJoueur();
-                    plateau.addObservateur(this);
-                        if(getPA()==0){
-                            jeuPrincipal.tourTerminé();
-                        }
+                    if (casJeu == 0) {
+                        joueurCourant.setTuile(getGrille().getTuileCase(x, y));
+                        jeuPrincipal.setBtn5Etat();
+
+                        jeuPrincipal.updatePlateauJoueur();
+                        plateau.addObservateur(this);
+                    } else if (casJeu == 1) {
+                        getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
+                        jeuPrincipal.setBtn5Etat();
+
+                        jeuPrincipal.updatePlateauJoueur();
+                        plateau.addObservateur(this);
+                    }
+                    if (getPA() == 0) {
+                        jeuPrincipal.tourTerminé();
+                    }
                 }
                 break;
 
-            case ASSECHER:
+            case CHOISIR_ASSECHER:
                 ////
-                 System.out.println("test recoit dans assecher vers (reception) "+msg.type);
+                System.out.println("test recoit dans assecher vers (reception) " + msg.type);
                 if (getPA() != 0) {
                     plateau.affichePosPossible(getJoueurCourant().AssechementAutourPossible());
-                    
-                    
-                    jeuPrincipal.updatePlateauJoueur();
-                    plateau.addObservateur(this);
-                    if(getPA()==0){
-                            jeuPrincipal.tourTerminé();
-                        }
+                    jeuPrincipal.setBtn5Etat();
+
+                    jeuPrincipal.quandSeDeplacer();
+                    casJeu = msg.casJeu;
+
+                    if (getPA() == 0) {
+                        jeuPrincipal.setBtn5Etat();
+
+                        jeuPrincipal.tourTerminé();
+                    }
                 }
                 break;
 
@@ -576,6 +593,21 @@ public class Controleur implements Observateur {
 
             case RECUP_TRESOR:
                 ////
+                break;
+
+            case TERMINER_TOUR:
+
+                System.out.println("test recoit terminé tour ) " + msg.type);
+                this.terminerTour();
+                jeuPrincipal.updatePlateauJoueur();
+                plateau.addObservateur(this);
+                break;
+
+            case ANNULER_ACTION:
+                System.out.println("J'ai reçu annuler !");
+                jeuPrincipal.setBtn5Etat();
+                jeuPrincipal.updatePlateauJoueur();
+                // CONTINUE METHODE MEME SI ANNULER OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                 break;
         }
     }

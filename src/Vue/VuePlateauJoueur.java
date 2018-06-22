@@ -29,6 +29,7 @@ public class VuePlateauJoueur extends Observe {
     private Controleur controleur;
     private JFrame fenetre;
     private VueGrille plateau;
+    private int btn5Etat = 0; //0: terminer tour 1: annuler
 
     /**
      * Creates new form IHM1
@@ -47,9 +48,8 @@ public class VuePlateauJoueur extends Observe {
         fenetre.setVisible(true);
     }
 
-
     public void updatePlateauJoueur() {
-
+        jLabel1.setText(controleur.getJoueurCourant().getNom());
         jPanel3.removeAll();
         jPanel3.setVisible(false);
 
@@ -157,13 +157,13 @@ public class VuePlateauJoueur extends Observe {
         });
 
         jButton2.setText("Assécher une tuile");
-         jButton2.addActionListener(new ActionListener() {
+        jButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jButton2ActionPerformed(e);
             }
         });
-        
+
         jButton3.setText("Echanger");
 
         jButton4.setText("Prendre trésor");
@@ -365,23 +365,42 @@ public class VuePlateauJoueur extends Observe {
     }// </editor-fold>                        
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        if (btn5Etat == 0) {
+            Message m = new Message();
+            m.type = TypesMessages.TERMINER_TOUR;
+            notifierObservateur(m);
+        } else if (btn5Etat == 1) {
+            Message m = new Message();
+            m.type = TypesMessages.ANNULER_ACTION;
+            notifierObservateur(m);
+        }
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Message m = new Message();
         m.type = TypesMessages.CHOISIR_SE_DEPLACER;
+        m.casJeu = 0;
         notifierObservateur(m);
     }
-       private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         Message m = new Message();
-        m.type = TypesMessages.ASSECHER;
+        m.type = TypesMessages.CHOISIR_ASSECHER;
+        m.casJeu = 1;
         notifierObservateur(m);
     }
 
     // Methodes
     public void setNomJoueur(String nomJoueur) {
         jLabel1.setText(nomJoueur);
+    }
+    
+    public void setBtn5Etat() {
+        if(btn5Etat == 0) {
+            btn5Etat = 1;
+        } else {
+            btn5Etat = 0;
+        }
     }
 
     public void quandSeDeplacer() {
@@ -391,8 +410,8 @@ public class VuePlateauJoueur extends Observe {
         jButton4.setEnabled(false);
         jButton5.setText("ANNULER");
     }
-    
-       public void tourTerminé() {
+
+    public void tourTerminé() {
         jButton1.setEnabled(false);
         jButton2.setEnabled(false);
         jButton3.setEnabled(false);

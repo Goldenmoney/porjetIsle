@@ -47,7 +47,7 @@ public class VuePlateauJoueur extends Observe {
         this.controleur = controleur;
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
-        plateau = new VueGrille(controleur);
+        plateau = new VueGrille(this);
         controleur.setPlateau(plateau);
         jPanel3.setLayout(new BorderLayout());
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
@@ -69,7 +69,7 @@ public class VuePlateauJoueur extends Observe {
     public void updatePlateauJoueur() {
         jLabel1.setText(controleur.getJoueurCourant().getNom());
         jPanel3.removeAll();
-        plateau = new VueGrille(controleur);
+        plateau = new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         String str = Integer.toString(controleur.getPA());
         jLabel3.setText(str);
@@ -82,6 +82,9 @@ public class VuePlateauJoueur extends Observe {
         plateau.addObservateur(controleur);
         updateCartesJoueurs(controleur.getJoueurCourant());
         cartesSpeciales();
+    }
+public Controleur getControleur() {
+        return controleur;
     }
 
     /**

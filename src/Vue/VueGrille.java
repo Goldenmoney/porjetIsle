@@ -21,18 +21,18 @@ import javax.swing.border.LineBorder;
 
 public class VueGrille extends Observe {
 
-    private Controleur controleur;
     private JPanel panelGrille;
     private JPanel panelBody;
     private JButton[][] tableauButton = new JButton[6][6];
     private ArrayList<JButton> buttonsGrille;
     private JPanel panelTuile;
     private Grille grille;
+    private VuePlateauJoueur vueJoueur;
 
-    public VueGrille(Controleur controleur) {
+   public VueGrille(VuePlateauJoueur vueJoueur) {
 
-        this.controleur = controleur;
-        grille = controleur.getGrille();
+        this.vueJoueur=vueJoueur;
+        grille = vueJoueur.getControleur().getGrille();
 
         panelBody = new JPanel(new BorderLayout());
         panelGrille = new JPanel(new GridLayout(6, 6));
@@ -41,6 +41,7 @@ public class VueGrille extends Observe {
         this.afficherGrille();
 
     }
+
 
     public void afficherGrille() {
         int i = 0;
@@ -144,7 +145,7 @@ public class VueGrille extends Observe {
 
     public void affichePion(Tuile tuile) {
         JPanel pion = new JPanel(new GridLayout(2, 1));
-        for (Aventurier joueur : controleur.getAventuriers()) {
+        for (Aventurier joueur : vueJoueur.getControleur().getAventuriers()) {
             if (joueur.getTuile() == tuile) {
 
                 panelTuile.add(pion, BorderLayout.EAST);

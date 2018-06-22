@@ -13,10 +13,12 @@ import Controleur.TypesMessages;
 import Modele.Aventurier;
 import Util.Parameters;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.border.LineBorder;
 //JOUEURS + CHOIX(DEPLACER, ASSECHER, CS)
 //NIVEAU EAU
 
@@ -30,6 +32,7 @@ public class VuePlateauJoueur extends Observe {
     private JFrame fenetre;
     private VueGrille plateau;
     private int btn5Etat = 0; //0: terminer tour 1: annuler
+    private int etatAnnuler;
 
     /**
      * Creates new form IHM1
@@ -51,12 +54,9 @@ public class VuePlateauJoueur extends Observe {
     public void updatePlateauJoueur() {
         jLabel1.setText(controleur.getJoueurCourant().getNom());
         jPanel3.removeAll();
-        jPanel3.setVisible(false);
-
         plateau = new VueGrille(controleur);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         String str = Integer.toString(controleur.getPA());
-        jPanel3.setVisible(true);
         jLabel3.setText(str);
         controleur.setPlateau(plateau);
         jButton1.setEnabled(true);
@@ -64,6 +64,7 @@ public class VuePlateauJoueur extends Observe {
         jButton3.setEnabled(true);
         jButton4.setEnabled(true);
         jButton5.setText("TERMINER TOUR");
+        plateau.addObservateur(controleur);
     }
 
     /**

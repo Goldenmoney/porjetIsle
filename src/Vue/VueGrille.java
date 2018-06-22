@@ -115,7 +115,7 @@ public class VueGrille extends Observe {
 
                 tableauButton[x][y].addActionListener((ActionEvent e) -> {
                     Message m = new Message();
-                    m.type = TypesMessages.SE_DEPLACER_VERS;
+                    m.type = TypesMessages.UTILISER_ACTION;
                     m.uneCaseX = caseX;
                     m.uneCaseY = caseY;
                     notifierObservateur(m);

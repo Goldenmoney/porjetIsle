@@ -210,10 +210,8 @@ public class Controleur implements Observateur {
         jeuPrincipal.setNomJoueur(joueurCourant.getNom());
         plateau.addObservateur(this);
 
-        System.out.println("aled1");
         // System.out.println("c'est a " + joueurCourant.getNom());
         //this.debutTour(joueurCourant);
-        System.out.println("aled2");
     }
 
     /* public void initJoueurs() {
@@ -541,34 +539,6 @@ public class Controleur implements Observateur {
                 }
                 break;
 
-            case SE_DEPLACER_VERS:
-                //le joueur choisie une case parmi celle proposée précdement
-                System.out.println("test recoit dans deplacer vers (reception) " + msg.type);
-                if (getPA() != 0) {
-                    setPA(pa - 1);
-                    int x = msg.uneCaseX;
-                    int y = msg.uneCaseY;
-                    System.out.println("Je reçois X : " + msg.uneCaseX);
-                    System.out.println("Je reçois Y : " + msg.uneCaseY);
-                    if (casJeu == 0) {
-                        joueurCourant.setTuile(getGrille().getTuileCase(x, y));
-                        jeuPrincipal.setBtn5Etat();
-
-                        jeuPrincipal.updatePlateauJoueur();
-                        plateau.addObservateur(this);
-                    } else if (casJeu == 1) {
-                        getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
-                        jeuPrincipal.setBtn5Etat();
-
-                        jeuPrincipal.updatePlateauJoueur();
-                        plateau.addObservateur(this);
-                    }
-                    if (getPA() == 0) {
-                        jeuPrincipal.tourTerminé();
-                    }
-                }
-                break;
-
             case CHOISIR_ASSECHER:
                 ////
                 System.out.println("test recoit dans assecher vers (reception) " + msg.type);
@@ -578,10 +548,34 @@ public class Controleur implements Observateur {
 
                     jeuPrincipal.quandSeDeplacer();
                     casJeu = msg.casJeu;
+                }
+                break;
 
-                    if (getPA() == 0) {
+            case UTILISER_ACTION:
+                //le joueur choisie une case parmi celle proposée précdement
+                System.out.println("test recoit dans deplacer vers (reception) " + msg.type);
+                if (getPA() != 0) { // cas DEPLACER
+                    setPA(pa - 1);
+                    int x = msg.uneCaseX;
+                    int y = msg.uneCaseY;
+                    System.out.println("Je reçois X : " + msg.uneCaseX);
+                    System.out.println("Je reçois Y : " + msg.uneCaseY);
+
+                    if (casJeu == 0) {
+                        joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                         jeuPrincipal.setBtn5Etat();
 
+                        jeuPrincipal.updatePlateauJoueur();
+                        //plateau.addObservateur(this);
+
+                    } else if (casJeu == 1) { // cas ASSECHER
+                        getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
+                        jeuPrincipal.setBtn5Etat();
+
+                        jeuPrincipal.updatePlateauJoueur();
+                        //plateau.addObservateur(this);
+                    }
+                    if (getPA() == 0) {
                         jeuPrincipal.tourTerminé();
                     }
                 }
@@ -600,13 +594,14 @@ public class Controleur implements Observateur {
                 System.out.println("test recoit terminé tour ) " + msg.type);
                 this.terminerTour();
                 jeuPrincipal.updatePlateauJoueur();
-                plateau.addObservateur(this);
+                //plateau.addObservateur(this);
                 break;
 
             case ANNULER_ACTION:
                 System.out.println("J'ai reçu annuler !");
                 jeuPrincipal.setBtn5Etat();
                 jeuPrincipal.updatePlateauJoueur();
+                //plateau.addObservateur(this);
                 // CONTINUE METHODE MEME SI ANNULER OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
                 break;
         }

@@ -413,6 +413,7 @@ public class VuePlateauJoueur extends Observe {
     public void cartesSpeciales() {
         // AJOUTER ACTION LISTENER AUX BOUTONS
         ArrayList<Carte_Tirage_Tresor> inventaire = controleur.getJoueurCourant().getInventaire();
+        System.out.println(inventaire.size()+"taille");
         ArrayList<JButton> jButtons = new ArrayList<>();
         jButtons.add(jButton13);
         jButtons.add(jButton14);
@@ -423,23 +424,22 @@ public class VuePlateauJoueur extends Observe {
         jButtons.add(jButton19);
 
         for (int i = 0; i < inventaire.size(); i++) {
-            if (inventaire.get(i).getType().equals(HELICOPTERE)) {
+            if (inventaire.get(i).getType()==HELICOPTERE) {
 
                 Carte_Tirage_Tresor carteTresor = inventaire.get(i);
                 jButtons.get(i).addActionListener((ActionEvent e) -> {
                     int nb = 0;
                     nb = nb + 1;
-                    System.out.println( " helico action msg" + nb);
+                    System.out.println(" helico action msg" + nb);
                     Message m = new Message();
                     m.type = TypesMessages.CARTE_ACTION;
                     m.casJeu = 0;
                     m.carte = carteTresor;
                     notifierObservateur(m);
                 });
-            } else if (inventaire.get(i).getType().equals(SAC_DE_SABLE)) {
+            } else if (inventaire.get(i).getType()==SAC_DE_SABLE) {
 
-                  
-                  Carte_Tirage_Tresor carteTresor = inventaire.get(i);
+                Carte_Tirage_Tresor carteTresor = inventaire.get(i);
                 jButtons.get(i).addActionListener((ActionEvent e) -> {
                     int nb = 0;
                     nb = nb + 1;

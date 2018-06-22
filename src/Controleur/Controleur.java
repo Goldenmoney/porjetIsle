@@ -552,7 +552,7 @@ public class Controleur implements Observateur {
 
             case UTILISER_ACTION:
                 //le joueur choisie une case parmi celle proposée précdement
-                System.out.println("test recoit dans deplacer vers (reception) " + msg.type);
+                System.out.println("test recoit action vers (reception) " + msg.type);
                 if (getPA() != 0) { // cas DEPLACER
                     setPA(pa - 1);
                     int x = msg.uneCaseX;
@@ -561,6 +561,7 @@ public class Controleur implements Observateur {
                     System.out.println("Je reçois Y : " + msg.uneCaseY);
 
                     if (casJeu == 0) {
+                        System.out.println("deplacer");
                         joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                         jeuPrincipal.setBtn5Etat();
 
@@ -568,6 +569,7 @@ public class Controleur implements Observateur {
                        // jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
 
                     } else if (casJeu == 1) { // cas ASSECHER
+                        System.out.println("assecher");
                         getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
                         jeuPrincipal.setBtn5Etat();
 

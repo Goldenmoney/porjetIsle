@@ -28,7 +28,6 @@ public class Controleur implements Observateur {
     private int actionChoisie;
     private boolean aventurierMort;
     private int pa;
-    private int nbJoueurs;
     private Aventurier joueurCourant;
 
     // Vues
@@ -42,6 +41,7 @@ public class Controleur implements Observateur {
     private Aventurier joueur2;
     private Aventurier joueur3;
     private Aventurier joueur4;
+    private int nbJoueurs;
     private ArrayList<Aventurier> aventuriers;
     private ArrayList<Tuile> tuiles;
     private ArrayList<Carte_Tirage_Tresor> piocheTresor;
@@ -102,6 +102,10 @@ public class Controleur implements Observateur {
     public void setPAMoins1(int pa) {
         this.pa = pa - 1;
         System.out.println("PA actuel : " + getPA());
+    }
+    
+     public void setPlateau(VueGrille plateau) {
+        this.plateau = plateau;
     }
 
     // Initialisation
@@ -275,10 +279,6 @@ public class Controleur implements Observateur {
 
     public void initPositionAventurier() {
         ////
-    }
-
-    public void setPlateau(VueGrille plateau) {
-        this.plateau = plateau;
     }
 
     public void debutTour(Aventurier aventurier) {

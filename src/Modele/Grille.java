@@ -33,7 +33,7 @@ public class Grille {
         tuiles.add(Le_Pont_des_Abimes);
         piocheInond.add(Carte_Inond_Le_Pont_des_Abimes);
 
-        Tuile La_Porte_de_Bronze = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.La_Porte_de_Bronze);
+        Tuile La_Porte_de_Bronze = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.La_Porte_de_Bronze);
         Carte_Inond Carte_Inond_La_Porte_de_Bronze = new Carte_Inond(La_Porte_de_Bronze);
         La_Porte_de_Bronze.setCarte_Inond(Carte_Inond_La_Porte_de_Bronze);
         tuiles.add(La_Porte_de_Bronze);
@@ -77,7 +77,7 @@ public class Grille {
         tuiles.add(La_Porte_dArgent);
         piocheInond.add(Carte_Inond_La_Porte_dArgent);
 
-        Tuile Les_Dunes_de_lIllusion = new Tuile(Utils.EtatTuile.COULEE, Utils.NomTuile.Les_Dunes_de_lIllusion);
+        Tuile Les_Dunes_de_lIllusion = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Les_Dunes_de_lIllusion);
         Carte_Inond Carte_Inond_Les_Dunes_de_lIllusion = new Carte_Inond(Les_Dunes_de_lIllusion);
         Les_Dunes_de_lIllusion.setCarte_Inond(Carte_Inond_Les_Dunes_de_lIllusion);
         tuiles.add(Les_Dunes_de_lIllusion);
@@ -108,31 +108,31 @@ public class Grille {
         tuiles.add(La_Foret_Pourpre);
         piocheInond.add(Carte_Inond_La_Foret_Pourpre);
 
-        Tuile Le_Lagon_Perdu = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.Le_Lagon_Perdu);
+        Tuile Le_Lagon_Perdu = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Lagon_Perdu);
         Carte_Inond Carte_Inond_Le_Lagon_Perdu = new Carte_Inond(Le_Lagon_Perdu);
         Le_Lagon_Perdu.setCarte_Inond(Carte_Inond_Le_Lagon_Perdu);
         tuiles.add(Le_Lagon_Perdu);
         piocheInond.add(Carte_Inond_Le_Lagon_Perdu);
 
-        Tuile Le_Marais_Brumeux = new Tuile(Utils.EtatTuile.COULEE, Utils.NomTuile.Le_Marais_Brumeux);
+        Tuile Le_Marais_Brumeux = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Marais_Brumeux);
         Carte_Inond Carte_Inond_Le_Marais_Brumeux = new Carte_Inond(Le_Marais_Brumeux);
         Le_Marais_Brumeux.setCarte_Inond(Carte_Inond_Le_Marais_Brumeux);
         tuiles.add(Le_Marais_Brumeux);
         piocheInond.add(Carte_Inond_Le_Marais_Brumeux);
 
-        Tuile Observatoire = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.Observatoire);
+        Tuile Observatoire = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Observatoire);
         Carte_Inond Carte_Inond_Observatoire = new Carte_Inond(Observatoire);
         Observatoire.setCarte_Inond(Carte_Inond_Observatoire);
         tuiles.add(Observatoire);
         piocheInond.add(Carte_Inond_Observatoire);
 
-        Tuile Le_Rocher_Fantome = new Tuile(Utils.EtatTuile.COULEE, Utils.NomTuile.Le_Rocher_Fantome);
+        Tuile Le_Rocher_Fantome = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Rocher_Fantome);
         Carte_Inond Carte_Inond_Le_Rocher_Fantome = new Carte_Inond(Le_Rocher_Fantome);
         Le_Rocher_Fantome.setCarte_Inond(Carte_Inond_Le_Rocher_Fantome);
         tuiles.add(Le_Rocher_Fantome);
         piocheInond.add(Carte_Inond_Le_Rocher_Fantome);
 
-        Tuile La_Caverne_du_Brasier = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.La_Caverne_du_Brasier);
+        Tuile La_Caverne_du_Brasier = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.La_Caverne_du_Brasier);
         Carte_Inond Carte_Inond_La_Caverne_du_Brasier = new Carte_Inond(La_Caverne_du_Brasier);
         La_Caverne_du_Brasier.setTypeTresor(Utils.TypeTresor.LE_CRISTAL_ARDENT);
         La_Caverne_du_Brasier.setCarte_Inond(Carte_Inond_La_Caverne_du_Brasier);
@@ -146,7 +146,7 @@ public class Grille {
         tuiles.add(Le_Temple_du_Soleil);
         piocheInond.add(Carte_Inond_Le_Temple_du_Soleil);
 
-        Tuile Le_Temple_de_La_Lune = new Tuile(Utils.EtatTuile.COULEE, Utils.NomTuile.Le_Temple_de_La_Lune);
+        Tuile Le_Temple_de_La_Lune = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Temple_de_La_Lune);
         Carte_Inond Carte_Inond_Le_Temple_de_La_Lune = new Carte_Inond(Le_Temple_de_La_Lune);
         Le_Temple_de_La_Lune.setCarte_Inond(Carte_Inond_Le_Temple_de_La_Lune);
         Le_Temple_de_La_Lune.setTypeTresor(Utils.TypeTresor.LA_PIERRE_SACREE);
@@ -172,7 +172,7 @@ public class Grille {
         tuiles.add(La_Tour_du_Guet);
         piocheInond.add(Carte_Inond_La_Tour_du_Guet);
 
-        Tuile Le_Jardin_des_Murmures = new Tuile(Utils.EtatTuile.INONDEE, Utils.NomTuile.Le_Jardin_des_Murmures);
+        Tuile Le_Jardin_des_Murmures = new Tuile(Utils.EtatTuile.ASSECHEE, Utils.NomTuile.Le_Jardin_des_Murmures);
         Carte_Inond Carte_Inond_Le_Jardin_des_Murmures = new Carte_Inond(Le_Jardin_des_Murmures);
         Le_Jardin_des_Murmures.setTypeTresor(Utils.TypeTresor.LA_STATUE_DU_ZEPHYR);
         Le_Jardin_des_Murmures.setCarte_Inond(Carte_Inond_Le_Jardin_des_Murmures);

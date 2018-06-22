@@ -204,6 +204,7 @@ public class Controleur implements Observateur {
 
         this.initJoueurs(j1, j2, j3, j4);
         this.niveauEau = difficulte;
+        piocherCarteInondation();
 
         jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
@@ -274,6 +275,10 @@ public class Controleur implements Observateur {
         piocheTresor.add(sac_1);
         Carte_Tirage_Tresor sac_2 = new Carte_Sac();
         piocheTresor.add(sac_2);
+        
+        if (Parameters.ALEAS) {
+            Collections.shuffle(piocheTresor);
+        }
     }
 
     public void initPositionAventurier() {
@@ -321,14 +326,14 @@ public class Controleur implements Observateur {
     public void terminerTour() {
         setPA(0);
         System.out.println("Tour terminé");
-//        if (verifPartieFinie()) {
-//            if (verifPartieGagnee()) {
-//                System.out.println("partie finie et gagnée");
-//            } else {
-//                System.out.println("partie finie et perdue");
-//            }
-//        } else {
-        // piocherCarteInondation();
+        if (verifPartieFinie()) {
+            if (verifPartieGagnee()) {
+                System.out.println("partie finie et gagnée");
+            } else {
+                System.out.println("partie finie et perdue");
+            }
+        } else {
+        piocherCarteInondation();
         if (joueurCourant == joueur1) {
             joueurCourant = joueur2;
         } else if (joueurCourant == joueur2 && joueur3 != null) {
@@ -342,7 +347,7 @@ public class Controleur implements Observateur {
         System.out.println("c'est a " + joueurCourant.getNom());
         this.setPA(3);
         //debutTour(joueurCourant);
-//        }
+        }
     }
 
     // Verification

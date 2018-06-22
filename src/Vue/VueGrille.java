@@ -44,7 +44,6 @@ public class VueGrille extends Observe {
 
     public void afficherGrille() {
         int i = 0;
-        panelBody.repaint();
         for (int x = 0; x < 6; x++) {
             for (int y = 0; y < 6; y++) {
 

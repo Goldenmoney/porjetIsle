@@ -519,6 +519,7 @@ public class Controleur implements Observateur {
 
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
+        
         switch (msg.type) {
             case JOUER:
                 initPartie(msg.nbJoueurs, msg.joueur1, msg.joueur2, msg.joueur3, msg.joueur4, msg.difficulte);
@@ -531,6 +532,8 @@ public class Controleur implements Observateur {
                     plateau.affichePosPossible(getJoueurCourant().posAutourPossible());
                     jeuPrincipal.quandSeDeplacer();
                     //joueurCourant.setTuile(getGrille().getTuileCase(x, y));
+                }else{
+                    jeuPrincipal.quandSeDeplacer();
                 }
                 break;
 
@@ -545,7 +548,10 @@ public class Controleur implements Observateur {
                     System.out.println("Je reçois Y : " + msg.uneCaseY);
                     joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                     jeuPrincipal.updatePlateauJoueur();
-                    
+                    plateau.addObservateur(this);
+                        if(getPA()==0){
+                            jeuPrincipal.tourTerminé();
+                        }
                 }
                 break;
 

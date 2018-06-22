@@ -47,20 +47,17 @@ public class VuePlateauJoueur extends Observe {
         fenetre.setVisible(true);
     }
 
-    public VueGrille getPlateau() {
-        return plateau;
-    }
 
     public void updatePlateauJoueur() {
 
         jPanel3.removeAll();
         jPanel3.setVisible(false);
-        
+
         plateau = new VueGrille(controleur);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
-        
+        String str = Integer.toString(controleur.getPA());
         jPanel3.setVisible(true);
-       
+        jLabel3.setText(str);
         controleur.setPlateau(plateau);
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
@@ -167,8 +164,9 @@ public class VuePlateauJoueur extends Observe {
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel2.setText("Points d'action : ");
-
-        jLabel3.setText("nbPA");
+        int nbPA = controleur.getPA();
+        String str = Integer.toString(nbPA);
+        jLabel3.setText(str);
 
         jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jButton5.setText("TERMINER TOUR");
@@ -381,6 +379,14 @@ public class VuePlateauJoueur extends Observe {
         jButton3.setEnabled(false);
         jButton4.setEnabled(false);
         jButton5.setText("ANNULER");
+    }
+    
+       public void tourTerminé() {
+        jButton1.setEnabled(false);
+        jButton2.setEnabled(false);
+        jButton3.setEnabled(false);
+        jButton4.setEnabled(false);
+        jButton5.setText("Terminer Tour");
     }
 
     /**

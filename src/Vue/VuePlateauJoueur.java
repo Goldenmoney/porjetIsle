@@ -157,7 +157,13 @@ public class VuePlateauJoueur extends Observe {
         });
 
         jButton2.setText("Assécher une tuile");
-
+         jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jButton2ActionPerformed(e);
+            }
+        });
+        
         jButton3.setText("Echanger");
 
         jButton4.setText("Prendre trésor");
@@ -365,6 +371,11 @@ public class VuePlateauJoueur extends Observe {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Message m = new Message();
         m.type = TypesMessages.CHOISIR_SE_DEPLACER;
+        notifierObservateur(m);
+    }
+       private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        Message m = new Message();
+        m.type = TypesMessages.ASSECHER;
         notifierObservateur(m);
     }
 

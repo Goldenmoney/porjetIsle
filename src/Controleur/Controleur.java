@@ -557,8 +557,16 @@ public class Controleur implements Observateur {
 
             case ASSECHER:
                 ////
+                 System.out.println("test recoit dans assecher vers (reception) "+msg.type);
                 if (getPA() != 0) {
-                    assechement(getJoueurCourant());
+                    plateau.affichePosPossible(getJoueurCourant().AssechementAutourPossible());
+                    
+                    
+                    jeuPrincipal.updatePlateauJoueur();
+                    plateau.addObservateur(this);
+                    if(getPA()==0){
+                            jeuPrincipal.tourTerminé();
+                        }
                 }
                 break;
 

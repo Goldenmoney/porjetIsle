@@ -25,7 +25,6 @@ public class Controleur implements Observateur {
     private int niveauEau;
     private boolean tresorsRecup;
     private int numTour;
-    private int actionChoisie;
     private boolean aventurierMort;
     private int pa;
     private Aventurier joueurCourant;

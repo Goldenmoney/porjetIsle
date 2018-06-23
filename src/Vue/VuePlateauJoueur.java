@@ -47,9 +47,8 @@ public class VuePlateauJoueur extends Observe {
         this.controleur = controleur;
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
-        plateau = new VueGrille(this);
-        controleur.setPlateau(plateau);
         jPanel3.setLayout(new BorderLayout());
+        plateau=new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());
         jPanel4.add(vueNiveau);
@@ -73,7 +72,6 @@ public class VuePlateauJoueur extends Observe {
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         String str = Integer.toString(controleur.getPA());
         jLabel3.setText(str);
-        controleur.setPlateau(plateau);
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
@@ -339,6 +337,11 @@ public class VuePlateauJoueur extends Observe {
             notifierObservateur(m);
         }
     }
+
+    public VueGrille getPlateau() {
+        return plateau;
+    }
+    
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Message m = new Message();

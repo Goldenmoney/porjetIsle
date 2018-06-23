@@ -32,7 +32,6 @@ public class Controleur implements Observateur {
     // Vues
     private VueInscription vueDebut;
     private VuePlateauJoueur jeuPrincipal;
-    private VueGrille plateau;
     private int casJeu;
 
     // Associations
@@ -102,10 +101,6 @@ public class Controleur implements Observateur {
     public void setPAMoins1(int pa) {
         this.pa = pa - 1;
         System.out.println("PA actuel : " + getPA());
-    }
-
-    public void setPlateau(VueGrille plateau) {
-        this.plateau = plateau;
     }
 
     // Initialisation
@@ -208,7 +203,7 @@ public class Controleur implements Observateur {
         jeuPrincipal = new VuePlateauJoueur(this);
         jeuPrincipal.addObservateur(this);
         jeuPrincipal.setNomJoueur(joueurCourant.getNom());
-        plateau.addObservateur(this);
+        jeuPrincipal.getPlateau().addObservateur(this);
 
         // System.out.println("c'est a " + joueurCourant.getNom());
         //this.debutTour(joueurCourant);
@@ -517,6 +512,10 @@ public class Controleur implements Observateur {
         niveauEau = +monte;
     }
 
+    public void setCasJeu(int casJeu) {
+        this.casJeu = casJeu;
+    }
+
     // Traiter message car Controleur=Obervé
     public void traiterMessage(Message msg) {
 
@@ -528,8 +527,8 @@ public class Controleur implements Observateur {
             case CHOISIR_SE_DEPLACER:
                 //quand le joueur choisie de ce déplacer, l'ihm lui propose les cases sur lesuqels le déplacement est possible
                 if (getPA() != 0) {
-                    casJeu = msg.casJeu;
-                    plateau.affichePosPossible(getJoueurCourant().posAutourPossible());
+                     setCasJeu(msg.casJeu);
+                    jeuPrincipal.getPlateau().affichePosPossible(getJoueurCourant().posAutourPossible());
                     jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
 
@@ -542,10 +541,10 @@ public class Controleur implements Observateur {
                 ////
                 System.out.println("test recoit dans assecher vers (reception) " + msg.type);
                 if (getPA() != 0) {
-                    plateau.affichePosPossible(getJoueurCourant().AssechementAutourPossible());
+                    jeuPrincipal.getPlateau().affichePosPossible(getJoueurCourant().AssechementAutourPossible());
                     jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
-                    casJeu = msg.casJeu;
+                    setCasJeu(msg.casJeu);
                 }
                 break;
 
@@ -608,10 +607,10 @@ public class Controleur implements Observateur {
                     jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
                     if (msg.casJeu == 0) { // Cas HELICOPTERE
-                        plateau.affichePosPossible(joueurCourant.posPossibleAll(COULEE));
+                        jeuPrincipal.getPlateau().affichePosPossible(joueurCourant.posPossibleAll(COULEE));
                         defausserCarteTresor(joueurCourant, msg.carte);
                     } else if (msg.casJeu == 1) { // Cas SAC DE SABLE
-                        plateau.affichePosPossible(joueurCourant.posPossibleAll(INONDEE));
+                        jeuPrincipal.getPlateau().affichePosPossible(joueurCourant.posPossibleAll(INONDEE));
                         defausserCarteTresor(joueurCourant, msg.carte);
                     }
                 }

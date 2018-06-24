@@ -428,7 +428,6 @@ public class VuePlateauJoueur extends Observe {
         for (int i = 0; i < inventaire.size(); i++) {
 
             if (inventaire.get(i).getType() == HELICOPTERE) {
-                System.out.println("HELICOOOOOOOOOOOOOOOOOOOOOOO");
                 Carte_Tirage_Tresor carteTresor = inventaire.get(i);
                 jButtons.get(i).addActionListener((ActionEvent e) -> {
                     System.out.println("HELICO action msg");

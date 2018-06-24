@@ -36,6 +36,7 @@ public class VuePlateauJoueur extends Observe {
     private Controleur controleur;
     private JFrame fenetre;
     private VueGrille plateau;
+    private VueNiveau niveau;
     private int btn5Etat = 0; //0: terminer tour 1: annuler
     private int etatAnnuler;
 
@@ -46,13 +47,14 @@ public class VuePlateauJoueur extends Observe {
         fenetre = new JFrame("L'île interdite");
         this.controleur = controleur;
         initComponents();
-        VueNiveau vueNiveau = new VueNiveau(1);
+        niveau = new VueNiveau(controleur.getNiveauEau());
         jPanel3.setLayout(new BorderLayout());
         plateau = new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());
-        jPanel4.add(vueNiveau);
+        jPanel4.add(niveau);
         fenetre.setVisible(true);
+        niveau.setNiveau(controleur.getNiveauEau());
 
         jButton13.setText("      ");
         jButton14.setText("      ");
@@ -67,11 +69,18 @@ public class VuePlateauJoueur extends Observe {
 
     public void updatePlateauJoueur() {
         jLabel1.setText(controleur.getJoueurCourant().getNom());
+
         jPanel3.removeAll();
         plateau = new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
+
+        jPanel4.removeAll();
+        niveau = new VueNiveau(controleur.getNiveauEau());
+        jPanel4.add(niveau);
+
         String str = Integer.toString(controleur.getPA());
         jLabel3.setText(str);
+
         jButton1.setEnabled(true);
         jButton2.setEnabled(true);
         jButton3.setEnabled(true);
@@ -397,6 +406,7 @@ public class VuePlateauJoueur extends Observe {
         jButtons.add(jButton18);
         jButtons.add(jButton19);
 
+        // MONTEE DES EAUX SI CARTE PIOCHEE
         // METTRE LES BOUTONS HELICO/SACS DANS SON INVENTAIRE ENABLED
         for (int i = 0; i < inventaire.size(); i++) {
             jButtons.get(i).setVisible(true);

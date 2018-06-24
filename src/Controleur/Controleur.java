@@ -193,6 +193,7 @@ public class Controleur implements Observateur {
 
     public void initPartie(int nbJoueurs, String j1, String j2, String j3, String j4, int difficulte) {
         this.nbJoueurs = nbJoueurs;
+        this.niveauEau = difficulte;
         this.initGrille();
 
         initPiocheInondation();
@@ -206,14 +207,8 @@ public class Controleur implements Observateur {
         jeuPrincipal.addObservateur(this);
         jeuPrincipal.setNomJoueur(joueurCourant.getNom());
         jeuPrincipal.getPlateau().addObservateur(this);
-
-        // System.out.println("c'est a " + joueurCourant.getNom());
-        //this.debutTour(joueurCourant);
     }
 
-    /* public void initJoueurs() {
-    }*/
-    //creation de la pioche de carte trésor
     public void initPiocheTresor() {
         Carte_Tirage_Tresor le_Cristal_ardent_1 = new Carte_Tresor(LE_CRISTAL_ARDENT);
         piocheTresor.add(le_Cristal_ardent_1);
@@ -277,16 +272,13 @@ public class Controleur implements Observateur {
         }
     }
 
-    public void initPositionAventurier() {
-        ////
-    }
-
     public void debutTour(Aventurier aventurier) {
         setPA(3);
         System.out.println("position du joueur actuel : " + aventurier.getTuile().getNomTuile());
         if (aventurier.getTuile().getEtat() == COULEE) {
             deplacementGratuit(aventurier);
         }
+
         System.out.println("PA actuel : " + getPA());
         boolean changementJoueur = false;
         while (getPA() > 0 && !changementJoueur) {
@@ -341,6 +333,14 @@ public class Controleur implements Observateur {
             System.out.println("Joueur Suivant");
             System.out.println("c'est a " + joueurCourant.getNom());
             this.setPA(3);
+
+            for (int i = 0; i < getJoueurCourant().getInventaire().size(); i++) {
+                if (getJoueurCourant().getInventaire().get(i).getType() == MONTEE_DES_EAUX) {
+                    joueurCourant.defausserCarte(getJoueurCourant().getInventaire().get(i));
+                    VueMessage message = new VueMessage(this);
+                    this.monteeEau(getNiveauEau()+1);
+                }
+            }
             //debutTour(joueurCourant);
         }
     }

@@ -48,7 +48,7 @@ public class VuePlateauJoueur extends Observe {
         initComponents();
         VueNiveau vueNiveau = new VueNiveau(1);
         jPanel3.setLayout(new BorderLayout());
-        plateau=new VueGrille(this);
+        plateau = new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
         jPanel4.setLayout(new BorderLayout());
         jPanel4.add(vueNiveau);
@@ -79,6 +79,7 @@ public class VuePlateauJoueur extends Observe {
         jButton5.setText("TERMINER TOUR");
         plateau.addObservateur(controleur);
         updateCartesJoueurs(controleur.getJoueurCourant());
+        removeActions();
         cartesSpeciales();
     }
 
@@ -341,7 +342,6 @@ public class VuePlateauJoueur extends Observe {
     public VueGrille getPlateau() {
         return plateau;
     }
-    
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         Message m = new Message();
@@ -426,32 +426,46 @@ public class VuePlateauJoueur extends Observe {
         jButtons.add(jButton19);
 
         for (int i = 0; i < inventaire.size(); i++) {
-            if (inventaire.get(i).getType()==HELICOPTERE) {
 
+            if (inventaire.get(i).getType() == HELICOPTERE) {
+                System.out.println("HELICOOOOOOOOOOOOOOOOOOOOOOO");
                 Carte_Tirage_Tresor carteTresor = inventaire.get(i);
                 jButtons.get(i).addActionListener((ActionEvent e) -> {
-                    int nb = 0;
-                    nb = nb + 1;
-                    System.out.println(" helico action msg" + nb);
+                    System.out.println("HELICO action msg");
                     Message m = new Message();
                     m.type = TypesMessages.CARTE_ACTION;
                     m.casJeu = 0;
                     m.carte = carteTresor;
                     notifierObservateur(m);
                 });
-            } else if (inventaire.get(i).getType()==SAC_DE_SABLE) {
 
+            } else if (inventaire.get(i).getType() == SAC_DE_SABLE) {
                 Carte_Tirage_Tresor carteTresor = inventaire.get(i);
                 jButtons.get(i).addActionListener((ActionEvent e) -> {
-                    int nb = 0;
-                    nb = nb + 1;
-                    System.out.println("ass action msg   " + nb);
+                    System.out.println("SAC action msg");
                     Message m = new Message();
                     m.type = TypesMessages.CARTE_ACTION;
                     m.casJeu = 1;
                     m.carte = carteTresor;
                     notifierObservateur(m);
                 });
+            }
+        }
+    }
+
+    public void removeActions() {
+        ArrayList<JButton> jButtons = new ArrayList<>();
+        jButtons.add(jButton13);
+        jButtons.add(jButton14);
+        jButtons.add(jButton15);
+        jButtons.add(jButton16);
+        jButtons.add(jButton17);
+        jButtons.add(jButton18);
+        jButtons.add(jButton19);
+
+        for (int i = 0; i < jButtons.size(); i++) {
+            for (ActionListener al : jButtons.get(i).getActionListeners()) {
+                jButtons.get(i).removeActionListener(al);
             }
         }
     }

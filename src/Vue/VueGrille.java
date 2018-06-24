@@ -120,8 +120,6 @@ public class VueGrille extends Observe {
                     m.uneCaseX = caseX;
                     m.uneCaseY = caseY;
                     notifierObservateur(m);
-                    System.out.println("J'envoie X : " + caseX);
-                    System.out.println("J'envoie Y : " + caseY);
                 });
                 i++;
             }

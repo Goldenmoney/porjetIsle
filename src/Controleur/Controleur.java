@@ -555,14 +555,11 @@ public class Controleur implements Observateur {
                     setPA(pa - 1);
                     int x = msg.uneCaseX;
                     int y = msg.uneCaseY;
-                    System.out.println("Je reçois X : " + msg.uneCaseX);
-                    System.out.println("Je reçois Y : " + msg.uneCaseY);
 
                     if (casJeu == 0) {
                         System.out.println("deplacer");
                         joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                         jeuPrincipal.setBtn5Etat();
-
                         jeuPrincipal.updatePlateauJoueur();
                        // jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
 
@@ -570,7 +567,6 @@ public class Controleur implements Observateur {
                         System.out.println("assecher");
                         getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
                         jeuPrincipal.setBtn5Etat();
-
                         jeuPrincipal.updatePlateauJoueur();
                     }
                     if (getPA() == 0) {
@@ -589,7 +585,7 @@ public class Controleur implements Observateur {
 
             case TERMINER_TOUR:
 
-                System.out.println("test recoit terminé tour ) " + msg.type);
+                System.out.println("test recoit terminé tour : " + msg.type);
                 this.terminerTour();
                 jeuPrincipal.updatePlateauJoueur();
                 jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
@@ -603,7 +599,7 @@ public class Controleur implements Observateur {
 
             case CARTE_ACTION:
                 if (getPA() != 0) {
-                    casJeu = msg.casJeu;
+                    this.casJeu = msg.casJeu;
                     jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
                     if (msg.casJeu == 0) { // Cas HELICOPTERE

@@ -12,18 +12,14 @@ import Controleur.Observe;
 import Controleur.TypesMessages;
 import Modele.Aventurier;
 import Modele.Carte_Tirage_Tresor;
-import Util.Parameters;
 import static Util.Utils.TypeCarteTresor.*;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
 //JOUEURS + CHOIX(DEPLACER, ASSECHER, CS)
 //NIVEAU EAU
 
@@ -38,7 +34,6 @@ public class VuePlateauJoueur extends Observe {
     private VueGrille plateau;
     private VueNiveau niveau;
     private int btn5Etat = 0; //0: terminer tour 1: annuler
-    private int etatAnnuler;
 
     /**
      * Creates new form IHM1
@@ -55,7 +50,7 @@ public class VuePlateauJoueur extends Observe {
         jPanel4.add(niveau);
         fenetre.setVisible(true);
         niveau.setNiveau(controleur.getNiveauEau());
-
+        jPanel2.setBorder(BorderFactory.createMatteBorder(10,10,10,10,controleur.getJoueurCourant().getCouleur().getCouleur()));    
         jButton13.setText("      ");
         jButton14.setText("      ");
         jButton15.setText("      ");
@@ -73,7 +68,7 @@ public class VuePlateauJoueur extends Observe {
         jPanel3.removeAll();
         plateau = new VueGrille(this);
         jPanel3.add(plateau.getPanelBody(), BorderLayout.CENTER);
-
+        jPanel2.setBorder(BorderFactory.createMatteBorder(10,10,10,10,controleur.getJoueurCourant().getCouleur().getCouleur()));
         jPanel4.removeAll();
         niveau = new VueNiveau(controleur.getNiveauEau());
         jPanel4.add(niveau);

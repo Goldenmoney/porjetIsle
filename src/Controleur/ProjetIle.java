@@ -11,7 +11,7 @@ import Vue.VueInscription;
  *
  * @author pontalc
  */
-public class PorjetIsle {
+public class ProjetIle {
 
     /**
      * @param args the command line arguments

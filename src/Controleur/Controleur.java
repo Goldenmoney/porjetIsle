@@ -554,7 +554,7 @@ public class Controleur implements Observateur {
                 //le joueur choisie une case parmi celle proposée précdement
                 System.out.println("test recoit action vers (reception) " + msg.type);
                 if (getPA() != 0) { // cas DEPLACER
-                    setPA(pa - 1);
+                    setPAMoins1(pa);
                     int x = msg.uneCaseX;
                     int y = msg.uneCaseY;
 

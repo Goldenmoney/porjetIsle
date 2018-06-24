@@ -28,6 +28,8 @@ public class Controleur implements Observateur {
     private boolean aventurierMort;
     private int pa;
     private Aventurier joueurCourant;
+    private Carte_Tirage_Tresor carteCourante;
+    int aDefausser = 0; // 0:Pas besoin // 1: Il faut défausser
 
     // Vues
     private VueInscription vueDebut;
@@ -527,7 +529,7 @@ public class Controleur implements Observateur {
             case CHOISIR_SE_DEPLACER:
                 //quand le joueur choisie de ce déplacer, l'ihm lui propose les cases sur lesuqels le déplacement est possible
                 if (getPA() != 0) {
-                     setCasJeu(msg.casJeu);
+                    setCasJeu(msg.casJeu);
                     jeuPrincipal.getPlateau().affichePosPossible(getJoueurCourant().posAutourPossible());
                     jeuPrincipal.setBtn5Etat();
                     jeuPrincipal.quandSeDeplacer();
@@ -560,13 +562,20 @@ public class Controleur implements Observateur {
                         System.out.println("deplacer");
                         joueurCourant.setTuile(getGrille().getTuileCase(x, y));
                         jeuPrincipal.setBtn5Etat();
+                        if (aDefausser == 1) {
+                            defausserCarteTresor(joueurCourant, carteCourante);
+                            aDefausser = 0;
+                        }
                         jeuPrincipal.updatePlateauJoueur();
-                       // jeuPrincipal.updateCartesJoueurs(this.getJoueurCourant());
 
                     } else if (casJeu == 1) { // cas ASSECHER
                         System.out.println("assecher");
                         getGrille().getTuileCase(x, y).majEtat(ASSECHEE);
                         jeuPrincipal.setBtn5Etat();
+                        if (aDefausser == 1) {
+                            defausserCarteTresor(joueurCourant, carteCourante);
+                            aDefausser = 0;
+                        }
                         jeuPrincipal.updatePlateauJoueur();
                     }
                     if (getPA() == 0) {
@@ -604,10 +613,12 @@ public class Controleur implements Observateur {
                     jeuPrincipal.quandSeDeplacer();
                     if (msg.casJeu == 0) { // Cas HELICOPTERE
                         jeuPrincipal.getPlateau().affichePosPossible(joueurCourant.posPossibleAll(COULEE));
-                        defausserCarteTresor(joueurCourant, msg.carte);
+                        this.carteCourante = msg.carte;
+                        aDefausser = 1;
                     } else if (msg.casJeu == 1) { // Cas SAC DE SABLE
                         jeuPrincipal.getPlateau().affichePosPossible(joueurCourant.posPossibleAll(INONDEE));
-                        defausserCarteTresor(joueurCourant, msg.carte);
+                        this.carteCourante = msg.carte;
+                        aDefausser = 1;
                     }
                 }
                 break;
